@@ -57,3 +57,4 @@ build-iPhoneSimulator/
 # Ignore all logfiles and tempfiles.
 /log/*
 !/log/.keep
+/log/development.log
