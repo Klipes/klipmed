@@ -1,0 +1,57 @@
+<div class="card">
+  <div class="card-header">
+    <div class= "row">
+      <div class="col-lg-1">
+        <i class="fa fa-building fa-2x" aria-hidden="true"></i>  
+      </div>
+      <div class="col-lg-10">
+        <h3 class="text-center"><%= Company.model_name.human %></h3>
+      </div>
+      <div class="col-lg-1"> 
+        <div class="pull-right">
+          <%= link_to new_backoffice_company_path, title: 'Nova Empresa', class: "btn btn-sm btn-primary " do %>
+          <i class="fa fa-plus" aria-hidden="true"></i>
+         <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</p>
+
+<div class="col-sm-12">
+  <div class="row">
+    <div class="col-sm-12">
+      <table class="table table-sm table-hover">
+          <thead>
+              <tr class="row">
+                  <th class="col-sm-9"><%= Company.human_attribute_name("trade_name") %></th>
+                  <th class="col-sm-2"><%= Company.human_attribute_name("phone") %></th>
+                  <th class="col-sm-1"></th>
+              </tr>
+          </thead>
+          <tbody>
+            <% @companies.each do |company| %>
+              <tr class="row">
+                <td class="col-sm-9"><%= company.trade_name %></td>
+                <td class="col-sm-2"><%= company.phone %></td>  
+                <td class="col-sm-1">
+                  <div class="pull-right">
+                    <%= link_to edit_backoffice_company_path(company) ,class: "btn btn-sm btn-default" do%>
+                      <i class="fa fa-edit"></i>
+                    <% end %> 
+                    <%= link_to root_path ,class: "btn btn-sm btn-default" do%>
+                      <i class="fa fa-trash-o"></i>
+                    <% end %>             
+                  </div>   
+                </td>    
+              </tr>
+            <% end %>  
+          </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<%= paginate @companies %>

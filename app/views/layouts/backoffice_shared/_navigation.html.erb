@@ -1,0 +1,33 @@
+<nav class="navbar navbar-expand-sm navbar-dark bg-primary fixed-top">
+  <a class="navbar-brand" href="<%= admin_path %>"><i class="fa fa-user-md fa-2x" aria-hidden="true"></i></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    <ul class="navbar-nav mr-auto">
+      <% if admin_signed_in?%>
+        <li class="nav-item dropdown active">
+          <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <%= t 'navigation.registrations' %></a>
+          <div class="dropdown-menu" aria-labelledby="dropdown01">
+            <%= link_to backoffice_companies_path,{:class =>"dropdown-item"} do %>
+              <%= t 'navigation.companies' %>
+            <% end %>
+            <%= link_to backoffice_users_path,{:class =>"dropdown-item"} do %>
+              <%= t 'navigation.users' %>
+            <% end %>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+    <div class="nav nav-bar pull-right"> 
+      <% if admin_signed_in?%>
+        <form class="form-inline my-2 my-lg-0">
+            <%= link_to destroy_admin_session_path, style:"margin-top:-5px", method: :delete do%>
+			        <i class="fa fa-sign-out fa-2x" style="color:white" aria-hidden="true"></i> 
+		        <% end %>  
+        </form>
+      <% end %>
+    </div>
+  </div>
+</nav>

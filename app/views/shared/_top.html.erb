@@ -1,0 +1,20 @@
+</br>
+<div class="card">
+  <div class="card-header">
+    <div class= "row">
+      <div class="col-lg-1">
+        <i class='<%= "#{icon}" %>' aria-hidden="true"></i>  
+      </div>
+      <div class="col-lg-10">
+        <h3 class="text-center"><%= title %></h3>
+      </div>
+      <div class="col-lg-1"> 
+        <div class="pull-right">
+          <%= link_to new_path, title: new_path_hint, class: "btn btn-sm btn-primary " do %>
+          <i class="fa fa-plus" aria-hidden="true"></i>
+         <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

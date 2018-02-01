@@ -1,0 +1,38 @@
+<%= render :partial => 'shared/top', 
+  :locals => { :icon => 'fa fa-list-ul fa-2x', :title => ReceivableCategory.model_name.human,
+               :new_path => new_site_receivable_category_path, :new_path_hint => 'Nova Categoria' } %>    
+</p>
+
+<div class="col-sm-12">
+  <div class="row">
+    <div class="col-sm-12">
+      <table class="table table-sm table-hover table-sm">
+          <thead>
+              <tr class="row">
+                  <th class="col-sm-11"><%= ReceivableCategory.human_attribute_name("description") %></th>
+                  <th class="col-sm-1"></th>
+              </tr>
+          </thead>
+          <tbody>
+            <% @receivable_categories.each do |category| %>
+              <tr class="row">
+                <td class="col-sm-11"><%= category.description %></td> 
+                <td class="col-sm-1">
+                  <div class="pull-right">
+                    <%= link_to edit_site_receivable_category_path(category) ,class: "btn btn-sm btn-default" do%>
+                      <i class="fa fa-edit"></i>
+                    <% end %> 
+                    <%= link_to root_path ,class: "btn btn-sm btn-default" do%>
+                      <i class="fa fa-trash-o"></i>
+                    <% end %>             
+                  </div>   
+                </td>    
+              </tr>
+            <% end %>  
+          </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<%= paginate @receivable_categories %>

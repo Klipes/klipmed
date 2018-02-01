@@ -1,0 +1,127 @@
+</br>
+
+<%= render :partial => 'shared/errors', :locals => { :model => @professional} %>
+
+<%= form_for [:site, @professional] do |f| %>
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <div class="card">
+        <div class="card-header">
+          <%= operation %>
+        </div>
+        <div class="card-block">  
+          </br>     
+          <div class="container col-lg-12 col-md-12 col-sm-12 col-xs-12">    
+            <div class="row">
+              <div class="col-lg-12 col-md-12">
+                <%= f.label :fullname %>:
+                <%= f.text_field :fullname, :class =>"form-control" %>
+              </div>           
+            </div>           
+            </br>
+
+            <div class="row">
+              <div class="col-md-9 col-lg-9">
+                <%= f.label :email %>:
+                <div class="input-group"> 
+                  <div class="input-group-prepend">
+                    <div class="input-group-text"><i class="fa fa-envelope" aria-hidden="true"></i></div>
+                  </div>
+                  <%= f.text_field :email, :class =>"form-control" %>
+                </div>                                      
+              </div>
+              <div class="col-md-3">
+                <%= f.label :phone %>:
+                <div class="input-group"> 
+                  <div class="input-group-prepend">
+                    <div class="input-group-text"><i class="fa fa-phone" aria-hidden="true"></i></div>
+                  </div> 
+                  <%= f.telephone_field :phone, :class =>"form-control" %>
+                </div>                                        
+              </div>
+            </div>
+            </br>
+
+            <!-- tabela relacionada de endereços!-->
+            <hr>
+            <h3>Endereço</h3> </br>
+            <%= f.fields_for :professional_address do |professional_address| %>
+              <div class="row">
+                <div class="col-lg-2 col-md-2">
+                  <%= professional_address.label :zip %>:
+                  <%= professional_address.text_field :zip, :class =>"form-control"%>
+                </div>
+                <div class="col-md-8">
+                  <br>
+                  <button type="button" name="buttonBuscar" id="buttonBuscar_professional" class="btn btn-success buttonBox">Buscar Endereço</button>
+                </div>            
+              </div>
+              </br>
+              <div class="row">
+                <div class="col-lg-8 col-md-8">
+                  <%= professional_address.label :address1 %>:
+                  <%= professional_address.text_field :address1, :class =>"form-control" %>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                  <%= professional_address.label :number %>:
+                  <%= professional_address.text_field :number, :class =>"form-control" %>
+                </div>              
+              </div>
+              </br>
+              <div class="row">
+                <div class="col-lg-6 col-md-6">
+                  <%= professional_address.label :address2 %>:
+                  <%= professional_address.text_field :address2, :class =>"form-control" %>
+                </div>             
+                <div class="col-lg-6 col-md-6">
+                  <%= professional_address.label :neighborhood %>:
+                  <%= professional_address.text_field :neighborhood, :class =>"form-control" %>
+                </div>              
+              </div>
+              </br>
+              <div class="row">
+                <div class="col-lg-6 col-md-6">
+                  <%= professional_address.label :city %>:
+                  <%= professional_address.text_field :city, :class =>"form-control" %>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                  <%= professional_address.label :state %>:
+                  <%= professional_address.select :state, options_state(@professional.professional_address.state), {}, {:class => "form-control"} %>
+                </div>              
+              </div>
+              </br>
+            <% end %>
+
+            <!-- tabela NxN de profissionais versus convênios !-->
+            <hr>
+            <h3>Convênios</h3> </br>
+            <div id="professional_covenants">
+              <%= f.fields_for :professional_covenants do |covenant| %>  
+                <div class="row">     
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">     
+                    <div id="nested-fields">
+                      <%= render partial: "professional_covenant_fields", locals: {f: covenant}%>
+                      </br>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+              <div class="field">
+                </br>
+                <%= link_to_add_association button_tag('Adicionar', type: "button", class: "btn btn-primary"), f, :professional_covenants %>
+              </div>
+            </div>
+            <hr>
+            </br>
+            <%= render :partial => 'shared/submit', :locals => { :f => f, :path => site_professionals_path} %>        
+          </div>
+        </div>
+      </div> 
+    </div>
+  </div>
+<% end %>
+
+</br>
+</br>
+
+

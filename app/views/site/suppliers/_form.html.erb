@@ -1,0 +1,109 @@
+</br>
+
+<%= render :partial => 'shared/errors', :locals => { :model => @supplier} %>
+
+<%= form_for [:site, @supplier] do |f| %>
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <div class="card">
+        <div class="card-header">
+          <%= operation %>
+        </div>
+        <div class="card-block">  
+          </br>     
+          <div class="container col-lg-12 col-md-12 col-sm-12 col-xs-12">    
+            <div class="row">
+              <div class="col-lg-6 col-md-6">
+                <%= f.label :supplier_name %>:
+                <%= f.text_field :supplier_name, :class =>"form-control" %>
+              </div>           
+              <div class="col-lg-6 col-md-6">
+                <%= f.label :trade_name %>:
+                <%= f.text_field :trade_name, :class =>"form-control" %>
+              </div>           
+            </div>           
+            </br>
+            <div class="row">
+              <div class="col-md-9 col-lg-9">
+                <%= f.label :email %>:
+                <div class="input-group"> 
+                  <div class="input-group-prepend">
+                    <div class="input-group-text"><i class="fa fa-envelope" aria-hidden="true"></i></div>
+                  </div>
+                  <%= f.text_field :email, :class =>"form-control" %>
+                </div>                                      
+              </div>
+              <div class="col-md-3">
+                <%= f.label :phone %>:
+                <div class="input-group"> 
+                  <div class="input-group-prepend">
+                    <div class="input-group-text"><i class="fa fa-phone" aria-hidden="true"></i></div>
+                  </div> 
+                  <%= f.telephone_field :phone, :class =>"form-control" %>
+                </div>                                        
+              </div>
+            </div>
+            </br>
+
+            <!-- tabela relacionada de endereços!-->
+            <hr>
+            <h3>Endereço</h3> </br>
+            <%= f.fields_for :supplier_address do |supplier_address| %>
+              <div class="row">
+                <div class="col-lg-2 col-md-2">
+                  <%= supplier_address.label :zip %>:
+                  <%= supplier_address.text_field :zip, :class =>"form-control"%>
+                </div>
+                <div class="col-md-8">
+                  <br>
+                  <button type="button" name="buttonBuscar" id="buttonBuscar_supplier" class="btn btn-success buttonBox">Buscar Endereço</button>
+                </div>            
+              </div>
+              </br>
+              <div class="row">
+                <div class="col-lg-8 col-md-8">
+                  <%= supplier_address.label :address1 %>:
+                  <%= supplier_address.text_field :address1, :class =>"form-control" %>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                  <%= supplier_address.label :number %>:
+                  <%= supplier_address.text_field :number, :class =>"form-control" %>
+                </div>              
+              </div>
+              </br>
+              <div class="row">
+                <div class="col-lg-6 col-md-6">
+                  <%= supplier_address.label :address2 %>:
+                  <%= supplier_address.text_field :address2, :class =>"form-control" %>
+                </div> 
+                <div class="col-lg-6 col-md-6">
+                  <%= supplier_address.label :neighborhood %>:
+                  <%= supplier_address.text_field :neighborhood, :class =>"form-control" %>
+                </div>              
+              </div>
+              </br>
+              <div class="row">
+                <div class="col-lg-6 col-md-6">
+                  <%= supplier_address.label :city %>:
+                  <%= supplier_address.text_field :city, :class =>"form-control" %>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                  <%= supplier_address.label :state %>:
+                  <%= supplier_address.select :state, options_state(@supplier.supplier_address.state), {}, {:class => "form-control"} %>
+                </div> 
+              </div>
+              </br>
+            <% end %>
+
+            <%= render :partial => 'shared/submit', :locals => { :f => f, :path => site_suppliers_path} %>        
+          </div>
+        </div>
+      </div> 
+    </div>
+  </div>
+<% end %>
+
+</br>
+</br>
+
+

@@ -1,0 +1,105 @@
+</br>
+
+<%= render :partial => 'shared/errors', :locals => { :model => @customer} %>        
+
+<%= form_for [:site, @customer] do |f| %>
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <div class="card">
+        <div class="card-header">
+          <%= operation %>
+        </div>
+        <div class="card-block">  
+          </br>     
+          <div class="container col-lg-12 col-md-12 col-sm-12 col-xs-12">    
+            <div class="row">
+              <div class="col-lg-12 col-md-12">
+                <%= f.label :fullname %>:
+                <%= f.text_field :fullname, :class =>"form-control" %>
+              </div>           
+            </div>           
+            </br>
+            <div class="row">
+              <div class="col-md-9 col-lg-9">
+                <%= f.label :email %>:
+                <div class="input-group"> 
+                  <div class="input-group-prepend">
+                    <div class="input-group-text"><i class="fa fa-envelope" aria-hidden="true"></i></div>
+                  </div>
+                  <%= f.text_field :email, :class =>"form-control" %>
+                </div>                                      
+              </div>
+              <div class="col-md-3">
+                <%= f.label :phone %>:
+                <div class="input-group"> 
+                  <div class="input-group-prepend">
+                    <div class="input-group-text"><i class="fa fa-phone" aria-hidden="true"></i></div>
+                  </div> 
+                  <%= f.telephone_field :phone, :class =>"form-control" %>
+                </div>                                        
+              </div>
+            </div>
+            </br>
+
+            <!-- tabela relacionada de endereços!-->
+            <hr>
+            <h3>Endereço</h3> </br>
+            <%= f.fields_for :customer_address do |customer_address| %>
+              <div class="row">
+                <div class="col-lg-2 col-md-2">
+                  <%= customer_address.label :zip %>:
+                  <%= customer_address.text_field :zip, :class =>"form-control"%>
+                </div>
+                <div class="col-md-8">
+                  <br>
+                  <button type="button" name="buttonBuscar" id="buttonBuscar_customer" class="btn btn-success buttonBox">Buscar Endereço</button>
+                </div>            
+              </div>
+              </br>
+              <div class="row">
+                <div class="col-lg-8 col-md-8">
+                  <%= customer_address.label :address1 %>:
+                  <%= customer_address.text_field :address1, :class =>"form-control" %>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                  <%= customer_address.label :number %>:
+                  <%= customer_address.text_field :number, :class =>"form-control" %>
+                </div>              
+              </div>
+              </br>
+              <div class="row">
+                <div class="col-lg-6 col-md-6">
+                  <%= customer_address.label :address2 %>:
+                  <%= customer_address.text_field :address2, :class =>"form-control" %>
+                </div>  
+                <div class="col-lg-6 col-md-6">
+                  <%= customer_address.label :neighborhood %>:
+                  <%= customer_address.text_field :neighborhood, :class =>"form-control" %>
+                </div>              
+              </div>
+              </br>
+              <div class="row">
+                <div class="col-lg-6 col-md-6">
+                  <%= customer_address.label :city %>:
+                  <%= customer_address.text_field :city, :class =>"form-control" %>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                  <%= customer_address.label :state %>:
+                  <%= customer_address.select :state, options_state(@customer.customer_address.state), {}, {:class => "form-control"} %>
+                </div>                
+              </div>
+              </br>
+            <% end %>
+
+            <%= render :partial => 'shared/submit', :locals => { :f => f, :path => site_customers_path} %>        
+          </div>
+        </div>
+      </div> 
+    </div>
+  </div>
+<% end %>
+
+</br>
+</br>
+
+

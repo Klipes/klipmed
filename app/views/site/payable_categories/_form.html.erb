@@ -1,0 +1,34 @@
+</br>
+</br>
+
+<%= render :partial => 'shared/errors', :locals => { :model => @payable_category} %>
+
+<%= form_for [:site, @payable_category] do |f| %>
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <div class="card">
+        <div class="card-header">
+          <%= operation %>
+        </div>
+        <div class="card-block">  
+          </br>     
+          <div class="container col-lg-12 col-md-12 col-sm-12 col-xs-12">    
+            <div class="row">
+              <div class="col-lg-12 col-md-12">
+                <%= f.label :description %>:
+                <%= f.text_field :description, :class =>"form-control" %>
+              </div>           
+            </div>           
+            </br>
+            <%= render :partial => 'shared/submit', :locals => { :f => f, :path => site_payable_categories_path} %>        
+          </div>
+        </div>
+      </div> 
+    </div>
+  </div>
+<% end %>
+
+</br>
+</br>
+
+

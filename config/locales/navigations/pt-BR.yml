@@ -1,0 +1,15 @@
+"pt-BR":
+  navigation:
+    registrations: "Cadastros"
+    users: "Usuários"
+    companies: "Empresas"
+    customers: "Clientes"
+    suppliers: "Fornecedores"
+    receivable_categories: "Categorias"
+    receivables: "Lançamentos"
+    payable_categories: "Categorias"
+    payables: "Lançamentos"
+    professionals: "Profissionais"
+    schedule: "Agenda"
+    covenants: "Convênios"
+    logout: "Sair"

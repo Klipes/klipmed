@@ -1,0 +1,4 @@
+<%= render partial: "form", 
+  locals: {operation: "Alterando Reserva de Horário",  
+           url: '/site/professional_reservations/' + @reservation.id.to_s, 
+           method: :patch}%>

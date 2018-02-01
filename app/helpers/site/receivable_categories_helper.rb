@@ -1,0 +1,2 @@
+module Site::ReceivableCategoriesHelper
+end

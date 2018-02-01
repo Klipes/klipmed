@@ -1,0 +1,6 @@
+"pt-BR":
+  enums:
+    user:
+      role:
+        full_access: "Acesso Total"
+        schedule_access: "Agendamento"

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../../../favicon.ico">
+
+    <title>Klipmed - Site</title>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
+
+  <body>
+		<div class="nav-side-menu">
+				<div class="brand"><a href="<%= site_home_index_path %>"><i class="fa fa-user-md fa-2x" aria-hidden="true"></i></a> KlipMed</div>
+				<%= render partial: "layouts/site_shared/navigation" %>				
+		</div>
+		<div class="container-fluid" id="main">
+			<div class="row">
+				<div class="col-md-12">
+
+					<div class="row">
+						<div class="col-lg-12">
+							<%= yield %>
+						</div>
+						<!-- /.col-lg-12 -->
+					</div>    
+				</div>
+			</div>
+		</div>
+
+    <% if notice %>
+      <script>
+        $.notify("<%= notice %>", "success")
+      </script>
+    <% end %>
+
+    <% if alert %>
+      <script>
+        $.notify("<%= alert %>", "success")
+      </script>
+    <% end %>
+  </body>
+</html>

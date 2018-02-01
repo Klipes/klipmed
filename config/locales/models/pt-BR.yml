@@ -1,0 +1,117 @@
+"pt-BR":
+  activerecord:
+    models:
+      user: "Usuários"
+      admin: "Administradores"
+      company: "Empresas"
+      customer: "Clientes"
+      supplier: "Fornecedores"
+      receivable_category: "Categorias"
+      receivable: "Titulos a Receber"
+      payable_category: "Categorias"
+      payable: "Titulos a Pagar"
+      professional: "Profissionais"
+      schedule: "Agenda"
+      covenant: "Convênios"
+      professional_reservation: "Reserva de Horários"
+    attributes:
+      user:
+        email: "E-mail"
+        name: "Nome"
+        password: "Senha"
+        password_confirmation: "Confirmação de Senha"
+        company_id: "Empresa"
+        role: "Nível de Acesso"
+      admin:
+        email: "E-mail"
+        password: "Senha"
+        password_confirmation: "Confirmação de Senha"
+      company:
+        company_name: "Razão Social"
+        trade_name: "Nome Fantasia"
+        address1: "Endereço"
+        address2: "Complemento"
+        number: "Número"
+        neighborhood: "Bairro"
+        city: "Cidade"
+        state: "Estado"
+        email: "E-mail"
+        phone: "Fone"
+        zip: "CEP"
+      customer:
+        fullname: "Nome"
+        email: "E-mail"
+        phone: "Fone"
+      customer_address:
+        customer_id: "Cliente"
+        address1: "Endereço"
+        address2: "Complemento"
+        number: "Número"
+        neighborhood: "Bairro"
+        city: "Cidade"
+        state: "Estado"
+        zip: "CEP"
+      supplier:
+        supplier_name: "Razão Social"
+        trade_name: "Nome Fantasia"
+        email: "E-mail"
+        phone: "Fone"
+      supplier_address:
+        address1: "Endereço"
+        address2: "Complemento"
+        number: "Número"
+        neighborhood: "Bairro"
+        city: "Cidade"
+        state: "Estado"
+        zip: "CEP"
+      professional:
+        fullname: "Nome"
+        email: "E-mail"
+        phone: "Fone"
+      professional_address:
+        address1: "Endereço"
+        address2: "Complemento"
+        number: "Número"
+        neighborhood: "Bairro"
+        city: "Cidade"
+        state: "Estado"
+        zip: "CEP"
+      receivable_category:
+        description: "Descrição"
+      receivable:
+        customer_id: "Cliente"
+        receivable_category_id: "Categoria"
+        due_date: "Vencimento"
+        amount_cents: "Valor"
+        description: "Descrição"
+        status: "Status"
+        statuses:   
+          open: "Aberto"
+          paid: "Pago"
+      payable:
+        supplier_id: "Fornecedor"
+        payable_category_id: "Categoria"
+        due_date: "Vencimento"
+        amount_cents: "Valor"
+        description: "Descrição"
+        statuses:   
+          open: "Aberto"
+          paid: "Pago"
+      schedule:
+        company_id: "Empresa"
+        professional_id: "Professional"
+        covenant_id: "Convênio"
+        customer_id: "Cliente"
+        start: "Inicio"
+        end: "Fim"
+        title: "Descrição"  
+      covenant:
+        description: "Descrição"
+      professional_reservation:
+        company_id: "Empresa"
+        professional_id: "Profissional"
+        user_id: "Usuário"
+        title: "Descrição"
+        start: "Inicio"
+        end: "Fim"
+      

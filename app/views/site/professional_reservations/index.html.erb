@@ -1,0 +1,44 @@
+<%= render :partial => 'shared/top', 
+  :locals => { :icon => 'fa fa-user-md fa-2x', :title => ProfessionalReservation.model_name.human,
+               :new_path => new_site_professional_reservation_path, :new_path_hint => 'Nova Reserva' } %>    
+</p>
+
+<div class="col-sm-12">
+  <div class="row">
+    <div class="col-sm-12">
+      <table class="table table-sm table-hover">
+          <thead>
+              <tr class="row">
+                  <th class="col-sm-4"><%= Professional.human_attribute_name("professional_id") %></th>
+                  <th class="col-sm-5"><%= Professional.human_attribute_name("title") %></th>
+                  <th class="col-sm-1"><%= Professional.human_attribute_name("start") %></th>
+                  <th class="col-sm-1"><%= Professional.human_attribute_name("end") %></th>
+                  <th class="col-sm-1"></th>
+              </tr>
+          </thead>
+          <tbody>
+            <% @reservations.each do |reservation| %>
+              <tr class="row">
+                <td class="col-sm-4"><%= reservation.professional.fullname %></td>
+                <td class="col-sm-5"><%= reservation.title %></td>
+                <td class="col-sm-1"><%= reservation.start.strftime("%m/%d/%Y %H:%M") %></td>
+                <td class="col-sm-1"><%= reservation.end.strftime("%m/%d/%Y %H:%M") %></td>
+                <td class="col-sm-1">
+                  <div class="pull-right">
+                    <%= link_to edit_site_professional_reservation_path(reservation) ,class: "btn btn-sm btn-default" do%>
+                      <i class="fa fa-edit"></i>
+                    <% end %> 
+                    <%= link_to "" ,class: "btn btn-sm btn-default" do%>
+                      <i class="fa fa-trash-o"></i>
+                    <% end %>             
+                  </div>   
+                </td>    
+              </tr>
+            <% end %>  
+          </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<%= paginate @reservations %>

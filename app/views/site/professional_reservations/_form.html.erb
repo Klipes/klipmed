@@ -1,0 +1,64 @@
+</br>
+</br>
+
+<%= render :partial => 'shared/errors', :locals => { :model => @reservation} %> 
+
+<%= form_tag(url, method: method ) do %>
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <div class="card">
+        <div class="card-header">
+          <%= operation %>
+        </div>
+        <div class="card-block">  
+          </br> 
+          <div class="container col-lg-12 col-md-12 col-sm-12 col-xs-12">    
+            <div class="row">
+              <div class="col-lg-12 col-md-12">
+                <%= label_tag ProfessionalReservation.human_attribute_name("professional_id") %>:
+                <%= select_tag "professional_id", options_from_collection_for_select(@professionals, "id", "fullname"), class: "form-control" %>
+              </div>           
+            </div>           
+            </br>
+            <div class="row">
+              <div class="col-lg-12 col-md-12">
+                <%= label_tag ProfessionalReservation.human_attribute_name("title") %>:
+                <%= text_field_tag 'title', @reservation.title, class: "form-control"%>
+              </div>
+            </div>
+            </br>
+            <div class="row">
+              <div class="col-lg-3">
+                <label>Data:</label>
+                <%= text_field_tag "reservation_date", @reservation.start.strftime("%d/%m/%Y"), class: "datetimepicker form-control" %>
+              </div>
+              <div class="col-lg-3">new
+                <label>Hora Inicio:</label>
+                <%= text_field_tag "reservation_hour_begin", @reservation.start.strftime("%H:%M"), class: "datetimepicker form-control" %>
+              </div>
+              <div class="col-lg-3">
+                <label>Hora Fim:</label>
+                <%= text_field_tag "reservation_hour_end", @reservation.end.strftime("%H:%M"), class: "datetimepicker form-control" %>
+              </div>
+            </div>
+            </br>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="row">
+            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4"></div>
+            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
+              <%= submit_tag nil, class:"btn btn-primary btn-block" %>
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
+              <%= link_to "Cancelar", site_professional_reservations_path, id: "news", class: "btn btn-danger btn-block"%>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+</br>
+</br>       

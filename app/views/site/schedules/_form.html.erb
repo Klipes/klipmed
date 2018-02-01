@@ -1,0 +1,61 @@
+<%= render :partial => 'shared/errors', :locals => { :model => @schedule} %>        
+
+
+<div class="modal" tabindex="-1" role="dialog" id="new_schedule">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Create new Schedule</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <%= form_for [:site, @schedule], :remote=>true do |f| %>
+        <div class="modal-body">
+          <div class="row">
+            <div class="container col-lg-12 col-md-12 col-sm-12 col-xs-12">  
+              <div class="row">
+                <div class="col-lg-12 col-md-12">
+                  <%= f.label :customer_id %>:
+                  <%= f.collection_select :customer_id, @customers.all, :id, :fullname, {include_blank: false}, {class: "form-control"} %>
+                </div>           
+              </div>  
+              <div class="row">
+                <div class="col-lg-12 col-md-12">
+                  <%= f.label :professional_id %>:
+                  <%= f.collection_select :professional_id, @professionals.all, :id, :fullname, {include_blank: false}, {class: "form-control"} %>
+                </div>                           
+              </div>  
+              <div class="row">
+                <div class="col-lg-12 col-md-12">
+                  <%= f.label :covenant_id %>:
+                  <%= f.grouped_collection_select :covenant_id, @professionals.all, :covenants, :fullname, :id, :description, {}, {class: "form-control"} %>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <label>Data</label>:</label> 
+                  <%= f.text_field :start, :value => @schedule.start.strftime("%d/%m/%Y"), :class =>"form-control datetimepicker" %>                                   
+                </div> 
+                <div class="col-md-3">
+                  <label>Hora:</label>
+
+                  <%= f.text_field :end, :value => @schedule.start.strftime("%H:%M"), :class =>"form-control datetimepicker" %>                                   
+                </div>         
+              </div>           
+            </div>
+          </div>
+          </br>
+          <%= render :partial => 'shared/submit', :locals => { :f => f, :path => site_schedules_path} %>                  
+        </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+
+</br>
+</br>
+
+

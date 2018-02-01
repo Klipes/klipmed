@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  company_id: 
+  professional_id: 
+  start: 2018-01-30 16:11:38
+  end: 2018-01-30 16:11:38
+  title: MyString
+
+two:
+  company_id: 
+  professional_id: 
+  start: 2018-01-30 16:11:38
+  end: 2018-01-30 16:11:38
+  title: MyString

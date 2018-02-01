@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../../../favicon.ico">
+
+    <title>Klipmed - Admin</title>
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+    <%= csrf_meta_tags %>
+  </head>
+
+  <body>
+    <main role="main" class="container-fluid">      
+      <%= render partial: "layouts/backoffice_shared/navigation" %>
+      <div class="row">
+        <div class="col-lg-12">
+          <%= yield %>
+        </div>
+        <!-- /.col-lg-12 -->
+      </div>
+    </main><!-- /.container -->
+
+    <% if notice %>
+      <script>
+        $.notify("<%= notice %>", "success")
+      </script>
+    <% end %>
+
+    <% if alert %>
+      <script>
+        $.notify("<%= alert %>", "success")
+      </script>
+    <% end %>
+  </body>
+</html>
