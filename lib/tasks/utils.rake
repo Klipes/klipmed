@@ -11,14 +11,14 @@ namespace :utils do
     puts "==============================================================================================="
     puts "rake utils:generate_companies..." 
     puts"#{%x(rake utils:generate_companies)}"
+    puts "rake utils:generate_covenants..."
+    puts"#{%x(rake utils:generate_covenants)}"
     puts "rake utils:generate_users..."
     puts"#{%x(rake utils:generate_users)}"
     puts "rake utils:generate_receivable_categories..."
     puts"#{%x(rake utils:generate_receivable_categories)}"
     puts "rake utils:generate_payable_categories..."
     puts"#{%x(rake utils:generate_payable_categories)}"
-    puts "rake utils:generate_covenants..."
-    puts"#{%x(rake utils:generate_covenants)}"
     puts "rake utils:generate_customers..."
     puts"#{%x(rake utils:generate_customers)}"
     puts "rake utils:generate_suppliers..."
@@ -57,15 +57,37 @@ namespace :utils do
     puts "companies created"
   end 
 
+  desc "Generate Covenant Data"
+  task generate_covenants: :environment do
+    (1..30).each do |i|
+      #crio o convênio particular default para todas as empresas
+      Covenant.create!(
+        description: "Particular",
+        company_id: i,
+      )
+
+      (1..4).each do |j|
+        Covenant.create!(
+          description: Faker::Commerce.department,
+          company_id: i,
+        )
+      end     
+    end
+    puts "Covenants Created"
+  end
+  
   desc "Generate User Data"
   task generate_users: :environment do
     #usuário "teste" do sistema
-    User.create(
+    User.create!(
       email: "user@user.com", 
-      password: "123456", 
-      password_confirmation: "123456", 
-      company_id: 1, 
-      role: 0)
+      name: Faker::Name.name,
+      password: "123456",
+      password_confirmation: "123456",
+      company_id: 1,
+      role: 0,
+      user_type: rand(0..1)
+    )
 
     UserAddress.create!(
       address1: Faker::Address.street_name,
@@ -77,7 +99,9 @@ namespace :utils do
       zip: Faker::Address.zip_code,
       user_id: 1
     )    
-      
+    puts "Usuário teste"
+
+    #usuários aleatórios
     (1..30).each do |i|    
       #usuário administrador
       User.create!(
@@ -116,7 +140,24 @@ namespace :utils do
         user_id: i
       )    
     end   
-    puts "Users Adrresses created" 
+    puts "Users Addresses created" 
+  
+    User.all.each do |user|
+      #Adiciono o convênio "Particular" para todos os profissionais
+      UserCovenant.create(
+        user_id: user.id,
+        covenant_id: Covenant.where("company_id = ? and description = ?", user.company_id, "Particular").first.id
+      )
+    
+      Random.rand(1..2).times do |i|
+        UserCovenant.create(
+          user_id: user.id,
+          covenant_id: Covenant.where("company_id = ?", user.company_id).all.sample.id
+        )
+      end
+    end
+    puts "Professionals Covenants created"
+
   end
   
   desc "Generate Receivable Categories Data"
@@ -143,25 +184,6 @@ namespace :utils do
       end     
     end 
     puts "Payable Categories Created"    
-  end
-
-  desc "Generate Covenant Data"
-  task generate_covenants: :environment do
-    (1..30).each do |i|
-      #crio o convênio particular default para todas as empresas
-      Covenant.create!(
-        description: "Particular",
-        company_id: i,
-      )
-
-      (1..4).each do |j|
-        Covenant.create!(
-          description: Faker::Commerce.department,
-          company_id: i,
-        )
-      end     
-    end
-    puts "Covenants Created"
   end
 
   desc "Generate Customer Data"

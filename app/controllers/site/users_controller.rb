@@ -2,6 +2,7 @@ class Site::UsersController < ApplicationController
   layout "site"
   before_action :authenticate_user!
   before_action :set_user, only: [:edit, :update, :destroy]
+  before_action :load_covenants, only: [:new, :edit]
 
   def index
     if current_user.full_access?
@@ -59,6 +60,11 @@ class Site::UsersController < ApplicationController
     params.require(:user).permit(
       :user_id, :email, :password, :password_confirmation, :name, :company_id, :role, :user_type,
       user_address_attributes:[:id, :user_id, :address1, :address2, :number, 
-        :neighborhood, :city, :state, :zip],)
+        :neighborhood, :city, :state, :zip],
+      user_covenants_attributes:[:id, :covenant_id, :_destroy])
+  end
+
+  def load_covenants
+    @covenants = Covenant.where("company_id = ?", current_user.company_id)  
   end
 end

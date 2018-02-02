@@ -10,5 +10,9 @@ class User < ActiveRecord::Base
   belongs_to :company
   has_one :user_address
 
+  has_many :user_covenants
+  has_many :covenants, through: :user_covenants
+
   accepts_nested_attributes_for :user_address
+  accepts_nested_attributes_for :user_covenants, reject_if: :all_blank, allow_destroy: true
 end

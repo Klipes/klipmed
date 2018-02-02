@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180202160558) do
+ActiveRecord::Schema.define(version: 20180202173013) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -238,6 +238,16 @@ ActiveRecord::Schema.define(version: 20180202160558) do
   end
 
   add_index "user_addresses", ["user_id"], name: "index_user_addresses_on_user_id"
+
+  create_table "user_covenants", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "covenant_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "user_covenants", ["covenant_id"], name: "index_user_covenants_on_covenant_id"
+  add_index "user_covenants", ["user_id"], name: "index_user_covenants_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
