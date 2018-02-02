@@ -240,6 +240,7 @@ ActiveRecord::Schema.define(version: 20180130161138) do
     t.text     "name"
     t.integer  "company_id"
     t.integer  "role",                   default: 0,  null: false
+    t.integer  "user_type",              default: 0,  null: false
   end
 
   add_index "users", ["company_id"], name: "index_users_on_company_id"

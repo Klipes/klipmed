@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
         
   enum role: [:full_access, :schedule_access]
+  enum user_type: [:user, :professional]
 
   belongs_to :company
 end

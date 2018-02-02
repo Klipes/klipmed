@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     resources :schedules, except: [:show]
     resources :covenants, except: [:show]
     resources :professional_reservations, except: [:show]
+    resources :users, except: [:show]
   end
 
   namespace :backoffice do

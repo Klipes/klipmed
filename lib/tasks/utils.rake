@@ -60,14 +60,26 @@ namespace :utils do
   desc "Generate User Data"
   task generate_users: :environment do
     (1..30).each do |i|    
-      (1..5).each do |j|
+      #usuário administrador
+      User.create!(
+        email: Faker::Internet.email, 
+        name: Faker::Name.name,
+        password: "123456",
+        password_confirmation: "123456",
+        company_id: i,
+        role: 0,
+        user_type: rand(0..1)
+      )
+    
+      (1..4).each do |j|
         User.create!(
           email: Faker::Internet.email, 
           name: Faker::Name.name,
           password: "123456",
           password_confirmation: "123456",
           company_id: i,
-          role: rand(0..1)
+          role: 1,
+          user_type: rand(0..1)
         )
       end
     end  
@@ -182,6 +194,7 @@ namespace :utils do
   
   desc "Generate Professional Data"
   task generate_professionals: :environment do
+    puts "Professionals"
     (1..30).each do |i|
       (1..5).each do |j|
         Professional.create!(
@@ -194,7 +207,7 @@ namespace :utils do
     end
     puts "Professionals created"
     
-
+    puts "Professionals Addresses"
     (1..150).each do |i|
       ProfessionalAddress.create!(
         address1: Faker::Address.street_name,
@@ -209,6 +222,7 @@ namespace :utils do
     end 
     puts "Professionals Addresses created"
     
+    puts "Professionals Covenants"    
     Professional.all.each do |professional|
       #Adiciono o convênio "Particular" para todos os profissionais
       ProfessionalCovenant.create(
@@ -225,6 +239,7 @@ namespace :utils do
     end
     puts "Professionals Covenants created"
 
+    puts "Professionals Reservations"
     Professional.all.each do |professional|
       Random.rand(1..2).times do |i|      
           _month = Random.rand(1..2)
