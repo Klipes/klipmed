@@ -114,4 +114,13 @@
         title: "Descrição"
         start: "Inicio"
         end: "Fim"
+      user_address:
+        user_id: "Usuário"
+        address1: "Endereço"
+        address2: "Complemento"
+        number: "Número"
+        neighborhood: "Bairro"
+        city: "Cidade"
+        state: "Estado"
+        zip: "CEP"
       

@@ -13,6 +13,7 @@ class Site::UsersController < ApplicationController
 
   def new
     @user = User.new
+    @user.build_user_address 
   end
 
   def create
@@ -55,6 +56,9 @@ class Site::UsersController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def user_params
-    params.require(:user).permit(:user_id, :email, :password, :password_confirmation, :name, :company_id, :role, :user_type)
+    params.require(:user).permit(
+      :user_id, :email, :password, :password_confirmation, :name, :company_id, :role, :user_type,
+      user_address_attributes:[:id, :user_id, :address1, :address2, :number, 
+        :neighborhood, :city, :state, :zip],)
   end
 end

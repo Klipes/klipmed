@@ -59,6 +59,25 @@ namespace :utils do
 
   desc "Generate User Data"
   task generate_users: :environment do
+    #usuário "teste" do sistema
+    User.create(
+      email: "user@user.com", 
+      password: "123456", 
+      password_confirmation: "123456", 
+      company_id: 1, 
+      role: 0)
+
+    UserAddress.create!(
+      address1: Faker::Address.street_name,
+      address2: Faker::Address.secondary_address,
+      neighborhood: Faker::Address.community,
+      number: Faker::Address.building_number,
+      city: Faker::Address.city,
+      state: [:SP, :RJ, :PR, :MG].sample,
+      zip: Faker::Address.zip_code,
+      user_id: 1
+    )    
+      
     (1..30).each do |i|    
       #usuário administrador
       User.create!(
@@ -83,7 +102,21 @@ namespace :utils do
         )
       end
     end  
-    puts "Users Created"  
+    puts "Users Created" 
+    
+    (1..150).each do |i|
+      UserAddress.create!(
+        address1: Faker::Address.street_name,
+        address2: Faker::Address.secondary_address,
+        neighborhood: Faker::Address.community,
+        number: Faker::Address.building_number,
+        city: Faker::Address.city,
+        state: [:SP, :RJ, :PR, :MG].sample,
+        zip: Faker::Address.zip_code,
+        user_id: i
+      )    
+    end   
+    puts "Users Adrresses created" 
   end
   
   desc "Generate Receivable Categories Data"

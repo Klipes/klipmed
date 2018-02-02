@@ -8,4 +8,7 @@ class User < ActiveRecord::Base
   enum user_type: [:user, :professional]
 
   belongs_to :company
+  has_one :user_address
+
+  accepts_nested_attributes_for :user_address
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180130161138) do
+ActiveRecord::Schema.define(version: 20180202160558) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -223,6 +223,21 @@ ActiveRecord::Schema.define(version: 20180130161138) do
   end
 
   add_index "suppliers", ["company_id"], name: "index_suppliers_on_company_id"
+
+  create_table "user_addresses", force: :cascade do |t|
+    t.string   "address1",                null: false
+    t.string   "address2"
+    t.string   "number",       limit: 10
+    t.string   "neighborhood"
+    t.string   "city"
+    t.string   "state",        limit: 2
+    t.string   "zip",          limit: 10, null: false
+    t.integer  "user_id"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  add_index "user_addresses", ["user_id"], name: "index_user_addresses_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
