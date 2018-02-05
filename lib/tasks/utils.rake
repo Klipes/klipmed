@@ -23,8 +23,8 @@ namespace :utils do
     puts"#{%x(rake utils:generate_customers)}"
     puts "rake utils:generate_suppliers..."
     puts"#{%x(rake utils:generate_suppliers)}"
-    puts "rake utils:generate_professionals..."
-    puts"#{%x(rake utils:generate_professionals)}"
+#    puts "rake utils:generate_professionals..."
+#    puts"#{%x(rake utils:generate_professionals)}"
     puts "rake utils:generate_receivables..." 
     puts"#{%x(rake utils:generate_receivables)}"
     puts "rake utils:generate_payables..."
@@ -68,7 +68,7 @@ namespace :utils do
 
       (1..4).each do |j|
         Covenant.create!(
-          description: Faker::Commerce.department,
+          description: ["UNIMED", "COOPUS", "SÃO LUCAS", "AMEPLAN", "AMIL", "SOMPO"].sample,
           company_id: i,
         )
       end     
@@ -246,7 +246,8 @@ namespace :utils do
     end 
     puts "Suppliers Addresses Created"
   end
-  
+ 
+=begin  
   desc "Generate Professional Data"
   task generate_professionals: :environment do
     puts "Professionals"
@@ -321,6 +322,7 @@ namespace :utils do
     end
     puts "Professional Reservations created"
   end
+=end
 
   desc "Generate Receivable Data"
   task generate_receivables: :environment do
@@ -375,14 +377,13 @@ namespace :utils do
         _date = DateTime.new(Date.today.year, _month, _day, _hour, _minute, 0)
 
         _customer = Customer.where("company_id = ?", i).all.sample 
-        _professional = Professional.where("company_id = ?", i).includes(:covenants).all.sample
+        _user = User.where("company_id = ?", i).includes(:covenants).all.sample
 
         Schedule.create!(
           company_id: i,
           customer_id: _customer.id,
-          professional_id: _professional.id,
-          covenant_id: _professional.covenants.all.sample.id,
-          user_id: User.where("company_id = ?", i).all.sample.id,
+          user_id: _user.id,
+          covenant_id: _user.covenants.all.sample.id,
           title: _customer.fullname,
           start: _date,  
           end: _date + 30.minutes

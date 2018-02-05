@@ -22,14 +22,14 @@
               </div>  
               <div class="row">
                 <div class="col-lg-12 col-md-12">
-                  <%= f.label :professional_id %>:
-                  <%= f.collection_select :professional_id, @professionals.all, :id, :fullname, {include_blank: false}, {class: "form-control"} %>
+                  <%= f.label :user_id %>:
+                  <%= f.collection_select :professional_id, @users.all, :id, :name, {include_blank: false}, {class: "form-control"} %>
                 </div>                           
               </div>  
               <div class="row">
                 <div class="col-lg-12 col-md-12">
                   <%= f.label :covenant_id %>:
-                  <%= f.grouped_collection_select :covenant_id, @professionals.all, :covenants, :fullname, :id, :description, {}, {class: "form-control"} %>
+                  <%= f.grouped_collection_select :covenant_id, @users.all, :covenants, :name, :id, :description, {}, {class: "form-control"} %>
                 </div>
               </div>
               <div class="row">

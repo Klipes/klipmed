@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
 
   belongs_to :company
   has_one :user_address
+  has_many :professional_reservations
 
   has_many :user_covenants
   has_many :covenants, through: :user_covenants

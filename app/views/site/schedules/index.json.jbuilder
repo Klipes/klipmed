@@ -5,7 +5,7 @@ json.array! @schedules do |schedule|
   json.title schedule.title
   json.start schedule.start.strftime(date_format)
   json.end schedule.end.strftime(date_format)
-  json.professional schedule.professional_id 
+  json.user schedule.user_id 
  
   if schedule.editable == 0
     json.phone schedule.customer.phone

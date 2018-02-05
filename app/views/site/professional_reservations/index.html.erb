@@ -9,17 +9,17 @@
       <table class="table table-sm table-hover">
           <thead>
               <tr class="row">
-                  <th class="col-sm-4"><%= Professional.human_attribute_name("professional_id") %></th>
-                  <th class="col-sm-5"><%= Professional.human_attribute_name("title") %></th>
-                  <th class="col-sm-1"><%= Professional.human_attribute_name("start") %></th>
-                  <th class="col-sm-1"><%= Professional.human_attribute_name("end") %></th>
+                  <th class="col-sm-4"><%= ProfessionalReservation.human_attribute_name("user_id") %></th>
+                  <th class="col-sm-5"><%= ProfessionalReservation.human_attribute_name("title") %></th>
+                  <th class="col-sm-1"><%= ProfessionalReservation.human_attribute_name("start") %></th>
+                  <th class="col-sm-1"><%= ProfessionalReservation.human_attribute_name("end") %></th>
                   <th class="col-sm-1"></th>
               </tr>
           </thead>
           <tbody>
             <% @reservations.each do |reservation| %>
               <tr class="row">
-                <td class="col-sm-4"><%= reservation.professional.fullname %></td>
+                <td class="col-sm-4"><%= reservation.user.name %></td>
                 <td class="col-sm-5"><%= reservation.title %></td>
                 <td class="col-sm-1"><%= reservation.start.strftime("%m/%d/%Y %H:%M") %></td>
                 <td class="col-sm-1"><%= reservation.end.strftime("%m/%d/%Y %H:%M") %></td>

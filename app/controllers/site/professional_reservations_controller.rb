@@ -3,9 +3,10 @@ class Site::ProfessionalReservationsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_reservation, only: [:edit, :update, :destroy]
   before_action :load_professionals, only: [:new, :edit]
+  before_action :load_users, only:[:index, :new, :edit]
 
   def index
-    @reservations = ProfessionalReservation.includes(:professional)
+    @reservations = ProfessionalReservation.includes(:user)
       .where("company_id = ?", current_user.company_id).page params[:page]
   end
 
@@ -18,8 +19,7 @@ class Site::ProfessionalReservationsController < ApplicationController
   def create
     @reservation = ProfessionalReservation.new()
     @reservation.company_id = current_user.company_id
-    @reservation.professional_id = params[:professional_id]
-    @reservation.user_id = current_user.id
+    @reservation.user_id = params[:user_id]
     @reservation.title = params[:title]
     @reservation.start = DateTime.parse("#{params[:reservation_date]} #{params[:reservation_hour_begin]}").strftime("%Y-%m-%dT%H:%M:%S")
     @reservation.end = DateTime.parse("#{params[:reservation_date]} #{params[:reservation_hour_end]}").strftime("%Y-%m-%dT%H:%M:%S")
@@ -35,7 +35,7 @@ class Site::ProfessionalReservationsController < ApplicationController
   end
 
   def update
-    @reservation.professional_id = params[:professional_id]
+    @reservation.user_id = params[:user_id]
     @reservation.title = params[:title]
     @reservation.start = DateTime.parse("#{params[:reservation_date]} #{params[:reservation_hour_begin]}").strftime("%Y-%m-%dT%H:%M:%S")
     @reservation.end = DateTime.parse("#{params[:reservation_date]} #{params[:reservation_hour_end]}").strftime("%Y-%m-%dT%H:%M:%S")
@@ -56,17 +56,12 @@ class Site::ProfessionalReservationsController < ApplicationController
     @professionals = Professional.where("company_id = ?", current_user.company_id)
   end
 
+  def load_users 
+    @users = User.where("company_id = ? AND user_type = ?", current_user.company_id, User.user_types[:professional])
+  end
+
   def reservation_params
-    params.require(:professional_reservation).permit(
-      :id, 
-      :company_id, 
-      :professional_id, 
-      :user_id, 
-      :title, 
-      :start, 
-      :end,
-      :reservation_date,
-      :reservation_hour_begin,
-      :reservation_hour_end)
+    params.require(:professional_reservation).permit(:id, :company_id, :professional_id, :user_id, 
+      :title, :start, :end,:reservation_date, :reservation_hour_begin, :reservation_hour_end)
   end
 end

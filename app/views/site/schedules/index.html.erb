@@ -7,7 +7,7 @@
             <div class="input-group-prepend">
               <div class="input-group-text"><i class="fa fa-user" aria-hidden="true"></i></div>
             </div> 
-            <%= select_tag('professional_id', options_from_collection_for_select(@professionals.all, 'id', 'fullname', @professional),  class: "form-control") %>
+            <%= select_tag('user_id', options_from_collection_for_select(@users.all, 'id', 'name', @users.first),  class: "form-control") %>
           </div>                
         </div>
         <div class="col-lg-1">

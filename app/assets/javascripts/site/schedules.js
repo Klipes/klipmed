@@ -50,7 +50,7 @@ $(document).on('turbolinks:load', function() {
           $.ajax({
             url: '/site/schedules.json',
             data: {
-                    professional_id: $('#professional_id').val(),
+                    user_id: $('#user_id').val(),
                     start: moment(start).format("YYYY-MM-DD") + "T00:00:00",
                     end: moment(end).format("YYYY-MM-DD") + "T00:00:00"            
                   },
@@ -131,9 +131,9 @@ $(document).on('turbolinks:load', function() {
     }
   });
 
-  $('#professional_id').change(function(){
+  $('#user_id').change(function(){
     event_data = { 
-        professional_id: $('#professional_id').val(),
+        user_id: $('#user_id').val(),
         start: moment($('.calendar').fullCalendar('getView').start).format("YYYY-MM-DD") + "T00:00:00",
         end: moment($('.calendar').fullCalendar('getView').end).format("YYYY-MM-DD") + "T00:00:00"
     };

@@ -110,7 +110,7 @@
       professional_reservation:
         company_id: "Empresa"
         professional_id: "Profissional"
-        user_id: "Usuário"
+        user_id: "Profissional"
         title: "Descrição"
         start: "Inicio"
         end: "Fim"
