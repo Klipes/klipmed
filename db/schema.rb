@@ -103,21 +103,6 @@ ActiveRecord::Schema.define(version: 20180202173013) do
   add_index "payables", ["payable_category_id"], name: "index_payables_on_payable_category_id"
   add_index "payables", ["supplier_id"], name: "index_payables_on_supplier_id"
 
-  create_table "professional_addresses", force: :cascade do |t|
-    t.string   "address1",                   null: false
-    t.string   "address2"
-    t.string   "number",          limit: 10
-    t.string   "neighborhood"
-    t.string   "city"
-    t.string   "state",           limit: 2
-    t.string   "zip",             limit: 10, null: false
-    t.integer  "professional_id"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-  end
-
-  add_index "professional_addresses", ["professional_id"], name: "index_professional_addresses_on_professional_id"
-
   create_table "professional_reservations", force: :cascade do |t|
     t.integer  "company_id"
     t.integer  "professional_id"

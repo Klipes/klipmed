@@ -262,22 +262,7 @@ namespace :utils do
       end
     end
     puts "Professionals created"
-    
-    puts "Professionals Addresses"
-    (1..150).each do |i|
-      ProfessionalAddress.create!(
-        address1: Faker::Address.street_name,
-        address2: Faker::Address.secondary_address,
-        neighborhood: Faker::Address.community,
-        number: Faker::Address.building_number,
-        city: Faker::Address.city,
-        state: [:SP, :RJ, :PR, :MG].sample,
-        zip: Faker::Address.zip_code,
-        professional_id: i
-      )    
-    end 
-    puts "Professionals Addresses created"
-    
+
     puts "Professionals Reservations"
     Professional.all.each do |professional|
       Random.rand(1..2).times do |i|      

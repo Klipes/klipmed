@@ -41,56 +41,6 @@
               </div>
             </div>
             </br>
-
-            <!-- tabela relacionada de endereços!-->
-            <hr>
-            <h3>Endereço</h3> </br>
-            <%= f.fields_for :professional_address do |professional_address| %>
-              <div class="row">
-                <div class="col-lg-3 col-md-3">
-                  <%= professional_address.label :zip %>:
-                  <%= professional_address.text_field :zip, :class =>"form-control"%>
-                </div>
-                <div class="col-md-8">
-                  <br>
-                  <button type="button" name="buttonBuscar" id="buttonBuscar_professional" class="btn btn-success buttonBox">Buscar Endereço</button>
-                </div>            
-              </div>
-              </br>
-              <div class="row">
-                <div class="col-lg-8 col-md-8">
-                  <%= professional_address.label :address1 %>:
-                  <%= professional_address.text_field :address1, :class =>"form-control" %>
-                </div>
-                <div class="col-lg-4 col-md-4">
-                  <%= professional_address.label :number %>:
-                  <%= professional_address.text_field :number, :class =>"form-control" %>
-                </div>              
-              </div>
-              </br>
-              <div class="row">
-                <div class="col-lg-6 col-md-6">
-                  <%= professional_address.label :address2 %>:
-                  <%= professional_address.text_field :address2, :class =>"form-control" %>
-                </div>             
-                <div class="col-lg-6 col-md-6">
-                  <%= professional_address.label :neighborhood %>:
-                  <%= professional_address.text_field :neighborhood, :class =>"form-control" %>
-                </div>              
-              </div>
-              </br>
-              <div class="row">
-                <div class="col-lg-6 col-md-6">
-                  <%= professional_address.label :city %>:
-                  <%= professional_address.text_field :city, :class =>"form-control" %>
-                </div>
-                <div class="col-lg-6 col-md-6">
-                  <%= professional_address.label :state %>:
-                  <%= professional_address.select :state, options_state(@professional.professional_address.state), {}, {:class => "form-control"} %>
-                </div>              
-              </div>
-              </br>
-            <% end %>
             <hr>
             </br>
             <%= render :partial => 'shared/submit', :locals => { :f => f, :path => site_professionals_path} %>        

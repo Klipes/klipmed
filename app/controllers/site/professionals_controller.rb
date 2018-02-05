@@ -11,7 +11,6 @@ class Site::ProfessionalsController < ApplicationController
 
   def new
     @professional = Professional.new
-    @professional.build_professional_address 
   end
 
   def create
@@ -39,8 +38,7 @@ class Site::ProfessionalsController < ApplicationController
   private
 
   def set_professional
-    @professional = Professional.includes(:professional_covenants).find(params[:id])
-    puts @professional.professional_covenants.count
+    @professional = Professional.find(params[:id])
   end
 
   def load_covenants
@@ -48,8 +46,6 @@ class Site::ProfessionalsController < ApplicationController
   end
 
   def professional_params
-    params.require(:professional).permit(:id, :fullname, :email, :phone, :company_id,
-      professional_address_attributes:[:id, :supplier_id, :address1, :address2, :number, 
-        :neighborhood, :city, :state, :zip])
+    params.require(:professional).permit(:id, :fullname, :email, :phone, :company_id)
   end
 end
