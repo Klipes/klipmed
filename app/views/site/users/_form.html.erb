@@ -49,13 +49,13 @@
             <h3>Endereço</h3> </br>
             <%= f.fields_for :user_address do |user_address| %>
               <div class="row">
-                <div class="col-lg-2 col-md-2">
+                <div class="col-lg-3 col-md-3">
                   <%= user_address.label :zip %>:
                   <%= user_address.text_field :zip, :class =>"form-control"%>
                 </div>
                 <div class="col-md-8">
                   <br>
-                  <button type="button" name="buttonBuscar" id="buttonBuscar_professional" class="btn btn-success buttonBox">Buscar Endereço</button>
+                  <button type="button" name="buttonBuscar" id="buttonBuscar_user" class="btn btn-success buttonBox">Buscar Endereço</button>
                 </div>            
               </div>
               </br>

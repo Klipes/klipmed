@@ -46,7 +46,7 @@
             <h3>Endereço</h3> </br>
             <%= f.fields_for :customer_address do |customer_address| %>
               <div class="row">
-                <div class="col-lg-2 col-md-2">
+                <div class="col-lg-3 col-md-3">
                   <%= customer_address.label :zip %>:
                   <%= customer_address.text_field :zip, :class =>"form-control"%>
                 </div>
