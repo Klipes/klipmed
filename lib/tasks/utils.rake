@@ -23,8 +23,6 @@ namespace :utils do
     puts"#{%x(rake utils:generate_customers)}"
     puts "rake utils:generate_suppliers..."
     puts"#{%x(rake utils:generate_suppliers)}"
-#    puts "rake utils:generate_professionals..."
-#    puts"#{%x(rake utils:generate_professionals)}"
     puts "rake utils:generate_receivables..." 
     puts"#{%x(rake utils:generate_receivables)}"
     puts "rake utils:generate_payables..."
@@ -62,7 +60,7 @@ namespace :utils do
     (1..30).each do |i|
       #crio o convênio particular default para todas as empresas
       Covenant.create!(
-        description: "Particular",
+        description: "PARTICULAR",
         company_id: i,
       )
 
@@ -156,8 +154,7 @@ namespace :utils do
         )
       end
     end
-    puts "Professionals Covenants created"
-
+    puts "User Covenants created"
   end
   
   desc "Generate Receivable Categories Data"
@@ -246,51 +243,6 @@ namespace :utils do
     end 
     puts "Suppliers Addresses Created"
   end
- 
-=begin  
-  desc "Generate Professional Data"
-  task generate_professionals: :environment do
-    puts "Professionals"
-    (1..30).each do |i|
-      (1..5).each do |j|
-        Professional.create!(
-          fullname: Faker::Name.name,
-          email: Faker::Internet.email, 
-          phone: Faker::PhoneNumber.cell_phone,
-          company_id: i,
-        )
-      end
-    end
-    puts "Professionals created"
-
-    puts "Professionals Reservations"
-    Professional.all.each do |professional|
-      Random.rand(1..2).times do |i|      
-          _month = Random.rand(1..2)
-        if _month == 2
-          _day = Random.rand(1..28)
-        else
-          _day = Random.rand(1..30)
-        end
-
-        _hour = Random.rand(8..18)
-        _minute = [0, 30].sample
-        
-        _date = DateTime.new(Date.today.year, _month, _day, _hour, _minute, 0)      
-
-        ProfessionalReservation.create(
-          company_id: professional.company_id,
-          professional_id: professional.id,
-          user_id: User.where("company_id = ?", professional.company_id).all.sample.id, 
-          title: Faker::Lorem.sentence,
-          start: _date,
-          end: _date + 120.minutes
-        )   
-      end    
-    end
-    puts "Professional Reservations created"
-  end
-=end
 
   desc "Generate Receivable Data"
   task generate_receivables: :environment do

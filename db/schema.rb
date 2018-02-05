@@ -105,29 +105,16 @@ ActiveRecord::Schema.define(version: 20180202173013) do
 
   create_table "professional_reservations", force: :cascade do |t|
     t.integer  "company_id"
-    t.integer  "professional_id"
     t.integer  "user_id"
     t.datetime "start"
     t.datetime "end"
     t.string   "title"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_index "professional_reservations", ["company_id"], name: "index_professional_reservations_on_company_id"
-  add_index "professional_reservations", ["professional_id"], name: "index_professional_reservations_on_professional_id"
   add_index "professional_reservations", ["user_id"], name: "index_professional_reservations_on_user_id"
-
-  create_table "professionals", force: :cascade do |t|
-    t.string   "fullname",              null: false
-    t.string   "email"
-    t.string   "phone",      limit: 20, null: false
-    t.integer  "company_id"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
-  end
-
-  add_index "professionals", ["company_id"], name: "index_professionals_on_company_id"
 
   create_table "receivable_categories", force: :cascade do |t|
     t.text     "description", limit: 50, null: false
@@ -154,22 +141,20 @@ ActiveRecord::Schema.define(version: 20180202173013) do
 
   create_table "schedules", force: :cascade do |t|
     t.integer  "company_id"
-    t.integer  "professional_id"
     t.integer  "customer_id"
     t.integer  "user_id"
     t.string   "title"
     t.datetime "start"
     t.datetime "end"
-    t.integer  "editable",        default: 1
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.integer  "editable",    default: 1
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
     t.integer  "covenant_id"
   end
 
   add_index "schedules", ["company_id"], name: "index_schedules_on_company_id"
   add_index "schedules", ["covenant_id"], name: "index_schedules_on_covenant_id"
   add_index "schedules", ["customer_id"], name: "index_schedules_on_customer_id"
-  add_index "schedules", ["professional_id"], name: "index_schedules_on_professional_id"
   add_index "schedules", ["user_id"], name: "index_schedules_on_user_id"
 
   create_table "supplier_addresses", force: :cascade do |t|
