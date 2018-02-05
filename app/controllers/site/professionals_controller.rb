@@ -50,7 +50,6 @@ class Site::ProfessionalsController < ApplicationController
   def professional_params
     params.require(:professional).permit(:id, :fullname, :email, :phone, :company_id,
       professional_address_attributes:[:id, :supplier_id, :address1, :address2, :number, 
-        :neighborhood, :city, :state, :zip],
-      professional_covenants_attributes:[:id, :covenant_id, :_destroy])
+        :neighborhood, :city, :state, :zip])
   end
 end

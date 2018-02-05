@@ -278,23 +278,6 @@ namespace :utils do
     end 
     puts "Professionals Addresses created"
     
-    puts "Professionals Covenants"    
-    Professional.all.each do |professional|
-      #Adiciono o convênio "Particular" para todos os profissionais
-      ProfessionalCovenant.create(
-        professional_id: professional.id,
-        covenant_id: Covenant.where("company_id = ? and description = ?", professional.company_id, "Particular").first.id
-      )
-    
-      Random.rand(1..2).times do |i|
-        ProfessionalCovenant.create(
-          professional_id: professional.id,
-          covenant_id: Covenant.where("company_id = ?", professional.company_id).all.sample.id
-        )
-      end
-    end
-    puts "Professionals Covenants created"
-
     puts "Professionals Reservations"
     Professional.all.each do |professional|
       Random.rand(1..2).times do |i|      

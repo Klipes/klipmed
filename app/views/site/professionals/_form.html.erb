@@ -91,26 +91,6 @@
               </div>
               </br>
             <% end %>
-
-            <!-- tabela NxN de profissionais versus convênios !-->
-            <hr>
-            <h3>Convênios</h3> </br>
-            <div id="professional_covenants">
-              <%= f.fields_for :professional_covenants do |covenant| %>  
-                <div class="row">     
-                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">     
-                    <div id="nested-fields">
-                      <%= render partial: "professional_covenant_fields", locals: {f: covenant}%>
-                      </br>
-                    </div>
-                  </div>
-                </div>
-              <% end %>
-              <div class="field">
-                </br>
-                <%= link_to_add_association button_tag('Adicionar', type: "button", class: "btn btn-primary"), f, :professional_covenants %>
-              </div>
-            </div>
             <hr>
             </br>
             <%= render :partial => 'shared/submit', :locals => { :f => f, :path => site_professionals_path} %>        

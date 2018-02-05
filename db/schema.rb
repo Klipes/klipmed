@@ -118,16 +118,6 @@ ActiveRecord::Schema.define(version: 20180202173013) do
 
   add_index "professional_addresses", ["professional_id"], name: "index_professional_addresses_on_professional_id"
 
-  create_table "professional_covenants", force: :cascade do |t|
-    t.integer  "professional_id"
-    t.integer  "covenant_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-  end
-
-  add_index "professional_covenants", ["covenant_id"], name: "index_professional_covenants_on_covenant_id"
-  add_index "professional_covenants", ["professional_id"], name: "index_professional_covenants_on_professional_id"
-
   create_table "professional_reservations", force: :cascade do |t|
     t.integer  "company_id"
     t.integer  "professional_id"
