@@ -144,7 +144,7 @@ namespace :utils do
       #Adiciono o convênio "Particular" para todos os profissionais
       UserCovenant.create(
         user_id: user.id,
-        covenant_id: Covenant.where("company_id = ? and description = ?", user.company_id, "Particular").first.id
+        covenant_id: Covenant.where("company_id = ? and description = ?", user.company_id, "PARTICULAR").first.id
       )
     
       Random.rand(1..2).times do |i|

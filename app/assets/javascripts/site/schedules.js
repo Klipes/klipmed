@@ -70,7 +70,7 @@ $(document).on('turbolinks:load', function() {
           event_data = { 
             schedule: {
               id: event.id,
-              professional_id: event.professional,
+              user_id: event.user,
               start: event.start.format(),
               end: event.end.format(),
               resize: false
@@ -86,7 +86,7 @@ $(document).on('turbolinks:load', function() {
           event_data = { 
             schedule: {
               id: event.id,
-              professional_id: event.professional,
+              user_id: event.user,
               start: event.start.format(),
               end: event.end.format(),
               resize: true

@@ -34,7 +34,7 @@ class Site::SchedulesController < ApplicationController
   def create
     @schedule = Schedule.new
     @schedule.company_id      = current_user.company_id
-    @schedule.user_id         = params[:schedule][:professional_id]
+    @schedule.user_id         = params[:schedule][:user_id]
     @schedule.covenant_id     = params[:schedule][:covenant_id]
     @schedule.customer_id     = params[:schedule][:customer_id].to_i
     @schedule.title           = "#{Customer.find(params[:schedule][:customer_id]).fullname} - #{Covenant.find_by(company_id: current_user.company_id, id: params[:schedule][:covenant_id]).description}"
@@ -50,7 +50,7 @@ class Site::SchedulesController < ApplicationController
   end
 
   def update
-    @schedule.user_id = params[:schedule][:professional_id]
+    @schedule.user_id = params[:schedule][:user_id]
     @schedule.start = DateTime.parse("#{params[:schedule][:start]} #{params[:schedule][:end]}").strftime("%Y-%m-%dT%H:%M:%S")
     if !params[:schedule][:resize]
       @schedule.end = @schedule.start + 30.minutes
