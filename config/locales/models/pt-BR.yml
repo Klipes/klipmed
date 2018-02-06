@@ -95,7 +95,7 @@
           paid: "Pago"
       schedule:
         company_id: "Empresa"
-        professional_id: "Professional"
+        user_id: "Profissional"
         covenant_id: "Convênio"
         customer_id: "Cliente"
         start: "Inicio"

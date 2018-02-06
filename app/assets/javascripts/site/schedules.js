@@ -1,14 +1,13 @@
 var covenant_Options;
 covenant_Options = function(html){
   var covenants = html;
-  var selectedProfessional = $('#schedule_professional_id :selected').text();
+  var selectedProfessional = $('#schedule_user_id :selected').text();
   var optgroup = "optgroup[label='"+ selectedProfessional + "']";
   var covenantOptions = $(covenants).filter(optgroup).html();
   $('#schedule_covenant_id').html(covenantOptions)
 };
 
 $(document).on('turbolinks:load', function() {
-//$(document).ready(function() {
   var covenantsOriginal = "";
 
   function load_calendar(){
@@ -117,7 +116,7 @@ $(document).on('turbolinks:load', function() {
     });
   });
 
-  $('body').on('change', '#schedule_professional_id', function() {  
+  $('body').on('change', '#schedule_user_id', function() {  
     if (covenantsOriginal == "") {
       covenantsOriginal = $('#schedule_covenant_id').html();  
     }

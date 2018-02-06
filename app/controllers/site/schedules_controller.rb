@@ -1,7 +1,6 @@
 class Site::SchedulesController < ApplicationController
   layout "site"
   before_action :authenticate_user!
-  before_action :load_professionals, only:[:new, :edit]
   before_action :load_users, only:[:index, :new, :edit]
   
   before_action :load_customers, only:[:new, :edit]
@@ -65,10 +64,6 @@ class Site::SchedulesController < ApplicationController
   end
 
   private
-    def load_professionals
-      @professionals = Professional.where("company_id = ?", current_user.company_id).all.includes(:covenants).all
-    end
-
     def load_customers
       @customers = Customer.where("company_id = ?", current_user.company_id)
     end  
