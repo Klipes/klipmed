@@ -8,7 +8,7 @@
     </li>
     <li>
       <%= link_to site_schedules_path, data: {"no-turbolinks": false } do %>
-        <i class="fa fa-calendar fa-lg"></i><%= t 'navigation.schedule' %>
+        <i class="fa fa-calendar-plus-o fa-lg"></i><%= t 'navigation.schedule' %>
       <% end %>
     </li>
     <li>
@@ -16,6 +16,23 @@
         <i class="fa fa-address-book-o fa-lg"></i> Tratamentos
       </a>
     </li>
+
+    <!--Agendamentos-->
+    <li data-toggle="collapse" data-target="#schedule" class="collapsed active">
+      <a href="#"><i class="fa fa-calendar fa-lg"></i> Agendamentos <span class="arrow"></span></a>
+    </li>
+    <ul class="sub-menu collapse" id="schedule">
+      <li class="active">
+        <%= link_to site_schedules_path,{} do %>
+          <%= t 'navigation.schedule' %>
+        <% end %>
+      </li>
+      <li>
+        <%= link_to site_professional_reservations_path ,{} do %>
+          <%= t 'navigation.schedule_reservation' %>
+        <% end %>    
+      </li>
+    </ul>
 
     <!--Cadastros-->
     <li data-toggle="collapse" data-target="#products" class="collapsed active">

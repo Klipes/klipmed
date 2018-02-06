@@ -10,7 +10,6 @@
       receivable: "Titulos a Receber"
       payable_category: "Categorias"
       payable: "Titulos a Pagar"
-      professional: "Profissionais"
       schedule: "Agenda"
       covenant: "Convênios"
       professional_reservation: "Reserva de Horários"
@@ -22,6 +21,7 @@
         password_confirmation: "Confirmação de Senha"
         company_id: "Empresa"
         role: "Nível de Acesso"
+        user_type: "Tipo"
       admin:
         email: "E-mail"
         password: "Senha"
@@ -64,10 +64,6 @@
         city: "Cidade"
         state: "Estado"
         zip: "CEP"
-      professional:
-        fullname: "Nome"
-        email: "E-mail"
-        phone: "Fone"
       professional_address:
         address1: "Endereço"
         address2: "Complemento"

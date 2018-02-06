@@ -11,5 +11,6 @@
     payables: "Lançamentos"
     professionals: "Profissionais"
     schedule: "Agenda"
+    schedule_reservation: "Reserva de Horário"
     covenants: "Convênios"
     logout: "Sair"

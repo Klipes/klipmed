@@ -4,3 +4,6 @@
       role:
         full_access: "Acesso Total"
         schedule_access: "Agendamento"
+      user_type:
+        user: "Usuário"
+        professional: "Profissional"

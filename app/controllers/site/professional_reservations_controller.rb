@@ -2,7 +2,6 @@ class Site::ProfessionalReservationsController < ApplicationController
   layout "site"
   before_action :authenticate_user!
   before_action :set_reservation, only: [:edit, :update, :destroy]
-  before_action :load_professionals, only: [:new, :edit]
   before_action :load_users, only:[:index, :new, :edit]
 
   def index
@@ -51,10 +50,6 @@ class Site::ProfessionalReservationsController < ApplicationController
   def set_reservation
     @reservation = ProfessionalReservation.find(params[:id])
   end 
-
-  def load_professionals
-    @professionals = Professional.where("company_id = ?", current_user.company_id)
-  end
 
   def load_users 
     @users = User.where("company_id = ? AND user_type = ?", current_user.company_id, User.user_types[:professional])
