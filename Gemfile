@@ -37,6 +37,7 @@ gem 'momentjs-rails', '~> 2.17', '>= 2.17.1'
 gem 'rails-assets-fullcalendar', source: 'https://rails-assets.org'
 gem 'bootstrap-daterangepicker-rails'
 gem 'cocoon', '~> 1.2', '>= 1.2.11'
+gem 'rails-assets-select2', source: 'https://rails-assets.org'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

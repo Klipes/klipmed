@@ -7,3 +7,8 @@
       user_type:
         user: "Usuário"
         professional: "Profissional"
+    schedule:
+      schedule_type:
+        initial: "Primeira Consulta"
+        normal: "Consulta"
+        return: "Retorno"

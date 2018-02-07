@@ -101,6 +101,9 @@
         start: "Inicio"
         end: "Fim"
         title: "Descrição"  
+        schedule_type: "Tipo"
+        new_customer_name: "Cliente"
+        new_customer_phone: "Telefone"
       covenant:
         description: "Descrição"
       professional_reservation:

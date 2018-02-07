@@ -8,8 +8,13 @@ json.array! @schedules do |schedule|
   json.user schedule.user_id 
  
   if schedule.editable == 0
-    json.phone schedule.customer.phone
-    json.color 'green'
+    if Schedule.schedule_types[schedule.schedule_type] == Schedule.schedule_types[:initial]
+      json.color 'yellow'
+    elsif Schedule.schedule_types[schedule.schedule_type] == Schedule.schedule_types[:normal]
+      json.color 'green'
+    elsif Schedule.schedule_types[schedule.schedule_type] == Schedule.schedule_types[:return]
+      json.color 'blue'
+    end
     json.editable true
   else 
     json.phone ""

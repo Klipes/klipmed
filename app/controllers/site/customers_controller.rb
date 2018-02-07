@@ -4,8 +4,17 @@ class Site::CustomersController < ApplicationController
   before_action :set_customer, only: [:edit, :update, :destroy]
 
   def index
-    @customers = Customer.where("company_id = ?", current_user.company_id).page params[:page]
+    respond_to do |format|
+      format.html do
+        @customers = Customer.where("company_id = ?", current_user.company_id).page params[:page]
+      end
+
+      format.json do
+        @customers = Customer.select(:id, :fullname).where("company_id = ? AND fullname LIKE ?", current_user.company_id, "#{params[:q][:term]}%")
+      end
+    end
     authorize @customers
+    puts @customers.to_json
   end
 
   def new

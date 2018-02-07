@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180202173013) do
+ActiveRecord::Schema.define(version: 20180207114912) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -146,10 +146,13 @@ ActiveRecord::Schema.define(version: 20180202173013) do
     t.string   "title"
     t.datetime "start"
     t.datetime "end"
-    t.integer  "editable",    default: 1
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.integer  "editable",                      default: 1
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
     t.integer  "covenant_id"
+    t.integer  "schedule_type",                 default: 1
+    t.string   "new_customer_phone", limit: 20
+    t.string   "new_customer_name"
   end
 
   add_index "schedules", ["company_id"], name: "index_schedules_on_company_id"

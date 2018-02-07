@@ -7,6 +7,29 @@ covenant_Options = function(html){
   $('#schedule_covenant_id').html(covenantOptions)
 };
 
+function formatRepoSelection (repo) {
+  return repo.fullname || repo.text;
+};
+
+function formatRepo (repo) {
+  if (repo.loading) {
+    return repo.text;
+  }array
+
+  var markup = "<div class='select2-result-customer__fullname'>" + repo.fullname + "</div>";
+  return markup;
+}
+
+configure_schedule = function (type){  
+  if (type == "initial"){
+    $('#select2_customer').hide();
+    $('#new_customer_fields').show();
+  } else {
+    $('#select2_customer').show();   
+    $('#new_customer_fields').hide();
+  }
+};
+
 $(document).on('turbolinks:load', function() {
   var covenantsOriginal = "";
 
@@ -14,6 +37,15 @@ $(document).on('turbolinks:load', function() {
     $('.calendar').each(function(){
       var calendar = $(this);
       calendar.fullCalendar({
+        nowIndicator: true,
+        selectable: true,
+        selectHelper: true,
+        editable: true,
+        eventLimit: true,
+        slotLabelFormat:"HH:mm",
+        timeFormat: 'H(:mm)',
+        defaultView: 'agendaWeek',
+        locale: "pt-BR",
         customButtons: {
           new_scheduller: {
             text: 'Novo Agendamento',
@@ -30,15 +62,6 @@ $(document).on('turbolinks:load', function() {
           center: 'title',
           right: 'month,agendaWeek,agendaDay, new_scheduller'
         },
-        nowIndicator: true,
-        selectable: true,
-        selectHelper: true,
-        editable: true,
-        eventLimit: true,
-        slotLabelFormat:"HH:mm",
-        timeFormat: 'H(:mm)',
-        defaultView: 'agendaWeek',
-        locale: "pt-BR",
         buttonText: {
           today:    'hoje',
           month:    'mês',
@@ -55,7 +78,6 @@ $(document).on('turbolinks:load', function() {
                   },
             type: 'GET',
             success: function(data) {
-              console.log(JSON.stringify(data));
               $('.calendar').fullCalendar('removeEvents'); 
               callback(data);
             }    
@@ -147,7 +169,45 @@ $(document).on('turbolinks:load', function() {
     });   
   });
   
+  $('body').on('change', '#schedule_schedule_type', function() {  
+    configure_schedule($('#schedule_schedule_type').val());
+  }); 
+
+  $(document).on('show.bs.modal', function() {
+    configure_schedule($('#schedule_schedule_type').val());
+
+    //combobox select2
+    $('#schedule_customer_id').select2({
+      theme: "bootstrap4",
+      dropdownParent: $("#new_schedule"),
+      dropdownAutoWidth : true,
+      minimumInputLength: 1,
+      width: '100%', 
+      height: '100%',
+      ajax: { // instead of writing the function to execute the request we use Select2's convenient helper
+        url: "/site/customers.json",
+        dataType: 'json',
+        quietMillis: 250,
+        data: function (term, page) {
+            return {
+                q: term, // search term
+            };
+        },
+        processResults: function (data) {
+          // Tranforms the top-level key of the response object from 'items' to 'results'
+          return {
+            results: data.items
+          };
+        },
+        cache: true,
+        templateResult: formatRepo,
+        templateSelection: formatRepoSelection
+      },        
+    });
+  });
+
   load_calendar();
 });
+
 
 

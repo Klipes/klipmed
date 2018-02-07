@@ -149,6 +149,7 @@ GEM
     rails-assets-jquery (3.3.1)
     rails-assets-moment (2.20.1)
     rails-assets-notifyjs (0.4.2)
+    rails-assets-select2 (4.0.5)
     rails-deprecated_sanitizer (1.0.3)
       activesupport (>= 4.2.0.alpha)
     rails-dom-testing (1.0.9)
@@ -236,6 +237,7 @@ DEPENDENCIES
   rails-assets-bootstrap (= 4.0.0.beta3)!
   rails-assets-fullcalendar!
   rails-assets-notifyjs!
+  rails-assets-select2!
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   spring

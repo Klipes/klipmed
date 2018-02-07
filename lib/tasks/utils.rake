@@ -1,4 +1,21 @@
 namespace :utils do
+  def generate_random_phone
+    "9#{Random.rand(1000..9999)}-#{Random.rand(1000..9999)}"
+  end
+
+  def generate_random_date
+    _month = Random.rand(Date.today.month..Date.today.month + 4)
+    if _month == 2
+      _day = Random.rand(1..28)
+    else
+      _day = Random.rand(1..30)
+    end
+
+    _hour = Random.rand(8..18)
+    _minute = [0, 30].sample
+    
+    _date = DateTime.new(Date.today.year, _month, _day, _hour, _minute, 0)
+  end
 
   desc "Setup Development"
   task setup: :environment do
@@ -15,18 +32,18 @@ namespace :utils do
     puts"#{%x(rake utils:generate_covenants)}"
     puts "rake utils:generate_users..."
     puts"#{%x(rake utils:generate_users)}"
-    puts "rake utils:generate_receivable_categories..."
-    puts"#{%x(rake utils:generate_receivable_categories)}"
-    puts "rake utils:generate_payable_categories..."
-    puts"#{%x(rake utils:generate_payable_categories)}"
+#    puts "rake utils:generate_receivable_categories..."
+#    puts"#{%x(rake utils:generate_receivable_categories)}"
+#    puts "rake utils:generate_payable_categories..."
+#    puts"#{%x(rake utils:generate_payable_categories)}"
     puts "rake utils:generate_customers..."
     puts"#{%x(rake utils:generate_customers)}"
-    puts "rake utils:generate_suppliers..."
-    puts"#{%x(rake utils:generate_suppliers)}"
-    puts "rake utils:generate_receivables..." 
-    puts"#{%x(rake utils:generate_receivables)}"
-    puts "rake utils:generate_payables..."
-    puts"#{%x(rake utils:generate_payables)}"
+#    puts "rake utils:generate_suppliers..."
+#    puts"#{%x(rake utils:generate_suppliers)}"
+#    puts "rake utils:generate_receivables..." 
+#    puts"#{%x(rake utils:generate_receivables)}"
+#    puts "rake utils:generate_payables..."
+#    puts"#{%x(rake utils:generate_payables)}"
     puts "rake utils:generate_schedules..."
     puts"#{%x(rake utils:generate_schedules)}"
     puts "==============================================================================================="
@@ -49,7 +66,7 @@ namespace :utils do
         state: [:SP, :RJ, :PR, :MG].sample,
         zip: Faker::Address.zip_code,
         email: Faker::Internet.email, 
-        phone: Faker::PhoneNumber.cell_phone,
+        phone: generate_random_phone
       )
     end    
     puts "companies created"
@@ -190,7 +207,7 @@ namespace :utils do
         Customer.create!(
           fullname: Faker::Name.name,
           email: Faker::Internet.email, 
-          phone: Faker::PhoneNumber.cell_phone,
+          phone: generate_random_phone,
           company_id: i,
         )
       end
@@ -221,7 +238,7 @@ namespace :utils do
           supplier_name: Faker::Company.name,
           trade_name: Faker::Company.name,
           email: Faker::Internet.email, 
-          phone: Faker::PhoneNumber.cell_phone,
+          phone: generate_random_phone,
           company_id: i,
         )
       end
@@ -252,7 +269,7 @@ namespace :utils do
           company_id: i,
           customer_id: Customer.where("company_id = ?", i).all.sample.id,
           receivable_category_id: ReceivableCategory.where("company_id = ?", i).all.sample.id,
-          due_date: Date.today + Random.rand(15),
+          due_date: generate_random_date,
           amount: "#{Random.rand(500)},#{Random.rand(99)}",
           description: Faker::Lorem.sentence,
           status: rand(0..1),
@@ -270,7 +287,7 @@ namespace :utils do
           company_id: i,
           supplier_id: Supplier.where("company_id = ?", i).all.sample.id,
           payable_category_id:  PayableCategory.where("company_id = ?", i).all.sample.id,
-          due_date: Date.today + Random.rand(15),
+          due_date: generate_random_date,
           amount: "#{Random.rand(500)},#{Random.rand(99)}",
           description: Faker::Lorem.sentence,
           status: rand(0..1),      
@@ -284,26 +301,28 @@ namespace :utils do
   task generate_schedules: :environment do
     (1..30).each do |i|
       (1..200).each do |j|  
-        _month = Random.rand(1..2)
-        if _month == 2
-          _day = Random.rand(1..28)
-        else
-          _day = Random.rand(1..30)
-        end
-
-        _hour = Random.rand(8..18)
-        _minute = [0, 30].sample
-        
-        _date = DateTime.new(Date.today.year, _month, _day, _hour, _minute, 0)
-
+        _date = generate_random_date
         _customer = Customer.where("company_id = ?", i).all.sample 
         _user = User.where("company_id = ?", i).includes(:covenants).all.sample
+
+        _schedule_type = Random.rand(0..2)
+
+        _new_customer_phone = ""
+        _new_customer_name = ""
+
+        if _schedule_type == Schedule.schedule_types[:initial]
+          _new_customer_phone = generate_random_phone
+          _new_customer_name = Faker::Name.name
+        end
 
         Schedule.create!(
           company_id: i,
           customer_id: _customer.id,
+          new_customer_name: _new_customer_name,
           user_id: _user.id,
           covenant_id: _user.covenants.all.sample.id,
+          schedule_type: _schedule_type,
+          new_customer_phone: _new_customer_phone,
           title: _customer.fullname,
           start: _date,  
           end: _date + 30.minutes

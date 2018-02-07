@@ -12,11 +12,11 @@ class Site::SchedulesController < ApplicationController
     respond_to do |format|
       format.html
       format.json do
-        @schedules =  Schedule.select(:id, :title, :start, :end, :user_id, :customer_id, '0 AS editable' )
+        @schedules =  Schedule.select(:id, :title, :start, :end, :user_id, :customer_id, :schedule_type, '0 AS editable' )
                               .includes(:customer).where("company_id = ? and user_id = ?", _company_id, params['user_id']) 
                               .where(start: params[:start]..params[:end]) 
 
-        @reservations = ProfessionalReservation.select(:id, :title, :start, :end, :user_id, '0 AS customer_id', '1 AS editable')
+        @reservations = ProfessionalReservation.select(:id, :title, :start, :end, :user_id, '0 AS customer_id', :schedule_type, '1 AS editable')
                                                .where("company_id = ? and user_id = ?", _company_id, params['user_id']) 
                                               .where(start: params[:start]..params[:end])    
         
@@ -36,8 +36,21 @@ class Site::SchedulesController < ApplicationController
     @schedule.company_id      = current_user.company_id
     @schedule.user_id         = params[:schedule][:user_id]
     @schedule.covenant_id     = params[:schedule][:covenant_id]
-    @schedule.customer_id     = params[:schedule][:customer_id].to_i
-    @schedule.title           = "#{Customer.find(params[:schedule][:customer_id]).fullname} - #{Covenant.find_by(company_id: current_user.company_id, id: params[:schedule][:covenant_id]).description}"
+    @schedule.schedule_type   = params[:schedule][:schedule_type]
+
+    if Schedule.schedule_types[params[:schedule][:schedule_type]] == Schedule.schedule_types[:initial]
+      @schedule.new_customer_name  = params[:schedule][:new_customer_name]
+      @schedule.new_customer_phone = params[:schedule][:new_customer_phone]
+      @schedule.customer_id        = nil
+      @schedule.title           = "#{params[:schedule][:new_customer_name]} - #{Covenant.find_by(company_id: current_user.company_id, id: params[:schedule][:covenant_id]).description}"
+
+    else
+      @schedule.new_customer_name  = ""
+      @schedule.new_customer_phone = ""
+      @schedule.customer_id        = params[:schedule][:customer_id].to_i
+      @schedule.title              = "#{Customer.find(params[:schedule][:customer_id]).fullname} - #{Covenant.find_by(company_id: current_user.company_id, id: params[:schedule][:covenant_id]).description}"
+    end
+
     @schedule.start           = DateTime.parse("#{params[:schedule][:start]} #{params[:schedule][:end]}").strftime("%Y-%m-%dT%H:%M:%S")
     @schedule.end             = @schedule.start + 30.minutes 
 
@@ -50,12 +63,27 @@ class Site::SchedulesController < ApplicationController
   end
 
   def update
-    @schedule.user_id = params[:schedule][:user_id]
-    @schedule.start = DateTime.parse("#{params[:schedule][:start]} #{params[:schedule][:end]}").strftime("%Y-%m-%dT%H:%M:%S")
+    @schedule.user_id       = params[:schedule][:user_id]
+    @schedule.schedule_type = params[:schedule][:schedule_type]
+    @schedule.start         = DateTime.parse("#{params[:schedule][:start]} #{params[:schedule][:end]}").strftime("%Y-%m-%dT%H:%M:%S")
+
     if !params[:schedule][:resize]
       @schedule.end = @schedule.start + 30.minutes
     else
       @schedule.end = DateTime.parse("#{params[:schedule][:end]} #{params[:schedule][:end]}").strftime("%Y-%m-%dT%H:%M:%S")
+    end
+
+    if Schedule.schedule_types[params[:schedule][:schedule_type]] == Schedule.schedule_types[:initial]
+      @schedule.new_customer_name  = params[:schedule][:new_customer_name]
+      @schedule.new_customer_phone = params[:schedule][:new_customer_phone]
+      @schedule.customer_id        = nil
+      @schedule.title           = "#{params[:schedule][:new_customer_name]} - #{Covenant.find_by(company_id: current_user.company_id, id: params[:schedule][:covenant_id]).description}"
+
+    else
+      @schedule.new_customer_name  = ""
+      @schedule.new_customer_phone = ""
+      @schedule.customer_id        = params[:schedule][:customer_id].to_i
+      @schedule.title              = "#{Customer.find(params[:schedule][:customer_id]).fullname} - #{Covenant.find_by(company_id: current_user.company_id, id: params[:schedule][:covenant_id]).description}"
     end
 
     if !@schedule.save
@@ -77,6 +105,6 @@ class Site::SchedulesController < ApplicationController
     end
     
     def schedule_params
-      params.require(:schedule).permit(:id, :company_id, :professional_id, :customer_id, :covenant_id, :user_id, :start, :end)
+      params.require(:schedule).permit(:id, :company_id, :user_id, :customer_id, :covenant_id, :schedule_type, :start, :end)
     end    
 end

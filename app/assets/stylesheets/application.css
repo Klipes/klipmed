@@ -13,6 +13,8 @@
  *= require bootstrap
  *= require font-awesome
  *= require bootstrap-datetimepicker
+ *= require select2
+ *= require select2-bootstrap4
  *= require fullcalendar
  *= require daterangepicker-bs3
  *= require_tree .
