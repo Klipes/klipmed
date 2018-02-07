@@ -204,6 +204,8 @@ $(document).on('turbolinks:load', function() {
         templateSelection: formatRepoSelection
       },        
     });
+
+    $('#schedule_new_customer_phone').inputmask('(99)9999[9]-9999');   
   });
 
   load_calendar();

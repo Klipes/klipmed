@@ -17,7 +17,6 @@ json.array! @schedules do |schedule|
     end
     json.editable true
   else 
-    json.phone ""
     json.color 'red'
     json.editable false
   end

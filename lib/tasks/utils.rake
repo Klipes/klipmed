@@ -1,6 +1,6 @@
 namespace :utils do
   def generate_random_phone
-    "9#{Random.rand(1000..9999)}-#{Random.rand(1000..9999)}"
+    "(14)#{['','',9,9,9,9,9].sample}#{Random.rand(1000..9999)}-#{Random.rand(1000..9999)}"
   end
 
   def generate_random_date
@@ -32,18 +32,18 @@ namespace :utils do
     puts"#{%x(rake utils:generate_covenants)}"
     puts "rake utils:generate_users..."
     puts"#{%x(rake utils:generate_users)}"
-#    puts "rake utils:generate_receivable_categories..."
-#    puts"#{%x(rake utils:generate_receivable_categories)}"
-#    puts "rake utils:generate_payable_categories..."
-#    puts"#{%x(rake utils:generate_payable_categories)}"
+    puts "rake utils:generate_receivable_categories..."
+    puts"#{%x(rake utils:generate_receivable_categories)}"
+    puts "rake utils:generate_payable_categories..."
+    puts"#{%x(rake utils:generate_payable_categories)}"
     puts "rake utils:generate_customers..."
     puts"#{%x(rake utils:generate_customers)}"
-#    puts "rake utils:generate_suppliers..."
-#    puts"#{%x(rake utils:generate_suppliers)}"
-#    puts "rake utils:generate_receivables..." 
-#    puts"#{%x(rake utils:generate_receivables)}"
-#    puts "rake utils:generate_payables..."
-#    puts"#{%x(rake utils:generate_payables)}"
+    puts "rake utils:generate_suppliers..."
+    puts"#{%x(rake utils:generate_suppliers)}"
+    puts "rake utils:generate_receivables..." 
+    puts"#{%x(rake utils:generate_receivables)}"
+    puts "rake utils:generate_payables..."
+    puts"#{%x(rake utils:generate_payables)}"
     puts "rake utils:generate_schedules..."
     puts"#{%x(rake utils:generate_schedules)}"
     puts "==============================================================================================="
