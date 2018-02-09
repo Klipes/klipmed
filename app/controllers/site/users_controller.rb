@@ -49,6 +49,15 @@ class Site::UsersController < ApplicationController
   def destroy
   end
   
+  def configuration
+    respond_to do |format|
+      format.json do
+        @list = [1,3,5].map(&:to_i) 
+        puts @list
+      end
+    end
+  end
+
   private
 
   def set_user

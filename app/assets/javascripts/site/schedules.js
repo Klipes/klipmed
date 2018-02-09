@@ -34,6 +34,22 @@ $(document).on('turbolinks:load', function() {
   var covenantsOriginal = "";
 
   function load_calendar(){
+    var return_first = function () {
+      var tmp = null;
+      $.ajax({
+          'async': false,
+          'type': "GET",
+          'global': false,
+          'dataType': 'json',
+          'url': "users/configuration.json",
+          'data': { 'user_id': 1},
+          'success': function (data) {
+              tmp = data;
+          }
+      });
+      return tmp;
+    }();
+
     $('.calendar').each(function(){
       var calendar = $(this);
       calendar.fullCalendar({
@@ -46,6 +62,7 @@ $(document).on('turbolinks:load', function() {
         timeFormat: 'H(:mm)',
         defaultView: 'agendaWeek',
         locale: "pt-BR",
+        hiddenDays: return_first,
         customButtons: {
           new_scheduller: {
             text: 'Novo Agendamento',
