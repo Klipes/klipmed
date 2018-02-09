@@ -39,11 +39,23 @@
                     <%= f.label :new_customer_phone %>:  
                     <%= f.text_field :new_customer_phone, :class =>"form-control" %>
                   </div>  
-
-                  <div class="col-lg-7 col-md-7">
-                    <%= f.label :new_customer_name %>:  
-                    <%= f.text_field :new_customer_name, :class =>"form-control" %>
-                  </div>       
+                  <% if current_page?(controller: 'schedules', action: 'new') %>
+                    <div class="col-lg-7 col-md-7">
+                      <%= f.label :new_customer_name %>:  
+                      <%= f.text_field :new_customer_name, :class =>"form-control" %>
+                    </div>       
+                  <% else %>
+                    <div class="col-lg-6 col-md-6">
+                      <%= f.label :new_customer_name %>:  
+                      <%= f.text_field :new_customer_name, :class =>"form-control" %>
+                    </div>       
+                    <div class="col-lg-1 col-md-1">
+                       
+                      <%= link_to new_site_customer_path, title: "Novo Paciente", class: "btn btn-sm btn-primary buttonCenter" do %>
+                        <i class="fa fa-plus" aria-hidden="true"></i>
+                      <% end %>                    
+                    </div>
+                  <% end %>
                 </div>                          
               </div>           
 
