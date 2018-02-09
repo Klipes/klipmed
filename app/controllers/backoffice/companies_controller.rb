@@ -9,6 +9,7 @@ class Backoffice::CompaniesController < ApplicationController
 
   def new
     @company = Company.new
+    @company.build_company_address   
   end
 
   def create
@@ -42,7 +43,7 @@ class Backoffice::CompaniesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def company_params
-    params.require(:company).permit(:company_id, :company_name, :trade_name, :address1, :address2, :number, :city,
-      :state, :zip, :email, :phone, :neighborhood)
+    params.require(:company).permit(:id, :company_name, :trade_name, :email, :phone,
+    company_address_attributes:[:id, :company_id, :address1, :address2, :number, :neighborhood, :city, :state, :zip])
   end
 end

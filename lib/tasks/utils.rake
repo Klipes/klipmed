@@ -58,6 +58,14 @@ namespace :utils do
       Company.create!(
         company_name: Faker::Company.name,
         trade_name: Faker::Company.name,
+        email: Faker::Internet.email, 
+        phone: generate_random_phone
+      )
+    end    
+    puts "companies created"
+
+    (1..30).each do |i|
+      CompanyAddress.create!(
         address1: Faker::Address.street_name,
         address2: Faker::Address.secondary_address,
         neighborhood: Faker::Address.community,
@@ -65,11 +73,10 @@ namespace :utils do
         city: Faker::Address.city,
         state: [:SP, :RJ, :PR, :MG].sample,
         zip: Faker::Address.zip_code,
-        email: Faker::Internet.email, 
-        phone: generate_random_phone
-      )
-    end    
-    puts "companies created"
+        company_id: i
+      )    
+    end   
+    puts "Company Addresses Created" 
   end 
 
   desc "Generate Covenant Data"

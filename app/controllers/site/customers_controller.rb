@@ -14,7 +14,6 @@ class Site::CustomersController < ApplicationController
       end
     end
     authorize @customers
-    puts @customers.to_json
   end
 
   def new

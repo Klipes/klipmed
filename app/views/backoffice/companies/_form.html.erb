@@ -44,9 +44,10 @@
             </br>
 
             <!-- tabela relacionada de endereços!-->
+            <!-- tabela relacionada de endereços!-->
             <%= render :partial => 'shared/address', :locals => { :f => f, :_model => @company, 
-                :_address => :company_address, :_state => @company.state, 
-                :_buttonLabel =>"company"} %>       
+                :_address => :company_address, :_state => @company.company_address.state, 
+                :_buttonLabel =>"company"} %>    
 
             <!-- Botões de Confirmar e Cancelar-->           
             <%= render :partial => 'shared/submit', :locals => { :f => f, :path => backoffice_companies_path} %>        

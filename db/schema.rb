@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180207114912) do
+ActiveRecord::Schema.define(version: 20180209011431) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -32,18 +32,26 @@ ActiveRecord::Schema.define(version: 20180207114912) do
   add_index "admins", ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
 
   create_table "companies", force: :cascade do |t|
-    t.string "company_name",            null: false
-    t.string "trade_name",              null: false
-    t.string "address1",                null: false
-    t.string "address2"
-    t.string "number",       limit: 10
-    t.string "neighborhood"
-    t.string "city"
-    t.string "state",        limit: 2
-    t.string "zip",          limit: 10, null: false
+    t.string "company_name", null: false
+    t.string "trade_name",   null: false
     t.string "email"
     t.string "phone"
   end
+
+  create_table "company_addresses", force: :cascade do |t|
+    t.string   "address1",                null: false
+    t.string   "address2"
+    t.string   "number",       limit: 10
+    t.string   "neighborhood"
+    t.string   "city"
+    t.string   "state",        limit: 2
+    t.string   "zip",          limit: 10, null: false
+    t.integer  "company_id"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  add_index "company_addresses", ["company_id"], name: "index_company_addresses_on_company_id"
 
   create_table "covenants", force: :cascade do |t|
     t.integer  "company_id"

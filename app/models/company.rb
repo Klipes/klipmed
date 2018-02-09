@@ -1,9 +1,9 @@
 class Company < ActiveRecord::Base
   validates :company_name, presence: true  
   validates :trade_name, presence: true
-  validates :zip, presence: true
   validates :phone, presence: true
 
+  has_one :company_address
   has_many :users
   has_many :customers
   has_many :suppliers
@@ -14,4 +14,6 @@ class Company < ActiveRecord::Base
   has_many :schedules
   has_many :covenants
   has_many :professional_reservations
+
+  accepts_nested_attributes_for :company_address
 end
