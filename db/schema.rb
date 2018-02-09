@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180209011431) do
+ActiveRecord::Schema.define(version: 20180209135858) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -209,6 +209,21 @@ ActiveRecord::Schema.define(version: 20180209011431) do
   end
 
   add_index "user_addresses", ["user_id"], name: "index_user_addresses_on_user_id"
+
+  create_table "user_configurations", force: :cascade do |t|
+    t.integer  "user_id"
+    t.boolean  "monday_schedule",    default: true, null: false
+    t.boolean  "tuesday_schedule",   default: true, null: false
+    t.boolean  "wednesday_schedule", default: true, null: false
+    t.boolean  "thursday_schedule",  default: true, null: false
+    t.boolean  "friday_schedule",    default: true, null: false
+    t.boolean  "saturday_schedule",  default: true, null: false
+    t.boolean  "sunday_schedule",    default: true, null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+  end
+
+  add_index "user_configurations", ["user_id"], name: "index_user_configurations_on_user_id"
 
   create_table "user_covenants", force: :cascade do |t|
     t.integer  "user_id"

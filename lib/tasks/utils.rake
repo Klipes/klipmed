@@ -164,6 +164,21 @@ namespace :utils do
     end   
     puts "Users Addresses created" 
   
+
+    (1..150).each do |i|
+      UserConfiguration.create!(
+        user_id: i,
+        monday_schedule: [true, false].sample,
+        tuesday_schedule: [true, false].sample,
+        wednesday_schedule: [true, false].sample,
+        thursday_schedule: [true, false].sample,
+        friday_schedule: [true, false].sample,
+        saturday_schedule: [true, false].sample,
+        sunday_schedule: [true, false].sample     
+        )    
+    end   
+    puts "Users Configuration created" 
+
     User.all.each do |user|
       #Adiciono o convênio "Particular" para todos os profissionais
       UserCovenant.create(

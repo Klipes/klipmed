@@ -20,6 +20,22 @@ function formatRepo (repo) {
   return markup;
 }
 
+function userActiveDays(id) {
+  var tmp = [0,1,2,3,4,5,6];
+  $.ajax({
+      'async': false,
+      'type': "GET",
+      'global': false,
+      'dataType': 'json',
+      'url': "users/configuration.json",
+      'data': {'id': id},
+      'success': function (data) {
+        tmp = data;
+      }
+  });
+  return tmp;
+};
+
 configure_schedule = function (type){  
   if (type == "initial"){
     $('#select2_customer').hide();
@@ -34,23 +50,7 @@ $(document).on('turbolinks:load', function() {
   var covenantsOriginal = "";
 
   function load_calendar(){
-    var return_first = function () {
-      var tmp = null;
-      $.ajax({
-          'async': false,
-          'type': "GET",
-          'global': false,
-          'dataType': 'json',
-          'url': "users/configuration.json",
-          'data': { 'user_id': 1},
-          'success': function (data) {
-              tmp = data;
-          }
-      });
-      return tmp;
-    }();
-
-    $('.calendar').each(function(){
+     $('.calendar').each(function(){
       var calendar = $(this);
       calendar.fullCalendar({
         nowIndicator: true,
@@ -62,7 +62,7 @@ $(document).on('turbolinks:load', function() {
         timeFormat: 'H(:mm)',
         defaultView: 'agendaWeek',
         locale: "pt-BR",
-        hiddenDays: return_first,
+        hiddenDays: userActiveDays($('#user_id').val()),
         customButtons: {
           new_scheduller: {
             text: 'Novo Agendamento',
@@ -181,7 +181,8 @@ $(document).on('turbolinks:load', function() {
         type: 'GET',
         success: function(data) {
           $('.calendar').fullCalendar('removeEvents'); 
-          $('.calendar').fullCalendar( 'addEventSource', data )
+          $('.calendar').fullCalendar('addEventSource', data);
+          $('.calendar').fullCalendar('option', 'hiddenDays', userActiveDays($('#user_id').val()))
         }
     });   
   });

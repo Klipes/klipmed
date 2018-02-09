@@ -1,7 +1,7 @@
 class Site::UsersController < ApplicationController
   layout "site"
   before_action :authenticate_user!
-  before_action :set_user, only: [:edit, :update, :destroy]
+  before_action :set_user, only: [:edit, :update, :destroy, :configuration]
   before_action :load_covenants, only: [:new, :edit]
 
   def index
@@ -51,9 +51,10 @@ class Site::UsersController < ApplicationController
   
   def configuration
     respond_to do |format|
+      format.html do
+      end
       format.json do
-        @list = [1,3,5].map(&:to_i) 
-        puts @list
+        @workDays = @user.workDays.map(&:to_i) 
       end
     end
   end
@@ -66,11 +67,10 @@ class Site::UsersController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def user_params
-    params.require(:user).permit(
-      :user_id, :email, :password, :password_confirmation, :name, :company_id, :role, :user_type,
-      user_address_attributes:[:id, :user_id, :address1, :address2, :number, 
-        :neighborhood, :city, :state, :zip],
-      user_covenants_attributes:[:id, :covenant_id, :_destroy])
+    params.require(:user).permit(:user_id, :email, :password, :password_confirmation, :name, :company_id, :role, :user_type,
+      user_address_attributes:[:id, :user_id, :address1, :address2, :number, :neighborhood, :city, :state, :zip],
+      user_covenants_attributes:[:id, :covenant_id, :_destroy],
+      user_configuration_attributes: [:id, :user_id, :monday_schedule, :tuesday_schedule, :wednesday_schedule, :thursday_schedule, :friday_schedule, :saturday_schedule, :sunday_schedule])
   end
 
   def load_covenants

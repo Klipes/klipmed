@@ -1,1 +1,1 @@
-json.array! @list
+json.array! @workDays

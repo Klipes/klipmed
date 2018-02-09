@@ -80,6 +80,21 @@
             </div>
             <hr>
 
+            <!-- Configurações -->
+            <div class="row">
+              <%= f.fields_for :user_configuration do |configuration| %>
+                <div class="col-md-12">
+                  <label class="checkbox"><%= configuration.check_box :monday_schedule, :class =>"checkbox" %> Segunda-Feira</label>
+                  <label class="checkbox"><%= configuration.check_box :tuesday_schedule, :class =>"checkbox" %> Terça-Feira</label>
+                  <label class="checkbox"><%= configuration.check_box :wednesday_schedule, :class =>"checkbox" %> Quarta-Feira</label>
+                  <label class="checkbox"><%= configuration.check_box :thursday_schedule, :class =>"checkbox" %> Quinta-Feira</label>
+                  <label class="checkbox"><%= configuration.check_box :friday_schedule, :class =>"checkbox" %> Sexta-Feira</label>
+                  <label class="checkbox"><%= configuration.check_box :saturday_schedule, :class =>"checkbox" %> Sábado</label>
+                  <label class="checkbox"><%= configuration.check_box :sunday_schedule, :class =>"checkbox" %> Domingo</label>
+                </div>
+              <% end %>
+            </div>
+
             <!-- Botões de Confirmar e Cancelar-->                
             <%= render :partial => 'shared/submit', :locals => { :f => f, :path => site_users_path} %>        
           </div>

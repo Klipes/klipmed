@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get "site/users/configuration/(:id)" => "site/users#configuration"
+
   namespace :site do
     resources :customers, except: [:show]
     resources :suppliers, except: [:show]
@@ -11,7 +13,6 @@ Rails.application.routes.draw do
     resources :covenants, except: [:show]
     resources :professional_reservations, except: [:show]
     resources :users, except: [:show]
-    get 'users/configuration/:id', to: 'site/users#configuration'
   end
 
   namespace :backoffice do
