@@ -55,54 +55,10 @@
             </br>
 
             <!-- tabela relacionada de endereços!-->
-            <hr>
-            <h3>Endereço</h3> </br>
-            <%= f.fields_for :user_address do |user_address| %>
-              <div class="row">
-                <div class="col-lg-3 col-md-3">
-                  <%= user_address.label :zip %>:
-                  <%= user_address.text_field :zip, :class =>"form-control"%>
-                </div>
-                <div class="col-md-8">
-                  <br>
-                  <button type="button" name="buttonBuscar" id="buttonBuscar_user" class="btn btn-success buttonBox">Buscar Endereço</button>
-                </div>            
-              </div>
-              </br>
-              <div class="row">
-                <div class="col-lg-8 col-md-8">
-                  <%= user_address.label :address1 %>:
-                  <%= user_address.text_field :address1, :class =>"form-control" %>
-                </div>
-                <div class="col-lg-4 col-md-4">
-                  <%= user_address.label :number %>:
-                  <%= user_address.text_field :number, :class =>"form-control" %>
-                </div>              
-              </div>
-              </br>
-              <div class="row">
-                <div class="col-lg-6 col-md-6">
-                  <%= user_address.label :address2 %>:
-                  <%= user_address.text_field :address2, :class =>"form-control" %>
-                </div>             
-                <div class="col-lg-6 col-md-6">
-                  <%= user_address.label :neighborhood %>:
-                  <%= user_address.text_field :neighborhood, :class =>"form-control" %>
-                </div>              
-              </div>
-              </br>
-              <div class="row">
-                <div class="col-lg-6 col-md-6">
-                  <%= user_address.label :city %>:
-                  <%= user_address.text_field :city, :class =>"form-control" %>
-                </div>
-                <div class="col-lg-6 col-md-6">
-                  <%= user_address.label :state %>:
-                  <%= user_address.select :state, options_state(@user.user_address.state), {}, {:class => "form-control"} %>
-                </div>              
-              </div>
-              </br>
-            <% end %>
+            <%= render :partial => 'shared/address', :locals => { :f => f, :_model => @user, 
+                :_address => :user_address, :_state => @user.user_address.state, 
+                :_buttonLabel =>"user"} %>  
+                    
             <!-- tabela NxN de usuários versus convênios !-->
             <hr>
             <h3>Convênios</h3> </br>
@@ -123,6 +79,8 @@
               </div>
             </div>
             <hr>
+
+            <!-- Botões de Confirmar e Cancelar-->                
             <%= render :partial => 'shared/submit', :locals => { :f => f, :path => site_users_path} %>        
           </div>
         </div>

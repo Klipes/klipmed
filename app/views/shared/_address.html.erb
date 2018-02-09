@@ -1,0 +1,48 @@
+<hr>
+<h3>Endereço</h3> </br>
+<%= f.fields_for _address do |address| %>
+  <div class="row">
+    <div class="col-lg-3 col-md-3">
+      <%= address.label :zip %>:
+      <%= address.text_field :zip, :class =>"form-control"%>
+    </div>
+    <div class="col-md-8">
+      <br>
+      <button type="button" name="buttonBuscar" id="buttonBuscar_<%=_buttonLabel%>" class="btn btn-success buttonBox">Buscar Endereço</button>
+    </div>            
+  </div>
+  </br>
+  <div class="row">
+    <div class="col-lg-8 col-md-8">
+      <%= address.label :address1 %>:
+      <%= address.text_field :address1, :class =>"form-control" %>
+    </div>
+    <div class="col-lg-4 col-md-4">
+      <%= address.label :number %>:
+      <%= address.text_field :number, :class =>"form-control" %>
+    </div>              
+  </div>
+  </br>
+  <div class="row">
+    <div class="col-lg-6 col-md-6">
+      <%= address.label :address2 %>:
+      <%= address.text_field :address2, :class =>"form-control" %>
+    </div>  
+    <div class="col-lg-6 col-md-6">
+      <%= address.label :neighborhood %>:
+      <%= address.text_field :neighborhood, :class =>"form-control" %>
+    </div>              
+  </div>
+  </br>
+  <div class="row">
+    <div class="col-lg-6 col-md-6">
+      <%= address.label :city %>:
+      <%= address.text_field :city, :class =>"form-control" %>
+    </div>
+    <div class="col-lg-6 col-md-6">
+      <%= address.label :state %>:
+      <%= address.select :state, options_state(_state), {}, {:class => "form-control"} %>
+    </div>                
+  </div>
+  </br>
+<% end %>

@@ -42,55 +42,11 @@
             </br>
 
             <!-- tabela relacionada de endereços!-->
-            <hr>
-            <h3>Endereço</h3> </br>
-            <%= f.fields_for :customer_address do |customer_address| %>
-              <div class="row">
-                <div class="col-lg-3 col-md-3">
-                  <%= customer_address.label :zip %>:
-                  <%= customer_address.text_field :zip, :class =>"form-control"%>
-                </div>
-                <div class="col-md-8">
-                  <br>
-                  <button type="button" name="buttonBuscar" id="buttonBuscar_customer" class="btn btn-success buttonBox">Buscar Endereço</button>
-                </div>            
-              </div>
-              </br>
-              <div class="row">
-                <div class="col-lg-8 col-md-8">
-                  <%= customer_address.label :address1 %>:
-                  <%= customer_address.text_field :address1, :class =>"form-control" %>
-                </div>
-                <div class="col-lg-4 col-md-4">
-                  <%= customer_address.label :number %>:
-                  <%= customer_address.text_field :number, :class =>"form-control" %>
-                </div>              
-              </div>
-              </br>
-              <div class="row">
-                <div class="col-lg-6 col-md-6">
-                  <%= customer_address.label :address2 %>:
-                  <%= customer_address.text_field :address2, :class =>"form-control" %>
-                </div>  
-                <div class="col-lg-6 col-md-6">
-                  <%= customer_address.label :neighborhood %>:
-                  <%= customer_address.text_field :neighborhood, :class =>"form-control" %>
-                </div>              
-              </div>
-              </br>
-              <div class="row">
-                <div class="col-lg-6 col-md-6">
-                  <%= customer_address.label :city %>:
-                  <%= customer_address.text_field :city, :class =>"form-control" %>
-                </div>
-                <div class="col-lg-6 col-md-6">
-                  <%= customer_address.label :state %>:
-                  <%= customer_address.select :state, options_state(@customer.customer_address.state), {}, {:class => "form-control"} %>
-                </div>                
-              </div>
-              </br>
-            <% end %>
+            <%= render :partial => 'shared/address', :locals => { :f => f, :_model => @customer, 
+                :_address => :customer_address, :_state => @customer.customer_address.state, 
+                :_buttonLabel =>"customer"} %>       
 
+            <!-- Botões de Confirmar e Cancelar-->     
             <%= render :partial => 'shared/submit', :locals => { :f => f, :path => site_customers_path} %>        
           </div>
         </div>

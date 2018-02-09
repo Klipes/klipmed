@@ -46,55 +46,11 @@
             </br>
 
             <!-- tabela relacionada de endereços!-->
-            <hr>
-            <h3>Endereço</h3> </br>
-            <%= f.fields_for :supplier_address do |supplier_address| %>
-              <div class="row">
-                <div class="col-lg-3 col-md-3">
-                  <%= supplier_address.label :zip %>:
-                  <%= supplier_address.text_field :zip, :class =>"form-control"%>
-                </div>
-                <div class="col-md-8">
-                  <br>
-                  <button type="button" name="buttonBuscar" id="buttonBuscar_supplier" class="btn btn-success buttonBox">Buscar Endereço</button>
-                </div>            
-              </div>
-              </br>
-              <div class="row">
-                <div class="col-lg-8 col-md-8">
-                  <%= supplier_address.label :address1 %>:
-                  <%= supplier_address.text_field :address1, :class =>"form-control" %>
-                </div>
-                <div class="col-lg-4 col-md-4">
-                  <%= supplier_address.label :number %>:
-                  <%= supplier_address.text_field :number, :class =>"form-control" %>
-                </div>              
-              </div>
-              </br>
-              <div class="row">
-                <div class="col-lg-6 col-md-6">
-                  <%= supplier_address.label :address2 %>:
-                  <%= supplier_address.text_field :address2, :class =>"form-control" %>
-                </div> 
-                <div class="col-lg-6 col-md-6">
-                  <%= supplier_address.label :neighborhood %>:
-                  <%= supplier_address.text_field :neighborhood, :class =>"form-control" %>
-                </div>              
-              </div>
-              </br>
-              <div class="row">
-                <div class="col-lg-6 col-md-6">
-                  <%= supplier_address.label :city %>:
-                  <%= supplier_address.text_field :city, :class =>"form-control" %>
-                </div>
-                <div class="col-lg-6 col-md-6">
-                  <%= supplier_address.label :state %>:
-                  <%= supplier_address.select :state, options_state(@supplier.supplier_address.state), {}, {:class => "form-control"} %>
-                </div> 
-              </div>
-              </br>
-            <% end %>
+            <%= render :partial => 'shared/address', :locals => { :f => f, :_model => @supplier, 
+                :_address => :supplier_address, :_state => @supplier.supplier_address.state, 
+                :_buttonLabel =>"supplier"} %>    
 
+            <!-- Botões de Confirmar e Cancelar-->     
             <%= render :partial => 'shared/submit', :locals => { :f => f, :path => site_suppliers_path} %>        
           </div>
         </div>
