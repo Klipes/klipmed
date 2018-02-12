@@ -21,7 +21,7 @@ function formatRepo (repo) {
 }
 
 function userActiveDays(id) {
-  var tmp = [0,1,2,3,4,5,6];
+  var tmp = [0,1,2,3,4,5,6]["08:00","18:00"];
   $.ajax({
       'async': false,
       'type': "GET",
@@ -51,6 +51,7 @@ $(document).on('turbolinks:load', function() {
 
   function load_calendar(){
      $('.calendar').each(function(){
+      var configuration = userActiveDays($('#user_id').val());
       var calendar = $(this);
       calendar.fullCalendar({
         nowIndicator: true,
@@ -62,7 +63,9 @@ $(document).on('turbolinks:load', function() {
         timeFormat: 'H(:mm)',
         defaultView: 'agendaWeek',
         locale: "pt-BR",
-        hiddenDays: userActiveDays($('#user_id').val()),
+        hiddenDays: configuration[0],
+        minTime: configuration[1][0],
+        maxTime: configuration[1][1],
         customButtons: {
           new_scheduller: {
             text: 'Novo Agendamento',
@@ -180,9 +183,12 @@ $(document).on('turbolinks:load', function() {
         data: event_data,
         type: 'GET',
         success: function(data) {
+          var configuration = userActiveDays($('#user_id').val());
           $('.calendar').fullCalendar('removeEvents'); 
           $('.calendar').fullCalendar('addEventSource', data);
-          $('.calendar').fullCalendar('option', 'hiddenDays', userActiveDays($('#user_id').val()))
+          $('.calendar').fullCalendar('option', 'hiddenDays', configuration[0]);
+          $('.calendar').fullCalendar('option', 'minTime', configuration[1][0]);
+          $('.calendar').fullCalendar('option', 'maxTime', configuration[1][1]);
         }
     });   
   });

@@ -15,6 +15,8 @@ class Site::UsersController < ApplicationController
   def new
     @user = User.new
     @user.build_user_address 
+    @user.build_user_configuration
+    @user.build_user_convenant
   end
 
   def create
@@ -54,7 +56,7 @@ class Site::UsersController < ApplicationController
       format.html do
       end
       format.json do
-        @workDays = @user.workDays.map(&:to_i) 
+        @workDays = @user.workDays.to_a
       end
     end
   end

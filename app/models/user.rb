@@ -21,29 +21,38 @@ class User < ActiveRecord::Base
 
   def workDays
     _result = Array.new
+    _workDays = Array.new
+    _workHours = Array.new
     _user_configuration = UserConfiguration.find(self.id)
+
     if !_user_configuration.sunday_schedule?
-      _result.push(0)
+      _workDays.push(0)
     end
     if !_user_configuration.monday_schedule?
-      _result.push(1)
+      _workDays.push(1)
     end
     if !_user_configuration.tuesday_schedule?
-      _result.push(2)
+      _workDays.push(2)
     end
     if !_user_configuration.wednesday_schedule?
-      _result.push(3)
+      _workDays.push(3)
     end
     if !_user_configuration.thursday_schedule?
-      _result.push(4)
+      _workDays.push(4)
     end
     if !_user_configuration.friday_schedule?
-      _result.push(5)
+      _workDays.push(5)
     end 
     if !_user_configuration.saturday_schedule?
-      _result.push(6)
+      _workDays.push(6)
     end   
     
+    _workHours.push(_user_configuration.start_hour.strftime("%H:%M"))
+    _workHours.push(_user_configuration.end_hour.strftime("%H:%M"))
+
+    _result.push(_workDays)
+    _result.push(_workHours)
+
     return _result
   end
 end

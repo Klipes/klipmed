@@ -59,41 +59,44 @@
                 :_address => :user_address, :_state => @user.user_address.state, 
                 :_buttonLabel =>"user"} %>  
                     
-            <!-- tabela NxN de usuários versus convênios !-->
-            <hr>
-            <h3>Convênios</h3> </br>
-            <div id="user_covenants">
-              <%= f.fields_for :user_covenants do |covenant| %>  
-                <div class="row">     
-                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">     
-                    <div id="nested-fields">
-                      <%= render partial: "user_covenant_fields", locals: {f: covenant}%>
-                      </br>
+
+            <% if User.user_types[@user.user_type] == User.user_types[:professional] %>
+              <!-- tabela NxN de usuários versus convênios !-->
+              <hr>
+              <h3>Convênios</h3> </br>
+              <div id="user_covenants">
+                <%= f.fields_for :user_covenants do |covenant| %>  
+                  <div class="row">     
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">     
+                      <div id="nested-fields">
+                        <%= render partial: "user_covenant_fields", locals: {f: covenant}%>
+                        </br>
+                      </div>
                     </div>
                   </div>
+                <% end %>
+                <div class="field">
+                  </br>
+                  <%= link_to_add_association button_tag('Adicionar', type: "button", class: "btn btn-primary"), f, :user_covenants %>
                 </div>
-              <% end %>
-              <div class="field">
-                </br>
-                <%= link_to_add_association button_tag('Adicionar', type: "button", class: "btn btn-primary"), f, :user_covenants %>
               </div>
-            </div>
-            <hr>
+              <hr>
 
-            <!-- Configurações -->
-            <div class="row">
-              <%= f.fields_for :user_configuration do |configuration| %>
-                <div class="col-md-12">
-                  <label class="checkbox"><%= configuration.check_box :monday_schedule, :class =>"checkbox" %> Segunda-Feira</label>
-                  <label class="checkbox"><%= configuration.check_box :tuesday_schedule, :class =>"checkbox" %> Terça-Feira</label>
-                  <label class="checkbox"><%= configuration.check_box :wednesday_schedule, :class =>"checkbox" %> Quarta-Feira</label>
-                  <label class="checkbox"><%= configuration.check_box :thursday_schedule, :class =>"checkbox" %> Quinta-Feira</label>
-                  <label class="checkbox"><%= configuration.check_box :friday_schedule, :class =>"checkbox" %> Sexta-Feira</label>
-                  <label class="checkbox"><%= configuration.check_box :saturday_schedule, :class =>"checkbox" %> Sábado</label>
-                  <label class="checkbox"><%= configuration.check_box :sunday_schedule, :class =>"checkbox" %> Domingo</label>
-                </div>
-              <% end %>
-            </div>
+              <!-- Configurações -->
+              <div class="row">
+                <%= f.fields_for :user_configuration do |configuration| %>
+                  <div class="col-md-12">
+                    <label class="checkbox"><%= configuration.check_box :monday_schedule, :class =>"checkbox" %> Segunda-Feira</label>
+                    <label class="checkbox"><%= configuration.check_box :tuesday_schedule, :class =>"checkbox" %> Terça-Feira</label>
+                    <label class="checkbox"><%= configuration.check_box :wednesday_schedule, :class =>"checkbox" %> Quarta-Feira</label>
+                    <label class="checkbox"><%= configuration.check_box :thursday_schedule, :class =>"checkbox" %> Quinta-Feira</label>
+                    <label class="checkbox"><%= configuration.check_box :friday_schedule, :class =>"checkbox" %> Sexta-Feira</label>
+                    <label class="checkbox"><%= configuration.check_box :saturday_schedule, :class =>"checkbox" %> Sábado</label>
+                    <label class="checkbox"><%= configuration.check_box :sunday_schedule, :class =>"checkbox" %> Domingo</label>
+                  </div>
+                <% end %>
+              </div>
+            <% end %>
 
             <!-- Botões de Confirmar e Cancelar-->                
             <%= render :partial => 'shared/submit', :locals => { :f => f, :path => site_users_path} %>        
