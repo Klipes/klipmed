@@ -9,8 +9,8 @@ class CreateUserConfigurations < ActiveRecord::Migration
       t.boolean :friday_schedule,     null: false, default: true
       t.boolean :saturday_schedule,   null: false, default: true
       t.boolean :sunday_schedule,     null: false, default: true 
-      t.time    :start_hour,          null: false
-      t.time    :end_hour,            null: false       
+      t.time :start_hour          
+      t.time :end_hour
       t.timestamps null: false
     end
   end

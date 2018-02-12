@@ -83,19 +83,43 @@
               <hr>
 
               <!-- Configurações -->
-              <div class="row">
-                <%= f.fields_for :user_configuration do |configuration| %>
+              <%= f.fields_for :user_configuration do |configuration| %>
+                <div class="row">
                   <div class="col-md-12">
-                    <label class="checkbox"><%= configuration.check_box :monday_schedule, :class =>"checkbox" %> Segunda-Feira</label>
-                    <label class="checkbox"><%= configuration.check_box :tuesday_schedule, :class =>"checkbox" %> Terça-Feira</label>
-                    <label class="checkbox"><%= configuration.check_box :wednesday_schedule, :class =>"checkbox" %> Quarta-Feira</label>
-                    <label class="checkbox"><%= configuration.check_box :thursday_schedule, :class =>"checkbox" %> Quinta-Feira</label>
-                    <label class="checkbox"><%= configuration.check_box :friday_schedule, :class =>"checkbox" %> Sexta-Feira</label>
-                    <label class="checkbox"><%= configuration.check_box :saturday_schedule, :class =>"checkbox" %> Sábado</label>
-                    <label class="checkbox"><%= configuration.check_box :sunday_schedule, :class =>"checkbox" %> Domingo</label>
+                    <div class="form-check">
+                      <label class="checkbox"><%= configuration.check_box :monday_schedule, :class =>"checkbox" %> Segunda-Feira</label>
+                    </div>
+                    <div class="form-check">
+                      <label class="checkbox"><%= configuration.check_box :tuesday_schedule, :class =>"checkbox" %> Terça-Feira</label>
+                    </div>
+                    <div class="form-check">
+                      <label class="checkbox"><%= configuration.check_box :wednesday_schedule, :class =>"checkbox" %> Quarta-Feira</label>
+                    </div>
+                    <div class="form-check">
+                      <label class="checkbox"><%= configuration.check_box :thursday_schedule, :class =>"checkbox" %> Quinta-Feira</label>
+                    </div>
+                    <div class="form-check">
+                      <label class="checkbox"><%= configuration.check_box :friday_schedule, :class =>"checkbox" %> Sexta-Feira</label>
+                    </div>
+                    <div class="form-check">
+                      <label class="checkbox"><%= configuration.check_box :saturday_schedule, :class =>"checkbox" %> Sábado</label>
+                    </div>
+                    <div class="form-check">
+                      <label class="checkbox"><%= configuration.check_box :sunday_schedule, :class =>"checkbox" %> Domingo</label>
+                    </div>  
                   </div>
-                <% end %>
-              </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-3 col-md-3">
+                    <label>Hora Inicial:</label>
+                    <%= configuration.text_field :start_hour, :class =>"form-control datetimepicker", :value => @user.user_configuration.start_hour.strftime("%H:%M") %>                                   
+                  </div>
+                  <div class="col-lg-3 col-md-3">
+                    <label>Hora Final:</label>
+                    <%= configuration.text_field :end_hour, :class =>"form-control datetimepicker", :value => @user.user_configuration.end_hour.strftime("%H:%M") %>                                                     
+                  </div>
+                </div>
+              <% end %>                
             <% end %>
 
             <!-- Botões de Confirmar e Cancelar-->                

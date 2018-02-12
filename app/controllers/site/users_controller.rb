@@ -72,7 +72,8 @@ class Site::UsersController < ApplicationController
     params.require(:user).permit(:user_id, :email, :password, :password_confirmation, :name, :company_id, :role, :user_type,
       user_address_attributes:[:id, :user_id, :address1, :address2, :number, :neighborhood, :city, :state, :zip],
       user_covenants_attributes:[:id, :covenant_id, :_destroy],
-      user_configuration_attributes: [:id, :user_id, :monday_schedule, :tuesday_schedule, :wednesday_schedule, :thursday_schedule, :friday_schedule, :saturday_schedule, :sunday_schedule])
+      user_configuration_attributes: [:id, :user_id, :monday_schedule, :tuesday_schedule, :wednesday_schedule, 
+            :thursday_schedule, :friday_schedule, :saturday_schedule, :sunday_schedule, :start_hour, :end_hour])
   end
 
   def load_covenants

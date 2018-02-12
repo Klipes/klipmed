@@ -2,7 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 $(document).on 'turbolinks:load', ->
-  $('.datetimepicker').datetimepicker
+  $('#receivable_due_date').datetimepicker
     defaultDate: "11/1/2013",
     format: 'DD/MM/YYYY'
 
