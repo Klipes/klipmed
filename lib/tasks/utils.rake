@@ -4,7 +4,7 @@ namespace :utils do
   end
 
   def generate_random_date
-    _month = Random.rand(Date.today.month..Date.today.month + 4)
+    _month = Random.rand(Date.today.month..Date.today.month + 1)
     if _month == 2
       _day = Random.rand(1..28)
     else
@@ -57,23 +57,23 @@ namespace :utils do
     (1..30).each do |i|
       Company.create!(
         company_name: Faker::Company.name,
-        trade_name: Faker::Company.name,
-        email: Faker::Internet.email, 
-        phone: generate_random_phone
+        trade_name:   Faker::Company.name,
+        email:        Faker::Internet.email, 
+        phone:        generate_random_phone
       )
     end    
     puts "companies created"
 
     (1..30).each do |i|
       CompanyAddress.create!(
-        address1: Faker::Address.street_name,
-        address2: Faker::Address.secondary_address,
+        address1:     Faker::Address.street_name,
+        address2:     Faker::Address.secondary_address,
         neighborhood: Faker::Address.community,
-        number: Faker::Address.building_number,
-        city: Faker::Address.city,
-        state: [:SP, :RJ, :PR, :MG].sample,
-        zip: Faker::Address.zip_code,
-        company_id: i
+        number:       Faker::Address.building_number,
+        city:         Faker::Address.city,
+        state:        [:SP, :RJ, :PR, :MG].sample,
+        zip:          Faker::Address.zip_code,
+        company_id:   i
       )    
     end   
     puts "Company Addresses Created" 
@@ -85,13 +85,13 @@ namespace :utils do
       #crio o convênio particular default para todas as empresas
       Covenant.create!(
         description: "PARTICULAR",
-        company_id: i,
+        company_id:  i,
       )
 
       (1..4).each do |j|
         Covenant.create!(
           description: ["UNIMED", "COOPUS", "SÃO LUCAS", "AMEPLAN", "AMIL", "SOMPO"].sample,
-          company_id: i,
+          company_id:  i,
         )
       end     
     end
@@ -102,24 +102,24 @@ namespace :utils do
   task generate_users: :environment do
     #usuário "teste" do sistema
     User.create!(
-      email: "user@user.com", 
-      name: Faker::Name.name,
-      password: "123456",
+      email:                 "user@user.com", 
+      name:                  Faker::Name.name,
+      password:              "123456",
       password_confirmation: "123456",
-      company_id: 1,
-      role: 0,
-      user_type: rand(0..1)
+      company_id:            1,
+      role:                  0,
+      user_type:             rand(0..1)
     )
 
     UserAddress.create!(
-      address1: Faker::Address.street_name,
-      address2: Faker::Address.secondary_address,
+      address1:     Faker::Address.street_name,
+      address2:     Faker::Address.secondary_address,
       neighborhood: Faker::Address.community,
-      number: Faker::Address.building_number,
-      city: Faker::Address.city,
-      state: [:SP, :RJ, :PR, :MG].sample,
-      zip: Faker::Address.zip_code,
-      user_id: 1
+      number:       Faker::Address.building_number,
+      city:         Faker::Address.city,
+      state:        [:SP, :RJ, :PR, :MG].sample,
+      zip:          Faker::Address.zip_code,
+      user_id:      1
     )    
     puts "Usuário teste"
 
@@ -127,24 +127,24 @@ namespace :utils do
     (1..30).each do |i|    
       #usuário administrador
       User.create!(
-        email: Faker::Internet.email, 
-        name: Faker::Name.name,
-        password: "123456",
+        email:                 Faker::Internet.email, 
+        name:                  Faker::Name.name,
+        password:              "123456",
         password_confirmation: "123456",
-        company_id: i,
-        role: 0,
-        user_type: rand(0..1)
+        company_id:            i,
+        role:                  0,
+        user_type:             rand(0..1)
       )
     
       (1..4).each do |j|
         User.create!(
-          email: Faker::Internet.email, 
-          name: Faker::Name.name,
-          password: "123456",
+          email:                 Faker::Internet.email, 
+          name:                  Faker::Name.name,
+          password:              "123456",
           password_confirmation: "123456",
-          company_id: i,
-          role: 1,
-          user_type: rand(0..1)
+          company_id:            i,
+          role:                  1,
+          user_type:             rand(0..1)
         )
       end
     end  
@@ -152,14 +152,14 @@ namespace :utils do
     
     (1..150).each do |i|
       UserAddress.create!(
-        address1: Faker::Address.street_name,
-        address2: Faker::Address.secondary_address,
+        address1:     Faker::Address.street_name,
+        address2:     Faker::Address.secondary_address,
         neighborhood: Faker::Address.community,
-        number: Faker::Address.building_number,
-        city: Faker::Address.city,
-        state: [:SP, :RJ, :PR, :MG].sample,
-        zip: Faker::Address.zip_code,
-        user_id: i
+        number:       Faker::Address.building_number,
+        city:         Faker::Address.city,
+        state:        [:SP, :RJ, :PR, :MG].sample,
+        zip:          Faker::Address.zip_code,
+        user_id:      i
       )    
     end   
     puts "Users Addresses created" 
@@ -204,7 +204,7 @@ namespace :utils do
       (1..5).each do |j|
         ReceivableCategory.create!(
           description: Faker::Commerce.department,
-          company_id: i
+          company_id:  i
         )
       end        
     end
@@ -217,7 +217,7 @@ namespace :utils do
       (1..5).each do |j|
         PayableCategory.create!(
           description: Faker::Commerce.department,
-          company_id: i
+          company_id:  i
         )
       end     
     end 
@@ -229,9 +229,9 @@ namespace :utils do
     (1..30).each do |i|
       (1..50).each do |j|
         Customer.create!(
-          fullname: Faker::Name.name,
-          email: Faker::Internet.email, 
-          phone: generate_random_phone,
+          fullname:   Faker::Name.name,
+          email:      Faker::Internet.email, 
+          phone:      generate_random_phone,
           company_id: i,
         )
       end
@@ -241,14 +241,14 @@ namespace :utils do
     
     (1..1500).each do |i|
       CustomerAddress.create!(
-        address1: Faker::Address.street_name,
-        address2: Faker::Address.secondary_address,
+        address1:     Faker::Address.street_name,
+        address2:     Faker::Address.secondary_address,
         neighborhood: Faker::Address.community,
-        number: Faker::Address.building_number,
-        city: Faker::Address.city,
-        state: [:SP, :RJ, :PR, :MG].sample,
-        zip: Faker::Address.zip_code,
-        customer_id: i
+        number:       Faker::Address.building_number,
+        city:         Faker::Address.city,
+        state:        [:SP, :RJ, :PR, :MG].sample,
+        zip:          Faker::Address.zip_code,
+        customer_id:  i
       )    
     end   
     puts "Customers Addresses Created" 
@@ -260,10 +260,10 @@ namespace :utils do
       (1..50).each do |j|
         Supplier.create!(
           supplier_name: Faker::Company.name,
-          trade_name: Faker::Company.name,
-          email: Faker::Internet.email, 
-          phone: generate_random_phone,
-          company_id: i,
+          trade_name:    Faker::Company.name,
+          email:         Faker::Internet.email, 
+          phone:         generate_random_phone,
+          company_id:    i,
         )
       end
     end 
@@ -272,14 +272,14 @@ namespace :utils do
 
     (1..1500).each do |i|
       SupplierAddress.create!(
-        address1: Faker::Address.street_name,
-        address2: Faker::Address.secondary_address,
+        address1:     Faker::Address.street_name,
+        address2:     Faker::Address.secondary_address,
         neighborhood: Faker::Address.community,
-        number: Faker::Address.building_number,
-        city: Faker::Address.city,
-        state: [:SP, :RJ, :PR, :MG].sample,
-        zip: Faker::Address.zip_code,
-        supplier_id: i
+        number:       Faker::Address.building_number,
+        city:         Faker::Address.city,
+        state:        [:SP, :RJ, :PR, :MG].sample,
+        zip:          Faker::Address.zip_code,
+        supplier_id:  i
       )    
     end 
     puts "Suppliers Addresses Created"
@@ -290,13 +290,13 @@ namespace :utils do
     (1..30).each do |i|
       (1..100).each do |j|
         Receivable.create!(
-          company_id: i,
-          customer_id: Customer.where("company_id = ?", i).all.sample.id,
+          company_id:             i,
+          customer_id:            Customer.where("company_id = ?", i).all.sample.id,
           receivable_category_id: ReceivableCategory.where("company_id = ?", i).all.sample.id,
-          due_date: generate_random_date,
-          amount: "#{Random.rand(500)},#{Random.rand(99)}",
-          description: Faker::Lorem.sentence,
-          status: rand(0..1),
+          due_date:               generate_random_date,
+          amount:                 "#{Random.rand(500)},#{Random.rand(99)}",
+          description:            Faker::Lorem.sentence,
+          status:                 rand(0..1),
         )
       end    
     end
@@ -308,13 +308,13 @@ namespace :utils do
     (1..30).each do |i|    
       (1..100).each do |j|      
         Payable.create!(
-          company_id: i,
-          supplier_id: Supplier.where("company_id = ?", i).all.sample.id,
-          payable_category_id:  PayableCategory.where("company_id = ?", i).all.sample.id,
-          due_date: generate_random_date,
-          amount: "#{Random.rand(500)},#{Random.rand(99)}",
-          description: Faker::Lorem.sentence,
-          status: rand(0..1),      
+          company_id:          i,
+          supplier_id:         Supplier.where("company_id = ?", i).all.sample.id,
+          payable_category_id: PayableCategory.where("company_id = ?", i).all.sample.id,
+          due_date:            generate_random_date,
+          amount:              "#{Random.rand(500)},#{Random.rand(99)}",
+          description:         Faker::Lorem.sentence,
+          status:              rand(0..1),      
         )
       end    
     end
@@ -336,20 +336,20 @@ namespace :utils do
 
         if _schedule_type == Schedule.schedule_types[:initial]
           _new_customer_phone = generate_random_phone
-          _new_customer_name = Faker::Name.name
+          _new_customer_name  = Faker::Name.name
         end
 
         Schedule.create!(
-          company_id: i,
-          customer_id: _customer.id,
-          new_customer_name: _new_customer_name,
-          user_id: _user.id,
-          covenant_id: _user.covenants.all.sample.id,
-          schedule_type: _schedule_type,
+          company_id:         i,
+          customer_id:        _customer.id,
+          new_customer_name:  _new_customer_name,
+          user_id:            _user.id,
+          covenant_id:        _user.covenants.all.sample.id,
+          schedule_type:      _schedule_type,
           new_customer_phone: _new_customer_phone,
-          title: _customer.fullname,
-          start: _date,  
-          end: _date + 30.minutes
+          title:              _customer.fullname,
+          start:              _date,  
+          end:                _date + 30.minutes
         )
       end
     end 

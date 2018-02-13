@@ -10,7 +10,8 @@ class Site::CustomersController < ApplicationController
       end
 
       format.json do
-        @customers = Customer.select(:id, :fullname).where("company_id = ? AND fullname LIKE ?", current_user.company_id, "#{params[:q][:term]}%")
+        @customers = Customer.select(:id, :fullname, :phone)
+            .where("company_id = ? AND (fullname LIKE ? OR phone LIKE ?)", current_user.company_id, "%#{params[:q][:term]}%", "%#{params[:q][:term]}%")
       end
     end
     authorize @customers
