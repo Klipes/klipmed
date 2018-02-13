@@ -51,8 +51,13 @@ function userConfiguration(id) {
 */ 
 configure_schedule = function (type){  
   if (type == "initial"){
-    $('#select2_customer').hide();
-    $('#new_customer_fields').show();
+    if($('#schedule_initial_parameter').val() == "initial"){
+      $('#select2_customer').hide();
+      $('#new_customer_fields').show();
+    } else {
+      $('#select2_customer').show();   
+      $('#new_customer_fields').hide();      
+    } 
   } else {
     $('#select2_customer').show();   
     $('#new_customer_fields').hide();
@@ -221,6 +226,12 @@ $(document).on('turbolinks:load', function() {
     configure_schedule($('#schedule_schedule_type').val());
   }); 
 
+  /* Função que é executada dentro do modal quando o usuário escolhe o tipo de consulta */
+  $('body').on('click', '#buttonBuscar_schedules', function() {
+    $('#schedule_initial_parameter').val('initial_complete');  
+    configure_schedule("normal");    
+  })
+
   /*Configuração realizada na inicialização do modal */
   $(document).on('show.bs.modal', function() {
     configure_schedule($('#schedule_schedule_type').val());
@@ -248,6 +259,11 @@ $(document).on('turbolinks:load', function() {
             return {
               results: data.items
             };
+          },
+          results: function(data, page) {
+            return { results: $.map( data, function(person, i) { 
+              return { id: person.id, text: person.name } 
+            } ) }
           },
           cache: true,
           templateResult: formatRepo,

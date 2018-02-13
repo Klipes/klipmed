@@ -155,12 +155,13 @@ ActiveRecord::Schema.define(version: 20180209135858) do
     t.datetime "start"
     t.datetime "end"
     t.integer  "editable",                      default: 1
-    t.datetime "created_at",                                null: false
-    t.datetime "updated_at",                                null: false
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
     t.integer  "covenant_id"
     t.integer  "schedule_type",                 default: 1
     t.string   "new_customer_phone", limit: 20
     t.string   "new_customer_name"
+    t.string   "released",           limit: 1,  default: "N"
   end
 
   add_index "schedules", ["company_id"], name: "index_schedules_on_company_id"

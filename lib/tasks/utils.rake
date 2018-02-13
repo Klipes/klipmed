@@ -326,7 +326,7 @@ namespace :utils do
     (1..30).each do |i|
       (1..200).each do |j|  
         _date = generate_random_date
-        _customer = Customer.where("company_id = ?", i).all.sample 
+        _customer = Customer.where("company_id = ?", i).all.sample
         _user = User.where("company_id = ?", i).includes(:covenants).all.sample
 
         _schedule_type = Random.rand(0..2)
@@ -337,20 +337,30 @@ namespace :utils do
         if _schedule_type == Schedule.schedule_types[:initial]
           _new_customer_phone = generate_random_phone
           _new_customer_name  = Faker::Name.name
-        end
 
-        Schedule.create!(
+          Schedule.create!(
+            company_id:         i,
+            user_id:            _user.id,
+            covenant_id:        _user.covenants.all.sample.id,
+            schedule_type:      _schedule_type,
+            new_customer_name:  _new_customer_name,
+            new_customer_phone: _new_customer_phone,
+            title:              _new_customer_name,
+            start:              _date,  
+            end:                _date + 30.minutes
+          )
+        else
+          Schedule.create!(
           company_id:         i,
-          customer_id:        _customer.id,
-          new_customer_name:  _new_customer_name,
+          customer_id:        _customer.id,  
           user_id:            _user.id,
           covenant_id:        _user.covenants.all.sample.id,
           schedule_type:      _schedule_type,
-          new_customer_phone: _new_customer_phone,
           title:              _customer.fullname,
           start:              _date,  
           end:                _date + 30.minutes
         )
+        end
       end
     end 
     puts "Schedules Created"  

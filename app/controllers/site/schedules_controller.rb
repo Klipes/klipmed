@@ -65,6 +65,7 @@ class Site::SchedulesController < ApplicationController
   def update
     @schedule.user_id       = params[:schedule][:user_id]
     @schedule.schedule_type = params[:schedule][:schedule_type]
+    @schedule.released      = params[:schedule][:released]
     @schedule.start         = DateTime.parse("#{params[:schedule][:start]} #{params[:schedule][:end]}").strftime("%Y-%m-%dT%H:%M:%S")
 
     if !params[:schedule][:resize]
@@ -76,9 +77,13 @@ class Site::SchedulesController < ApplicationController
     if Schedule.schedule_types[params[:schedule][:schedule_type]] == Schedule.schedule_types[:initial]
       @schedule.new_customer_name  = params[:schedule][:new_customer_name]
       @schedule.new_customer_phone = params[:schedule][:new_customer_phone]
-      @schedule.customer_id        = nil
-      @schedule.title           = "#{params[:schedule][:new_customer_name]} - #{Covenant.find_by(company_id: current_user.company_id, id: params[:schedule][:covenant_id]).description}"
-
+      if params[:schedule][:initial_parameter] == "initial"
+        @schedule.customer_id        = nil
+        @schedule.title              = "#{params[:schedule][:new_customer_name]} - #{Covenant.find_by(company_id: current_user.company_id, id: params[:schedule][:covenant_id]).description}"
+      else
+        @schedule.customer_id        = params[:schedule][:customer_id].to_i
+        @schedule.title              = "#{Customer.find_by(company_id: current_user.company_id, id: params[:schedule][:customer_id]).fullname} - #{Covenant.find_by(company_id: current_user.company_id, id: params[:schedule][:covenant_id]).description}"        
+      end  
     else
       @schedule.new_customer_name  = ""
       @schedule.new_customer_phone = ""
@@ -105,6 +110,6 @@ class Site::SchedulesController < ApplicationController
     end
     
     def schedule_params
-      params.require(:schedule).permit(:id, :company_id, :user_id, :customer_id, :covenant_id, :schedule_type, :start, :end)
+      params.require(:schedule).permit(:id, :company_id, :user_id, :customer_id, :covenant_id, :schedule_type, :start, :end, :released)
     end    
 end
