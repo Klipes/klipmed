@@ -4,6 +4,7 @@ class Site::ReceivablesController < ApplicationController
   before_action :set_receivable, only: [:edit, :update, :destroy]
   before_action :set_customers, only: [:new, :create, :edit, :update]
   before_action :set_categories, only: [:index, :new, :create, :edit, :update]
+  before_action :set_payment_methods, only: [:new, :edit]
 
   def index
     @receivables = Receivable.where("company_id = ?", current_user.company_id)
@@ -55,5 +56,9 @@ class Site::ReceivablesController < ApplicationController
 
   def set_categories
     @categories = ReceivableCategory.where("company_id = ?", current_user.company_id)
+  end
+
+  def set_payment_methods
+    @payment_methods = PaymentMethod.where("company_id = ?", current_user.company_id)
   end
 end

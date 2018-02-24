@@ -82,6 +82,7 @@
         amount_cents: "Valor"
         description: "Descrição"
         status: "Status"
+        payment_method_id: "Forma de Pagamento"
         statuses:   
           open: "Aberto"
           paid: "Pago"
@@ -91,6 +92,7 @@
         due_date: "Vencimento"
         amount_cents: "Valor"
         description: "Descrição"
+        payment_method_id: "Forma de Pagamento"
         statuses:   
           open: "Aberto"
           paid: "Pago"
