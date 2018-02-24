@@ -1,40 +1,26 @@
 <%= render :partial => 'shared/top', 
   :locals => { :icon => 'fa fa-user fa-2x', :model => Customer,
-               :new_path => new_site_customer_path, :new_path_hint => 'Nova Empresa' } %>        
+               :new_path => new_site_customer_path, :new_path_hint => 'Nova Empresa' } %>       
+
 </p>
 
 <div class="col-sm-12">
+<%= form_tag site_customers_path(format: :js), method: :get, remote: true do %>
   <div class="row">
-    <div class="col-sm-12">
-      <table class="table table-sm table-hover table-sm">
-          <thead>
-              <tr class="row">
-                <th class="col-sm-9"><%= Customer.human_attribute_name("fullname") %></th>
-                <th class="col-sm-2"><%= Customer.human_attribute_name("phone") %></th>
-                <th class="col-sm-1"></th>
-              </tr>
-          </thead>
-          <tbody>
-            <% @customers.each do |customer| %>
-              <tr class="row">
-                <td class="col-sm-9"><%= customer.fullname %></td>
-                <td class="col-sm-2"><%= customer.phone %></td>  
-                <td class="col-sm-1">
-                  <div class="pull-right">
-                    <%= link_to edit_site_customer_path(customer) ,class: "btn btn-sm btn-default" do%>
-                      <i class="fa fa-edit"></i>
-                    <% end %> 
-                    <%= link_to "" ,class: "btn btn-sm btn-default" do%>
-                      <i class="fa fa-trash-o"></i>
-                    <% end %>             
-                  </div>   
-                </td>    
-              </tr>
-            <% end %>  
-          </tbody>
-      </table>
+    <div class="col-lg-11 col-md-11">
+      <%= text_field_tag 'search_text', '', class: "form-control" %>
+    </div>
+    <div class="col-lg-1 col-md-1">
+      <%= submit_tag "Pesquisar", class: "btn btn-primary" %>
     </div>
   </div>
+<% end %> 
+</div>
+
+</p>
+
+<div id ="table_customers" class="col-sm-12">
+  <%= render :partial => 'customers' %>
 </div>
 
 <%= paginate @customers %>

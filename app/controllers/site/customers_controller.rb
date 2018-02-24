@@ -9,6 +9,10 @@ class Site::CustomersController < ApplicationController
         @customers = Customer.where("company_id = ?", current_user.company_id).order(:fullname).page params[:page]
       end
 
+      format.js do
+        @customers = Customer.where("company_id = ? AND (fullname LIKE ?)", current_user.company_id, "%#{params[:search_text]}%").order(:fullname).page params[:page]                
+      end
+
       format.json do
         @customers = Customer.where("company_id = ? AND (fullname LIKE ? OR phone LIKE ?)", current_user.company_id, "%#{params[:q][:term]}%", "%#{params[:q][:term]}%").order(:fullname)
       end
