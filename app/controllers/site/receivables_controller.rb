@@ -7,10 +7,33 @@ class Site::ReceivablesController < ApplicationController
   before_action :set_payment_methods, only: [:new, :edit]
 
   def index
-    @receivables = Receivable.where("company_id = ?", current_user.company_id)
-      .includes(:customer)
-      .includes(:receivable_category)
-      .page params[:page]
+    respond_to do |format|
+      format.html do
+        @receivables = Receivable.where("company_id = ?", current_user.company_id)
+        .includes(:customer)
+        .includes(:receivable_category)
+        .order(:due_date)
+        .page params[:page]
+      end
+
+      format.js do 
+        sql = Receivable.where("receivables.company_id = ?", current_user.company_id)
+              .includes(:receivable_category)
+
+        if !params[:search_text].empty?
+          sql = sql.joins(:customer).where("customers.fullname LIKE ?", "%#{params[:search_text]}%")  
+        else
+          sql= sql.includes(:customer)
+        end
+
+        if !params[:status].empty?
+          sql = sql.where("receivables.status = ?", Receivable.statuses[params[:status]])
+        end
+        sql = sql.order(:due_date).page params[:page] 
+   
+        @receivables = sql
+      end
+    end
   end
 
   def new

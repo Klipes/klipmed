@@ -1,0 +1,40 @@
+  <div class="row">
+    <div class="col-sm-12">
+      <table class="table table-sm table-hover table-sm">
+        <thead>
+          <tr class="row">
+            <th class="col-sm-3"><%= Customer.human_attribute_name("fullname") %></th>
+            <th class="col-sm-4"><%= Receivable.human_attribute_name("description") %></th>
+            <th class="col-sm-2"><%= Receivable.human_attribute_name("receivable_category_id") %></th>
+            <th class="col-sm-1"><%= Receivable.human_attribute_name("due_date") %></th>
+            <th class="col-sm-1"><%= Receivable.human_attribute_name("amount_cents") %></th>
+            <th class="col-sm-1"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @receivables.each do |receivable| %>
+            <tr class="row">
+              <td class="col-sm-3"><h6><%= receivable.customer.fullname %></h6></td>
+              <td class="col-sm-4"><h6><%= receivable.description %></h6></td>
+              <td class="col-sm-2"><h6><%= receivable.receivable_category.description %></h6></td>
+              <td class="col-sm-1"><%= l receivable.due_date %></td>  
+              <td class="col-sm-1"><%= humanized_money_with_symbol(receivable.amount) %></td>  
+              <td class="col-sm-1">
+                <div class="pull-right">
+                  <label>
+                    <%= receivable.get_html_status.html_safe %>
+                  </label>
+                  <%= link_to edit_site_receivable_path(receivable) ,class: "btn btn-sm btn-default" do%>
+                    <i class="fa fa-edit"></i>
+                  <% end %> 
+                  <%= link_to root_path ,class: "btn btn-sm btn-default" do%>
+                    <i class="fa fa-trash-o"></i>
+                  <% end %>             
+                </div> 
+              </td>    
+            </tr>
+          <% end %>  
+        </tbody>
+      </table>
+    </div>
+  </div>
