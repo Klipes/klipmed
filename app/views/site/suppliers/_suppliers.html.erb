@@ -1,0 +1,31 @@
+  <div class="row">
+    <div class="col-sm-12">
+      <table class="table table-sm table-hover">
+          <thead>
+              <tr class="row">
+                  <th class="col-sm-9"><%= Supplier.human_attribute_name("trade_name") %></th>
+                  <th class="col-sm-2"><%= Supplier.human_attribute_name("phone") %></th>
+                  <th class="col-sm-1"></th>
+              </tr>
+          </thead>
+          <tbody>
+            <% @suppliers.each do |supplier| %>
+              <tr class="row">
+                <td class="col-sm-9"><%= supplier.trade_name %></td>
+                <td class="col-sm-2"><%= supplier.phone %></td>  
+                <td class="col-sm-1">
+                  <div class="pull-right">
+                    <%= link_to edit_site_supplier_path(supplier) ,class: "btn btn-sm btn-default" do%>
+                      <i class="fa fa-edit"></i>
+                    <% end %> 
+                    <%= link_to root_path ,class: "btn btn-sm btn-default" do%>
+                      <i class="fa fa-trash-o"></i>
+                    <% end %>             
+                  </div>   
+                </td>    
+              </tr>
+            <% end %>  
+          </tbody>
+      </table>
+    </div>
+  </div>

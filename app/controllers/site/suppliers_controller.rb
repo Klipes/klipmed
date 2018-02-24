@@ -4,7 +4,15 @@ class Site::SuppliersController < ApplicationController
   before_action :set_supplier, only: [:edit, :update, :destroy]
 
   def index
-    @suppliers = Supplier.where("company_id = ?", current_user.company_id).order(:trade_name).page params[:page]
+    respond_to do |format|
+      format.html do
+        @suppliers = Supplier.where("company_id = ?", current_user.company_id).order(:trade_name).page params[:page]
+      end
+
+      format.js do
+        @suppliers = Supplier.where("company_id = ? AND (trade_name LIKE ?)", current_user.company_id, "%#{params[:search_text]}%").order(:trade_name).page params[:page]                
+      end
+    end
     authorize @suppliers
   end
 

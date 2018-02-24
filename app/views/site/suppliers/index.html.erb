@@ -4,37 +4,23 @@
 </p>
 
 <div class="col-sm-12">
+<%= form_tag site_suppliers_path(format: :js), method: :get, remote: true do %>
   <div class="row">
-    <div class="col-sm-12">
-      <table class="table table-sm table-hover">
-          <thead>
-              <tr class="row">
-                  <th class="col-sm-9"><%= Supplier.human_attribute_name("trade_name") %></th>
-                  <th class="col-sm-2"><%= Supplier.human_attribute_name("phone") %></th>
-                  <th class="col-sm-1"></th>
-              </tr>
-          </thead>
-          <tbody>
-            <% @suppliers.each do |supplier| %>
-              <tr class="row">
-                <td class="col-sm-9"><%= supplier.trade_name %></td>
-                <td class="col-sm-2"><%= supplier.phone %></td>  
-                <td class="col-sm-1">
-                  <div class="pull-right">
-                    <%= link_to edit_site_supplier_path(supplier) ,class: "btn btn-sm btn-default" do%>
-                      <i class="fa fa-edit"></i>
-                    <% end %> 
-                    <%= link_to root_path ,class: "btn btn-sm btn-default" do%>
-                      <i class="fa fa-trash-o"></i>
-                    <% end %>             
-                  </div>   
-                </td>    
-              </tr>
-            <% end %>  
-          </tbody>
-      </table>
+    <div class="col-lg-11 col-md-11">
+      <%= text_field_tag 'search_text', '', class: "form-control" %>
+    </div>
+    <div class="col-lg-1 col-md-1">
+      <%= submit_tag "Pesquisar", class: "btn btn-primary" %>
     </div>
   </div>
+<% end %> 
+</div>
+
+</p>
+
+
+<div id="table_suppliers" class="col-sm-12">
+  <%= render :partial => 'suppliers' %>
 </div>
 
 <%= paginate @suppliers %>
