@@ -15,27 +15,27 @@
           <div class="container col-lg-12 col-md-12 col-sm-12 col-xs-12">    
             <div class="row">
               <div class="col-lg-12 col-md-12">
-                <%= f.label :supplier_id %>:
+                <%= f.label :supplier_id %>
                 <%= f.collection_select :supplier_id, @suppliers.all, :id, :trade_name, {include_blank: false}, {class: "form-control"} %>
               </div>           
             </div> 
             <div class="row">
               <div class="col-lg-12 col-md-12">
-                <%= f.label :payable_category_id %>:
+                <%= f.label :payable_category_id %>
                 <%= f.collection_select :payable_category_id, @categories.all, :id, :description, {include_blank: false}, {class: "form-control"} %>
               </div>           
             </div>           
             </br>     
             <div class="row">
               <div class="col-md-12 col-lg-12">
-                <%= f.label :description %>:
+                <%= f.label :description %>
                 <%= f.text_field :description, :class =>"form-control" %>
               </div>
             </div>
             </br>
             <div class="row">
               <div class="col-md-3">
-                <%= f.label :amount_cents %>:
+                <%= f.label :amount_cents %>
                 <div class="input-group"> 
                   <div class="input-group-prepend">
                     <div class="input-group-text">R$</div>
@@ -44,15 +44,15 @@
                 </div>                        
               </div>
               <div class="col-md-2">
-                <%= f.label :due_date %>:
+                <%= f.label :due_date %>
                 <%= f.text_field :due_date, :value => @payable.due_date.strftime("%d/%m/%Y"), :class =>"form-control datetimepicker" %>                                   
               </div>
               <div class="col-md-2">
-                <%= f.label :status %>:
+                <%= f.label :status %>
                 <%= f.select :status, options_for_select(Payable.status_attributes_for_select, selected: @payable.status), {}, {:class => "form-control"}%>
               </div>   
               <div class="col-lg-5 col-md-5">
-                <%= f.label :payment_method_id %>:
+                <%= f.label :payment_method_id %>
                 <%= f.collection_select :payment_method_id, @payment_methods.all, :id, :description, {include_blank: false}, {class: "form-control"} %>
               </div>                                 
             </div>
