@@ -7,7 +7,33 @@ class Site::PayablesController < ApplicationController
   before_action :set_payment_methods, only: [:new, :edit]
 
   def index
-    @payables = Payable.where("company_id = ?", current_user.company_id).includes(:supplier).page params[:page]
+    respond_to do |format|
+      format.html do
+        @payables = Payable.where("company_id = ?", current_user.company_id)
+          .includes(:supplier)
+          .includes(:payable_category)
+          .order(:due_date)
+          .page params[:page]
+      end
+
+      format.js do
+        sql = Payable.where("payables.company_id = ?", current_user.company_id)
+              .includes(:payable_category)
+
+        if !params[:search_text].empty?
+          sql = sql.joins(:supplier).where("suppliers.trade_name LIKE ?", "%#{params[:search_text]}%")  
+        else
+          sql= sql.includes(:suppliers)
+        end
+
+        if !params[:status].empty?
+          sql = sql.where("payables.status = ?", Payable.statuses[params[:status]])
+        end
+        sql = sql.order(:due_date).page params[:page] 
+   
+        @payables = sql
+      end
+    end
   end
 
   def new

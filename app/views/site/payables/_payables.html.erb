@@ -1,0 +1,39 @@
+<div class="row">
+  <div class="col-sm-12">
+    <table class="table table-sm table-hover table-sm">
+      <thead>
+        <tr class="row">
+          <th class="col-sm-3"><%= Supplier.human_attribute_name("trade_name") %></th>
+          <th class="col-sm-4"><%= Payable.human_attribute_name("description") %></th>
+          <th class="col-sm-2"><%= Payable.human_attribute_name("payable_category_id") %></th>            <th class="col-sm-1"><%= Payable.human_attribute_name("due_date") %></th>
+          <th class="col-sm-1"><%= Payable.human_attribute_name("amount_cents") %></th>
+          <th class="col-sm-1"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @payables.each do |payable| %>
+          <tr class="row">
+            <td class="col-sm-3"><%= payable.supplier.trade_name %></td>
+            <td class="col-sm-4"><%= payable.description %></td>
+            <td class="col-sm-2"><h6><%= payable.payable_category.description %></h6></td>
+            <td class="col-sm-1"><%= l payable.due_date %></td>  
+            <td class="col-sm-1"><%= humanized_money_with_symbol(payable.amount) %></td>  
+            <td class="col-sm-1">
+              <div class="pull-right">
+                <label>
+                  <%= payable.get_html_status.html_safe %>
+                </label>
+                <%= link_to edit_site_payable_path(payable) ,class: "btn btn-sm btn-default" do%>
+                  <i class="fa fa-edit"></i>
+                <% end %> 
+                <%= link_to "" ,class: "btn btn-sm btn-deafult" do%>
+                  <i class="fa fa-trash-o"></i>
+                <% end %>             
+              </div> 
+            </td>    
+          </tr>
+        <% end %>  
+      </tbody>
+    </table>
+  </div>
+</div>
