@@ -4,18 +4,18 @@
 
 </p>
 
-<div class="col-sm-12">
 <%= form_tag site_customers_path(format: :js), method: :get, remote: true do %>
-  <div class="row">
-    <div class="col-lg-11 col-md-11">
+  <div class="form-group row">
+    <div class="col-sm-11">
       <%= text_field_tag 'search_text', '', class: "form-control" %>
     </div>
-    <div class="col-lg-1 col-md-1">
-      <%= submit_tag "Pesquisar", class: "btn btn-primary" %>
+    <div class="col-sm-1">
+      <%= button_tag :class => "btn btn-primary float-right" do %>
+        <i class="fa fa-search"></i>
+      <% end %>
     </div>
   </div>
 <% end %> 
-</div>
 
 </p>
 
