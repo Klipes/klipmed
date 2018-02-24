@@ -4,7 +4,7 @@ class Site::SuppliersController < ApplicationController
   before_action :set_supplier, only: [:edit, :update, :destroy]
 
   def index
-    @suppliers = Supplier.where("company_id = ?", current_user.company_id).page params[:page]
+    @suppliers = Supplier.where("company_id = ?", current_user.company_id).order(:trade_name).page params[:page]
     authorize @suppliers
   end
 

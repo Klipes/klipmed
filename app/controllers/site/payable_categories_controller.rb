@@ -4,7 +4,7 @@ class Site::PayableCategoriesController < ApplicationController
   before_action :set_payable_category, only: [:edit, :update, :destroy]
 
   def index
-    @payable_categories = PayableCategory.where("company_id = ?", current_user.company_id).page params[:page]
+    @payable_categories = PayableCategory.where("company_id = ?", current_user.company_id).order(:description).page params[:page]
   end
 
   def new

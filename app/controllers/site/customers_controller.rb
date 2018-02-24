@@ -6,12 +6,11 @@ class Site::CustomersController < ApplicationController
   def index
     respond_to do |format|
       format.html do
-        @customers = Customer.where("company_id = ?", current_user.company_id).page params[:page]
+        @customers = Customer.where("company_id = ?", current_user.company_id).order(:fullname).page params[:page]
       end
 
       format.json do
-        @customers = Customer.select(:id, :fullname, :phone)
-            .where("company_id = ? AND (fullname LIKE ? OR phone LIKE ?)", current_user.company_id, "%#{params[:q][:term]}%", "%#{params[:q][:term]}%")
+        @customers = Customer.where("company_id = ? AND (fullname LIKE ? OR phone LIKE ?)", current_user.company_id, "%#{params[:q][:term]}%", "%#{params[:q][:term]}%").order(:fullname)
       end
     end
     authorize @customers

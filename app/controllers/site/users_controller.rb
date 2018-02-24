@@ -6,7 +6,7 @@ class Site::UsersController < ApplicationController
 
   def index
     if current_user.full_access?
-      @users = User.where("company_id = ?", current_user.company_id).all.page params[:page]
+      @users = User.where("company_id = ?", current_user.company_id).order(:name).page params[:page]
     else
       @users = User.where("id = ?", current_user.id).all.page params[:page]
     end
