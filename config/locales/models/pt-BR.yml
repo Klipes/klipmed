@@ -13,6 +13,7 @@
       schedule: "Agenda"
       covenant: "Convênios"
       professional_reservation: "Reserva de Horários"
+      payment_method: "Forma de Pagamento"
     attributes:
       user:
         email: "E-mail"
@@ -122,4 +123,7 @@
         city: "Cidade"
         state: "Estado"
         zip: "CEP"
+      payment_method:
+        company_id: "Empresa"
+        description: "Descrição"
       

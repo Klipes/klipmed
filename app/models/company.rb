@@ -14,6 +14,7 @@ class Company < ActiveRecord::Base
   has_many :schedules
   has_many :covenants
   has_many :professional_reservations
+  has_many :payment_methods
 
   accepts_nested_attributes_for :company_address
 end

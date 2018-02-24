@@ -1,0 +1,2 @@
+module Site::PaymentMethodsHelper
+end

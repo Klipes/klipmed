@@ -13,4 +13,5 @@
     schedule: "Agenda"
     schedule_reservation: "Reserva de Horário"
     covenants: "Convênios"
+    payment_methods: "Formas de Pagamento"
     logout: "Sair"

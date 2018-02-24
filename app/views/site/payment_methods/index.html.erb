@@ -1,0 +1,38 @@
+<%= render :partial => 'shared/top', 
+  :locals => { :icon => 'fa fa-list-ul fa-2x', :model => PaymentMethod,
+               :new_path => new_site_payment_method_path, :new_path_hint => 'Nova Forma de Pagamento' } %>    
+</p>
+
+<div class="col-sm-12">
+  <div class="row">
+    <div class="col-sm-12">
+      <table class="table table-sm table-hover table-sm">
+          <thead>
+              <tr class="row">
+                  <th class="col-sm-11"><%= PaymentMethod.human_attribute_name("description") %></th>
+                  <th class="col-sm-1"></th>
+              </tr>
+          </thead>
+          <tbody>
+            <% @payment_methods.each do |payment| %>
+              <tr class="row">
+                <td class="col-sm-11"><%= payment.description %></td> 
+                <td class="col-sm-1">
+                  <div class="pull-right">
+                    <%= link_to edit_site_payment_method_path(payment) ,class: "btn btn-sm btn-default" do%>
+                      <i class="fa fa-edit"></i>
+                    <% end %> 
+                    <%= link_to root_path ,class: "btn btn-sm btn-default" do%>
+                      <i class="fa fa-trash-o"></i>
+                    <% end %>             
+                  </div>   
+                </td>    
+              </tr>
+            <% end %>  
+          </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<%= paginate @payment_methods %>

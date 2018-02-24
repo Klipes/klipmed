@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180209135858) do
+ActiveRecord::Schema.define(version: 20180224020105) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -110,6 +110,15 @@ ActiveRecord::Schema.define(version: 20180209135858) do
   add_index "payables", ["company_id"], name: "index_payables_on_company_id"
   add_index "payables", ["payable_category_id"], name: "index_payables_on_payable_category_id"
   add_index "payables", ["supplier_id"], name: "index_payables_on_supplier_id"
+
+  create_table "payment_methods", force: :cascade do |t|
+    t.integer  "company_id"
+    t.string   "description", limit: 20
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "payment_methods", ["company_id"], name: "index_payment_methods_on_company_id"
 
   create_table "professional_reservations", force: :cascade do |t|
     t.integer  "company_id"

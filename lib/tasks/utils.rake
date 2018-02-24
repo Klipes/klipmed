@@ -27,25 +27,27 @@ namespace :utils do
 
     puts "==============================================================================================="
     puts "rake utils:generate_companies..." 
-    puts"#{%x(rake utils:generate_companies)}"
+    puts "#{%x(rake utils:generate_companies)}"
     puts "rake utils:generate_covenants..."
-    puts"#{%x(rake utils:generate_covenants)}"
+    puts "#{%x(rake utils:generate_covenants)}"
+    puts "rake utils:generate_payment_methods..."
+    puts "#{%x(rake utils:generate_payment_methods)}"
     puts "rake utils:generate_users..."
-    puts"#{%x(rake utils:generate_users)}"
+    puts "#{%x(rake utils:generate_users)}"
     puts "rake utils:generate_receivable_categories..."
-    puts"#{%x(rake utils:generate_receivable_categories)}"
+    puts "#{%x(rake utils:generate_receivable_categories)}"
     puts "rake utils:generate_payable_categories..."
-    puts"#{%x(rake utils:generate_payable_categories)}"
+    puts "#{%x(rake utils:generate_payable_categories)}"
     puts "rake utils:generate_customers..."
-    puts"#{%x(rake utils:generate_customers)}"
+    puts "#{%x(rake utils:generate_customers)}"
     puts "rake utils:generate_suppliers..."
-    puts"#{%x(rake utils:generate_suppliers)}"
+    puts "#{%x(rake utils:generate_suppliers)}"
     puts "rake utils:generate_receivables..." 
-    puts"#{%x(rake utils:generate_receivables)}"
+    puts "#{%x(rake utils:generate_receivables)}"
     puts "rake utils:generate_payables..."
-    puts"#{%x(rake utils:generate_payables)}"
+    puts "#{%x(rake utils:generate_payables)}"
     puts "rake utils:generate_schedules..."
-    puts"#{%x(rake utils:generate_schedules)}"
+    puts "#{%x(rake utils:generate_schedules)}"
     puts "==============================================================================================="
     puts "Setup finished!"
   end
@@ -365,4 +367,17 @@ namespace :utils do
     end 
     puts "Schedules Created"  
   end
+
+  desc "Generate Payment_Method Data"
+  task generate_payment_methods: :environment do
+    (1..30).each do |i|
+      (1..5).each do |j|
+        PaymentMethod .create!(
+          description: ['Dinheiro','Cheque','Cartão Visa Débito','Cartão Visa Crédito','PayPal'].sample,
+          company_id:  i
+        )
+      end     
+    end 
+    puts "Payment Methods Created"    
+  end  
 end

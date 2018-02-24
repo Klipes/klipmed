@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     resources :covenants, except: [:show]
     resources :professional_reservations, except: [:show]
     resources :users, except: [:show]
+    resources :payment_methods, except: [:show]
   end
 
   namespace :backoffice do
