@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180224020105) do
+ActiveRecord::Schema.define(version: 20180224030157) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -105,10 +105,12 @@ ActiveRecord::Schema.define(version: 20180224020105) do
     t.integer "amount_cents"
     t.string  "description",         limit: 50,             null: false
     t.integer "status",                         default: 0, null: false
+    t.integer "payment_method_id"
   end
 
   add_index "payables", ["company_id"], name: "index_payables_on_company_id"
   add_index "payables", ["payable_category_id"], name: "index_payables_on_payable_category_id"
+  add_index "payables", ["payment_method_id"], name: "index_payables_on_payment_method_id"
   add_index "payables", ["supplier_id"], name: "index_payables_on_supplier_id"
 
   create_table "payment_methods", force: :cascade do |t|
@@ -150,10 +152,12 @@ ActiveRecord::Schema.define(version: 20180224020105) do
     t.integer "amount_cents"
     t.string  "description",            limit: 50,             null: false
     t.integer "status",                            default: 0, null: false
+    t.integer "payment_method_id"
   end
 
   add_index "receivables", ["company_id"], name: "index_receivables_on_company_id"
   add_index "receivables", ["customer_id"], name: "index_receivables_on_customer_id"
+  add_index "receivables", ["payment_method_id"], name: "index_receivables_on_payment_method_id"
   add_index "receivables", ["receivable_category_id"], name: "index_receivables_on_receivable_category_id"
 
   create_table "schedules", force: :cascade do |t|
