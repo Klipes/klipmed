@@ -84,18 +84,13 @@ namespace :utils do
   desc "Generate Covenant Data"
   task generate_covenants: :environment do
     (1..30).each do |i|
-      #crio o convênio particular default para todas as empresas
-      Covenant.create!(
-        description: "PARTICULAR",
-        company_id:  i,
-      )
-
-      (1..4).each do |j|
+      covenants =  ["PARTICULAR", "UNIMED", "COOPUS", "SÃO LUCAS", "AMEPLAN", "AMIL", "SOMPO"]
+      for item in covenants do
         Covenant.create!(
-          description: ["UNIMED", "COOPUS", "SÃO LUCAS", "AMEPLAN", "AMIL", "SOMPO"].sample,
+          description: item,
           company_id:  i,
         )
-      end     
+      end 
     end
     puts "Covenants Created"
   end
@@ -290,11 +285,14 @@ namespace :utils do
   desc "Generate Receivable Data"
   task generate_receivables: :environment do
     (1..30).each do |i|
+      _customers = Customer.where("company_id = ?", i).all
+      _receivable_category = ReceivableCategory.where("company_id = ?", i).all
+  
       (1..100).each do |j|
         Receivable.create!(
           company_id:             i,
-          customer_id:            Customer.where("company_id = ?", i).all.sample.id,
-          receivable_category_id: ReceivableCategory.where("company_id = ?", i).all.sample.id,
+          customer_id:            _customers.sample.id,
+          receivable_category_id: _receivable_category.sample.id,
           due_date:               generate_random_date,
           amount:                 "#{Random.rand(500)},#{Random.rand(99)}",
           description:            Faker::Lorem.sentence,
@@ -308,11 +306,13 @@ namespace :utils do
   desc "Generate Payable Data"
   task generate_payables: :environment do
     (1..30).each do |i|    
+      _suppliers = Supplier.where("company_id = ?", i).all
+      _payable_category = PayableCategory.where("company_id = ?", i).all
       (1..100).each do |j|      
         Payable.create!(
           company_id:          i,
-          supplier_id:         Supplier.where("company_id = ?", i).all.sample.id,
-          payable_category_id: PayableCategory.where("company_id = ?", i).all.sample.id,
+          supplier_id:         _suppliers.sample.id,
+          payable_category_id: _payable_category.sample.id,
           due_date:            generate_random_date,
           amount:              "#{Random.rand(500)},#{Random.rand(99)}",
           description:         Faker::Lorem.sentence,
@@ -326,11 +326,13 @@ namespace :utils do
   desc "Generate Schedule Data"
   task generate_schedules: :environment do
     (1..30).each do |i|
+      _customers =  Customer.where("company_id = ?", i).all
+      _users = User.where("company_id = ?", i).includes(:covenants).all
+
       (1..200).each do |j|  
         _date = generate_random_date
-        _customer = Customer.where("company_id = ?", i).all.sample
-        _user = User.where("company_id = ?", i).includes(:covenants).all.sample
-
+        _customer = _customers.sample
+        _user = _users.sample
         _schedule_type = Random.rand(0..2)
 
         _new_customer_phone = ""
@@ -371,12 +373,13 @@ namespace :utils do
   desc "Generate Payment_Method Data"
   task generate_payment_methods: :environment do
     (1..30).each do |i|
-      (1..5).each do |j|
+      payment_methods = ['Dinheiro','Cheque','Cartão Visa Débito','Cartão Visa Crédito','PayPal']
+      for item in payment_methods do
         PaymentMethod .create!(
-          description: ['Dinheiro','Cheque','Cartão Visa Débito','Cartão Visa Crédito','PayPal'].sample,
+          description: item,
           company_id:  i
         )
-      end     
+      end
     end 
     puts "Payment Methods Created"    
   end  
