@@ -86,6 +86,7 @@ ActiveRecord::Schema.define(version: 20180225123034) do
     t.integer  "company_id"
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
+    t.string   "identifier", limit: 20
   end
 
   add_index "customers", ["company_id"], name: "index_customers_on_company_id"
@@ -207,6 +208,8 @@ ActiveRecord::Schema.define(version: 20180225123034) do
     t.integer  "company_id"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+    t.integer  "supplier_type"
+    t.string   "identifier",    limit: 20
   end
 
   add_index "suppliers", ["company_id"], name: "index_suppliers_on_company_id"

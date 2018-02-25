@@ -45,6 +45,7 @@
         fullname: "Nome"
         email: "E-mail"
         phone: "Fone"
+        identifier: "CPF"
       customer_address:
         customer_id: "Cliente"
         address1: "Endereço"

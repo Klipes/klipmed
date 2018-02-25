@@ -261,6 +261,7 @@ namespace :utils do
             fullname:   Faker::Name.name,
             email:      Faker::Internet.email, 
             phone:      generate_random_phone,
+            identifier: CPF.generate(true),
             company_id: i,
           )
           customer.save!
@@ -298,6 +299,8 @@ namespace :utils do
             trade_name:    Faker::Company.name,
             email:         Faker::Internet.email, 
             phone:         generate_random_phone,
+            supplier_type: 1,
+            identifier:    CNPJ.generate(true),
             company_id:    i,
           )
           supplier.save!
@@ -376,12 +379,13 @@ namespace :utils do
     Schedule.transaction do
       (1..30).each do |i|
         _customers =  Customer.where("company_id = ?", i).all
-        _users = User.where("company_id = ?", i).includes(:covenants).all
+        _users = User.where("company_id = ?", i)
+        _userCovenants = UserCovenant.all
 
         (1..200).each do |j|  
           _date = generate_random_date
           _customer = _customers.sample
-          _user = _users.sample
+          _user = _users.includes(:covenants).sample
           _schedule_type = Random.rand(0..2)
 
           _new_customer_phone = ""
@@ -394,7 +398,7 @@ namespace :utils do
             schedule = Schedule.new(
               company_id:         i,
               user_id:            _user.id,
-              covenant_id:        _user.covenants.all.sample.id,
+              covenant_id:        _userCovenants.select {|f| f.user_id == _user.id}.sample.id,
               schedule_type:      _schedule_type,
               new_customer_name:  _new_customer_name,
               new_customer_phone: _new_customer_phone,
