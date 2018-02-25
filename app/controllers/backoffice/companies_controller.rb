@@ -43,7 +43,7 @@ class Backoffice::CompaniesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def company_params
-    params.require(:company).permit(:id, :company_name, :trade_name, :email, :phone,
+    params.require(:company).permit(:id, :company_name, :trade_name, :email, :phone, :company_type, :identifier,
     company_address_attributes:[:id, :company_id, :address1, :address2, :number, :neighborhood, :city, :state, :zip])
   end
 end

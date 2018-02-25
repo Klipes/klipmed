@@ -17,4 +17,6 @@ class Company < ActiveRecord::Base
   has_many :payment_methods
 
   accepts_nested_attributes_for :company_address
+
+  enum company_type: {:entity => 0, :legal_entity => 1}
 end

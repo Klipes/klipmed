@@ -12,3 +12,7 @@
         initial: "Primeira Consulta"
         normal: "Consulta"
         return: "Retorno"
+    company:
+      company_type:
+        entity: "Pessoa Física"
+        legal_entity: "Pessoa Jurídica"

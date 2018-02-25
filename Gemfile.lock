@@ -60,6 +60,7 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     concurrent-ruby (1.0.5)
+    cpf_cnpj (0.4.1)
     crass (1.0.3)
     debug_inspector (0.0.3)
     devise (4.4.0)
@@ -221,6 +222,7 @@ DEPENDENCIES
   byebug
   cocoon (~> 1.2, >= 1.2.11)
   coffee-rails (~> 4.1.0)
+  cpf_cnpj (~> 0.4.1)
   devise (~> 4.3)
   devise-i18n
   enum_help (~> 0.0.17)

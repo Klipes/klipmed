@@ -39,6 +39,8 @@
         email: "E-mail"
         phone: "Fone"
         zip: "CEP"
+        company_type: "Tipo"
+        identifier: "CPF/CNPJ"
       customer:
         fullname: "Nome"
         email: "E-mail"
