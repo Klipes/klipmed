@@ -9,7 +9,7 @@ class Site::ReceivablesController < ApplicationController
   def index
     respond_to do |format|
       format.html do
-        @receivables = Receivable.where("company_id = ?", current_user.company_id)
+        @receivables = Receivable.company(current_user.company_id)
         .includes(:customer)
         .includes(:receivable_category)
         .order(:due_date)
@@ -17,21 +17,12 @@ class Site::ReceivablesController < ApplicationController
       end
 
       format.js do 
-        sql = Receivable.where("receivables.company_id = ?", current_user.company_id)
-              .includes(:receivable_category)
-
-        if !params[:search_text].empty?
-          sql = sql.joins(:customer).where("customers.fullname LIKE ?", "%#{params[:search_text]}%")  
-        else
-          sql= sql.includes(:customer)
-        end
-
-        if !params[:status].empty?
-          sql = sql.where("receivables.status = ?", Receivable.statuses[params[:status]])
-        end
-        sql = sql.order(:due_date).page params[:page] 
-   
-        @receivables = sql
+        @receivables = Receivable.company(current_user.company_id)
+        .includes(:receivable_category)
+        .customers(params[:search_text])
+        .status(params[:status])
+        .order(:due_date)
+        .page params[:page]
       end
     end
   end
@@ -60,6 +51,10 @@ class Site::ReceivablesController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def destroy
+    @receivable.update(deleted_at: DateTime.now)
   end
 
   private

@@ -5,7 +5,7 @@ class Payable < ActiveRecord::Base
   
   monetize :amount_cents, :as => "amount"
 
-  enum status: [:open, :paid]
+  enum status: {:open => 0, :paid => 1}
  
   def get_html_status
     if self.open?
@@ -20,4 +20,21 @@ class Payable < ActiveRecord::Base
       [I18n.t("activerecord.attributes.#{model_name.i18n_key}.statuses.#{status}"), status]
     end
   end
+
+  default_scope { where("payables.deleted_at IS NULL") }
+  scope :company, ->(company) {where("payables.company_id = ?", company)}
+  scope :suppliers, ->(text) { 
+    if !text.empty?
+      joins(:supplier).where("suppliers.trade_name LIKE ?", "%#{text}%")
+    else
+      includes(:supplier)
+    end
+  }
+
+  scope :status, ->(text) { 
+    if !text.empty?
+      where("payables.status = ?", Payable.statuses[text])
+    end
+  }  
+
 end

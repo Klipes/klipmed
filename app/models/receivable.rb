@@ -20,4 +20,20 @@ class Receivable < ActiveRecord::Base
       [I18n.t("activerecord.attributes.#{model_name.i18n_key}.statuses.#{status}"), status]
     end
   end
+
+  default_scope { where("receivables.deleted_at IS NULL") }
+  scope :company, ->(company) {where("receivables.company_id = ?", company)}
+  scope :customers, ->(text) { 
+    if !text.empty?
+      joins(:customer).where("customers.fullname LIKE ?", "%#{text}%")
+    else
+      includes(:customer)
+    end
+  }
+
+  scope :status, ->(text) { 
+    if !text.empty?
+      where("receivables.status = ?", Receivable.statuses[text])
+    end
+  }  
 end

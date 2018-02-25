@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180225123034) do
+ActiveRecord::Schema.define(version: 20180225175900) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(version: 20180225123034) do
     t.string   "description", limit: 50, null: false
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.datetime "deleted_at"
   end
 
   add_index "covenants", ["company_id"], name: "index_covenants_on_company_id"
@@ -87,6 +88,7 @@ ActiveRecord::Schema.define(version: 20180225123034) do
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
     t.string   "identifier", limit: 20
+    t.datetime "deleted_at"
   end
 
   add_index "customers", ["company_id"], name: "index_customers_on_company_id"
@@ -96,19 +98,21 @@ ActiveRecord::Schema.define(version: 20180225123034) do
     t.integer  "company_id"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.datetime "deleted_at"
   end
 
   add_index "payable_categories", ["company_id"], name: "index_payable_categories_on_company_id"
 
   create_table "payables", force: :cascade do |t|
-    t.integer "company_id"
-    t.integer "supplier_id"
-    t.integer "payable_category_id"
-    t.date    "due_date"
-    t.integer "amount_cents"
-    t.string  "description",         limit: 50,             null: false
-    t.integer "status",                         default: 0, null: false
-    t.integer "payment_method_id"
+    t.integer  "company_id"
+    t.integer  "supplier_id"
+    t.integer  "payable_category_id"
+    t.date     "due_date"
+    t.integer  "amount_cents"
+    t.string   "description",         limit: 50,             null: false
+    t.integer  "status",                         default: 0, null: false
+    t.integer  "payment_method_id"
+    t.datetime "deleted_at"
   end
 
   add_index "payables", ["company_id"], name: "index_payables_on_company_id"
@@ -121,6 +125,7 @@ ActiveRecord::Schema.define(version: 20180225123034) do
     t.string   "description", limit: 20
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.datetime "deleted_at"
   end
 
   add_index "payment_methods", ["company_id"], name: "index_payment_methods_on_company_id"
@@ -133,6 +138,7 @@ ActiveRecord::Schema.define(version: 20180225123034) do
     t.string   "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
   end
 
   add_index "professional_reservations", ["company_id"], name: "index_professional_reservations_on_company_id"
@@ -143,19 +149,21 @@ ActiveRecord::Schema.define(version: 20180225123034) do
     t.integer  "company_id"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.datetime "deleted_at"
   end
 
   add_index "receivable_categories", ["company_id"], name: "index_receivable_categories_on_company_id"
 
   create_table "receivables", force: :cascade do |t|
-    t.integer "company_id"
-    t.integer "customer_id"
-    t.integer "receivable_category_id"
-    t.date    "due_date"
-    t.integer "amount_cents"
-    t.string  "description",            limit: 50,             null: false
-    t.integer "status",                            default: 0, null: false
-    t.integer "payment_method_id"
+    t.integer  "company_id"
+    t.integer  "customer_id"
+    t.integer  "receivable_category_id"
+    t.date     "due_date"
+    t.integer  "amount_cents"
+    t.string   "description",            limit: 50,             null: false
+    t.integer  "status",                            default: 0, null: false
+    t.integer  "payment_method_id"
+    t.datetime "deleted_at"
   end
 
   add_index "receivables", ["company_id"], name: "index_receivables_on_company_id"
@@ -178,6 +186,7 @@ ActiveRecord::Schema.define(version: 20180225123034) do
     t.string   "new_customer_phone", limit: 20
     t.string   "new_customer_name"
     t.string   "released",           limit: 1,  default: "N"
+    t.datetime "deleted_at"
   end
 
   add_index "schedules", ["company_id"], name: "index_schedules_on_company_id"
@@ -210,6 +219,7 @@ ActiveRecord::Schema.define(version: 20180225123034) do
     t.datetime "updated_at",               null: false
     t.integer  "supplier_type"
     t.string   "identifier",    limit: 20
+    t.datetime "deleted_at"
   end
 
   add_index "suppliers", ["company_id"], name: "index_suppliers_on_company_id"

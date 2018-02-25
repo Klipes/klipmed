@@ -385,7 +385,7 @@ namespace :utils do
         (1..200).each do |j|  
           _date = generate_random_date
           _customer = _customers.sample
-          _user = _users.includes(:covenants).sample
+          _user = _users.sample
           _schedule_type = Random.rand(0..2)
 
           _new_customer_phone = ""
@@ -412,7 +412,7 @@ namespace :utils do
             company_id:         i,
             customer_id:        _customer.id,  
             user_id:            _user.id,
-            covenant_id:        _user.covenants.all.sample.id,
+            covenant_id:        _userCovenants.select {|f| f.user_id == _user.id}.sample.id,
             schedule_type:      _schedule_type,
             title:              _customer.fullname,
             start:              _date,  

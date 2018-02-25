@@ -4,7 +4,7 @@ class Site::PaymentMethodsController < ApplicationController
   before_action :set_payment_method, only: [:edit, :update, :destroy]
 
   def index
-    @payment_methods = PaymentMethod.where("company_id = ?", current_user.company_id).order(:description).page params[:page]
+    @payment_methods = PaymentMethod.company(current_user.company_id).order(:description).page params[:page]
   end
 
   def new
@@ -33,6 +33,7 @@ class Site::PaymentMethodsController < ApplicationController
   end
 
   def destroy
+    @payment_method.update(deleted_at: DateTime.now)
   end
 
   def set_payment_method

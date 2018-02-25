@@ -6,11 +6,11 @@ class Site::SuppliersController < ApplicationController
   def index
     respond_to do |format|
       format.html do
-        @suppliers = Supplier.where("company_id = ?", current_user.company_id).order(:trade_name).page params[:page]
+        @suppliers = Supplier.company(current_user.company_id).order(:trade_name).page params[:page]
       end
 
       format.js do
-        @suppliers = Supplier.where("company_id = ? AND (trade_name LIKE ?)", current_user.company_id, "%#{params[:search_text]}%").order(:trade_name).page params[:page]                
+        @suppliers = Supplier.company(current_user.company_id).fullname_or_phone(params[:search_text]).order(:trade_name).page params[:page]                
       end
     end
     authorize @suppliers
@@ -41,6 +41,10 @@ class Site::SuppliersController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def destroy
+    @supplier.update(deleted_at: DateTime.now)
   end
 
   private

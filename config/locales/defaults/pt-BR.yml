@@ -151,6 +151,7 @@
       submit: Confirmar
       update: Confirmar
       cancel: Cancelar
+      delete: Confirma a exclusão?
   number:
     currency:
       format:

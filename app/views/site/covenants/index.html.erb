@@ -16,16 +16,16 @@
           </thead>
           <tbody>
             <% @covenants.each do |covenant| %>
-              <tr class="row">
+              <tr class="row" id="<%="covenant_#{covenant.id}"%>">
                 <td class="col-sm-11"><%= covenant.description %></td> 
                 <td class="col-sm-1">
                   <div class="pull-right">
                     <%= link_to edit_site_covenant_path(covenant) ,class: "btn btn-sm btn-default" do%>
                       <i class="fa fa-edit"></i>
                     <% end %> 
-                    <%= link_to root_path ,class: "btn btn-sm btn-default" do%>
+                    <%= link_to site_covenant_path(covenant) ,class: "btn btn-sm btn-default", remote: true, method: :delete, data: { confirm: t('helpers.submit.delete')} do%>
                       <i class="fa fa-trash-o"></i>
-                    <% end %>             
+                    <% end %>     
                   </div>   
                 </td>    
               </tr>

@@ -9,4 +9,8 @@ class Supplier < ActiveRecord::Base
   accepts_nested_attributes_for :supplier_address
 
   enum supplier_type: {:entity => 0, :legal_entity => 1}
+
+  default_scope { where("suppliers.deleted_at IS NULL") }
+  scope :fullname_or_phone, ->(text) { where("trade_name LIKE ? OR phone LIKE ?", "%#{text}%", "%#{text}%") }
+  scope :company, ->(company) {where("company_id = ?", company)}
 end

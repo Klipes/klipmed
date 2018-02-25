@@ -13,7 +13,7 @@
       schedule: "Agenda"
       covenant: "Convênios"
       professional_reservation: "Reserva de Horários"
-      payment_method: "Forma de Pagamento"
+      payment_method: "Formas de Pagamento"
     attributes:
       user:
         email: "E-mail"
