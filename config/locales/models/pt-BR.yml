@@ -60,6 +60,8 @@
         trade_name: "Nome Fantasia"
         email: "E-mail"
         phone: "Fone"
+        supplier_type: "Tipo"
+        identifier: "CPF/CNPJ"
       supplier_address:
         address1: "Endereço"
         address2: "Complemento"

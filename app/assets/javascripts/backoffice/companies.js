@@ -1,4 +1,4 @@
-function configureIdentifier(type){
+function configureCompanyIdentifier(type){
   if (type == "entity"){
     $('#company_identifier').inputmask('999.999.999-99');
   } else {
@@ -8,7 +8,7 @@ function configureIdentifier(type){
 
 $(document).on('turbolinks:load', function() {
   $('#company_company_address_attributes_zip').inputmask('99999-999');
-  configureIdentifier($('#company_company_type').val());
+  configureCompanyIdentifier($('#company_company_type').val());
 
   $('#buttonBuscar_company').click(function() {
     var cep, validacep;
@@ -33,6 +33,6 @@ $(document).on('turbolinks:load', function() {
   $('#company_phone').inputmask('(99)9999[9]-9999');
 
   $('body').on('change', '#company_company_type', function() {  
-    configureIdentifier($('#company_company_type').val());
+    configureCompanyIdentifier($('#company_company_type').val());
   });   
 });

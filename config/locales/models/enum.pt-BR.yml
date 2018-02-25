@@ -16,3 +16,7 @@
       company_type:
         entity: "Pessoa Física"
         legal_entity: "Pessoa Jurídica"
+    supplier:
+      supplier_type:
+        entity: "Pessoa Física"
+        legal_entity: "Pessoa Jurídica"

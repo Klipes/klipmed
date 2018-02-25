@@ -24,6 +24,17 @@
             </div>           
             </br>
             <div class="row">
+              <div class="col-lg-6 col-md-6">
+                <%= f.label :company_type %>:
+                <%= f.collection_select :supplier_type, Supplier.supplier_types_i18n.map{ |a| [a.first,a.second] }, :first, :second, {include_blank: false}, {class: "form-control"} %>
+              </div>
+              <div class="col-lg-6 col-md-6">
+                <%= f.label :identifier %>:
+                <%= f.text_field :identifier, :class =>"form-control" %>
+              </div>              
+            </div>           
+            |</br>
+            <div class="row">
               <div class="col-md-8 col-lg-8">
                 <%= f.label :email %>:
                 <div class="input-group"> 
