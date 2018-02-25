@@ -11,6 +11,7 @@ function configurePaymentMethod(paymentMethod){
 $(document).on('turbolinks:load', function() {
   configurePaymentMethod($('#receivable_status').val());
 
+  $('#receivable_installment').inputmask('99/99');
   $('#receivable_due_date').datetimepicker({
     defaultDate: "11/1/2013",
     format: 'DD/MM/YYYY'

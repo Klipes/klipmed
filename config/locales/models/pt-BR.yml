@@ -88,6 +88,7 @@
         description: "Descrição"
         status: "Status"
         payment_method_id: "Forma de Pagamento"
+        installment: "Parcela"
         statuses:   
           open: "Aberto"
           paid: "Pago"
@@ -98,6 +99,7 @@
         amount_cents: "Valor"
         description: "Descrição"
         payment_method_id: "Forma de Pagamento"
+        installment: "Parcela"
         statuses:   
           open: "Aberto"
           paid: "Pago"

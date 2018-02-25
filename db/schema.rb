@@ -110,6 +110,7 @@ ActiveRecord::Schema.define(version: 20180225175900) do
     t.date     "due_date"
     t.integer  "amount_cents"
     t.string   "description",         limit: 50,             null: false
+    t.string   "installment",         limit: 5,              null: false
     t.integer  "status",                         default: 0, null: false
     t.integer  "payment_method_id"
     t.datetime "deleted_at"
@@ -161,6 +162,7 @@ ActiveRecord::Schema.define(version: 20180225175900) do
     t.date     "due_date"
     t.integer  "amount_cents"
     t.string   "description",            limit: 50,             null: false
+    t.string   "installment",            limit: 5,              null: false
     t.integer  "status",                            default: 0, null: false
     t.integer  "payment_method_id"
     t.datetime "deleted_at"

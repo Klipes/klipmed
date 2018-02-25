@@ -7,6 +7,7 @@ class CreateReceivables < ActiveRecord::Migration
       t.date :due_date
       t.integer :amount_cents
       t.string :description, limit: 50, null: false
+      t.string :installment, limit: 5, null: false
       t.integer :status, null: false, default: 0
     end
   end

@@ -65,7 +65,7 @@ class Site::ReceivablesController < ApplicationController
 
   def receivable_params
     params.require(:receivable).permit(:id, :company_id, :customer_id, :due_date, :amount, :description,
-    :receivable_category_id, :status)
+    :receivable_category_id, :status, :installment)
   end  
 
   def set_customers

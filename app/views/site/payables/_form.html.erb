@@ -48,6 +48,13 @@
                 <%= f.text_field :due_date, :value => @payable.due_date.strftime("%d/%m/%Y"), :class =>"form-control datetimepicker" %>                                   
               </div>
               <div class="col-md-2">
+                <%= f.label :installment %>
+                <%= f.text_field :installment, :value => @payable.installment, :class =>"form-control" %>                                   
+              </div>
+            </div>
+            </br>
+            <div class="row">  
+              <div class="col-md-2">
                 <%= f.label :status %>
                 <%= f.select :status, options_for_select(Payable.status_attributes_for_select, selected: @payable.status), {}, {:class => "form-control"}%>
               </div>   

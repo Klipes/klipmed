@@ -11,6 +11,7 @@ function configurePayablePaymentMethod(paymentMethod){
 $(document).on('turbolinks:load', function() {
   configurePayablePaymentMethod($('#payable_status').val());
 
+  $('#payable_installment').inputmask('99/99');
   $('#payable_due_date').datetimepicker({
     defaultDate: "11/1/2013",
     format: 'DD/MM/YYYY'

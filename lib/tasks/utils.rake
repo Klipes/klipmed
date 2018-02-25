@@ -341,6 +341,7 @@ namespace :utils do
             receivable_category_id: _receivable_category.sample.id,
             due_date:               generate_random_date,
             amount:                 "#{Random.rand(500)},#{Random.rand(99)}",
+            installment:            "01/01",
             description:            Faker::Lorem.sentence,
             status:                 rand(0..1),
           )
@@ -364,6 +365,7 @@ namespace :utils do
             payable_category_id: _payable_category.sample.id,
             due_date:            generate_random_date,
             amount:              "#{Random.rand(500)},#{Random.rand(99)}",
+            installment:         "01/01",
             description:         Faker::Lorem.sentence,
             status:              rand(0..1),      
           )

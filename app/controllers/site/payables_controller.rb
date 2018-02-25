@@ -65,7 +65,7 @@ class Site::PayablesController < ApplicationController
 
   def payable_params
     params.require(:payable).permit(:id, :company_id, :supplier_id, :due_date, :amount, :description,
-      :receivable_category_id, :status)
+      :receivable_category_id, :status, :installment)
   end  
 
   def set_suppliers
