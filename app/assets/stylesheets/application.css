@@ -77,8 +77,7 @@
   padding: 0px;
   margin: 0px;
   line-height: 35px;
-  cursor: pointer;
-  /*    
+  cursor: pointer;    
     .collapsed{
        .arrow:before{
                  font-family: FontAwesome;
@@ -90,7 +89,6 @@
                  float:right;
             }
      }
-*/
 }
 .nav-side-menu ul :not(collapsed) .arrow:before,
 .nav-side-menu li :not(collapsed) .arrow:before {

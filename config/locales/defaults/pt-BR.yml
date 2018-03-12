@@ -152,6 +152,8 @@
       update: Confirmar
       cancel: Cancelar
       delete: Confirma a exclusão?
+    devise:
+      login_text: "Login"
   number:
     currency:
       format:
