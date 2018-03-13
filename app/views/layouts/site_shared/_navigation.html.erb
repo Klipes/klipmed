@@ -1,116 +1,105 @@
-<i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
-<div class="menu-list">
-  <ul id="menu-content" class="menu-content collapse out">
-    <li>
-      <a href="#">
-        <i class="fa fa-dashboard fa-lg"></i> Dashboard
-      </a>
-    </li>
-    <li>
-      <%= link_to site_schedules_path, data: {"no-turbolinks": false } do %>
-        <i class="fa fa-calendar-plus-o fa-lg"></i><%= t 'navigation.schedule' %>
-      <% end %>
-    </li>
-    <li>
-      <a href="#">
-        <i class="fa fa-address-book-o fa-lg"></i> Tratamentos
-      </a>
-    </li>
+			<nav id="sidebar">
+				<!-- Sidebar Header -->
+				<div class="sidebar-header" id="sidebar-header">
+					<h3>KlipMed</h3>
+					<strong><i class="fa fa-user-md fa-3x"></i></strong>
+				</div>
 
-    <!--Agendamentos-->
-    <li data-toggle="collapse" data-target="#schedule" class="collapsed active">
-      <a href="#"><i class="fa fa-calendar fa-lg"></i> Agendamentos <span class="arrow"></span></a>
-    </li>
-    <ul class="sub-menu collapse" id="schedule">
-      <li class="active">
-        <%= link_to site_schedules_path,{} do %>
-          <%= t 'navigation.schedule' %>
-        <% end %>
-      </li>
-      <li>
-        <%= link_to site_professional_reservations_path ,{} do %>
-          <%= t 'navigation.schedule_reservation' %>
-        <% end %>    
-      </li>
-    </ul>
+				<!-- Sidebar Links -->
+				<ul class="list-unstyled components">
+					<li class="active">
+						<a href="#homeSubmenu">
+							<i class="fa fa-dashboard"></i>
+							Dashboard
+						</a>
+					</li>
+					<li>
+            <%= link_to site_schedules_path do %>
+              <i class="fa fa-calendar-plus-o fa-lg"></i><%= t 'navigation.schedule' %>
+            <% end %>
+					</li>
+          <!-- Cadastros !-->
+					<li>
+						<a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">
+							<i class="fa fa-folder-o"></i>
+							Cadastros
+						</a>
+						<ul class="collapse list-unstyled" id="pageSubmenu">
+							<li>        
+                <% if policy(Customer).index? %>
+                  <%= link_to site_customers_path,{} do %>
+                    <%= t 'navigation.customers' %>
+                  <% end %>
+                <% end %>
+              </li>
+							<li>       
+                <% if policy(Customer).index? %>  
+                  <%= link_to site_suppliers_path ,{} do %>
+                    <%= t 'navigation.suppliers' %>
+                  <% end %>
+                <% end %>      
+              </li>
+							<li>
+                <%= link_to site_covenants_path,{} do %>
+                  <%= t 'navigation.covenants' %>
+                <% end %>
+              </li>
+							<li>
+                <%= link_to site_payment_methods_path,{} do %>
+                  <%= t 'navigation.payment_methods' %>
+                <% end %>             
+              </li>
+						</ul>
+					</li>
 
-    <!--Cadastros-->
-    <li data-toggle="collapse" data-target="#products" class="collapsed active">
-      <a href="#"><i class="fa fa-list-ul fa-lg"></i> Cadastros <span class="arrow"></span></a>
-    </li>
-    <ul class="sub-menu collapse" id="products">
-      <li class="active">
-        <% if policy(Customer).index? %>
-          <%= link_to site_customers_path,{} do %>
-            <%= t 'navigation.customers' %>
-          <% end %>
-        <% end %>
-      </li>
-      <li>
-        <% if policy(Customer).index? %>  
-          <%= link_to site_suppliers_path ,{} do %>
-            <%= t 'navigation.suppliers' %>
-          <% end %>
-        <% end %>      
-      </li>
-      <li>
-        <%= link_to site_covenants_path,{} do %>
-          <%= t 'navigation.covenants' %>
-        <% end %>
-      </li>
-      <li>
-        <%= link_to site_payment_methods_path,{} do %>
-          <%= t 'navigation.payment_methods' %>
-        <% end %>
-      </li>
-    </ul>
+          <!-- Contas a Receber!-->
+					<li>
+						<a href="#pageSubmenu1" data-toggle="collapse" aria-expanded="false">
+							<i class="fa fa-money"></i>
+							Receber
+						</a>
+						<ul class="collapse list-unstyled" id="pageSubmenu1">
+							<li>        
+                <%= link_to site_receivable_categories_path ,{} do %>
+                  <%= t 'navigation.receivable_categories' %>
+                <% end %>
+              </li>
+							<li>       
+                <%= link_to site_receivables_path ,{} do %>
+                  <%= t 'navigation.receivables' %>
+                <% end %>     
+              </li>
+						</ul>
+					</li>
 
-    <!--Contas A Receber-->
-    <li data-toggle="collapse" data-target="#service" class="collapsed">
-      <a href="#"><i class="fa fa-money fa-lg"></i> Receber <span class="arrow"></span></a>
-    </li>
-    <ul class="sub-menu collapse" id="service">
-      <li>                
-        <%= link_to site_receivable_categories_path ,{} do %>
-         <%= t 'navigation.receivable_categories' %>
-        <% end %>
-      </li>
-      <li>
-        <%= link_to site_receivables_path ,{} do %>
-          <%= t 'navigation.receivables' %>
-        <% end %>      
-      </li>
-    </ul>
-
-    <!--Contas A Pagar-->
-    <li data-toggle="collapse" data-target="#new" class="collapsed">
-      <a href="#"><i class="fa fa-money fa-lg"></i> Pagar <span class="arrow"></span></a>
-    </li>
-    <ul class="sub-menu collapse" id="new">
-      <li>           
-        <%= link_to site_payable_categories_path ,{} do %>
-          <%= t 'navigation.payable_categories' %>
-        <% end %>
-      </li>
-      <li>
-        <%= link_to site_payables_path ,{} do %>
-          <%= t 'navigation.payables' %>
-        <% end %> 
-      </li>
-    </ul>
-
-    <!--Usuários-->
-    <li>
-      <%= link_to site_users_path, data: {"no-turbolinks": false } do %>
-        <i class="fa fa-user fa-lg"></i><%= t 'navigation.users' %>
-      <% end %>
-    </li>
-    
-    <!--Sair-->    
-    <li>
-      <%= link_to destroy_user_session_path ,  method: :delete do %>
-        <i class="fa fa-sign-out fa-lg"></i> <%= t 'navigation.logout' %>
-      <% end %>
-    </li>
-  </ul>
-</div>
+          <!-- Contas a Pagar!-->
+					<li>
+						<a href="#pageSubmenu2" data-toggle="collapse" aria-expanded="false">
+							<i class="fa fa-money"></i>
+              Pagar
+						</a>
+						<ul class="collapse list-unstyled" id="pageSubmenu2">
+							<li>        
+                <%= link_to site_payable_categories_path ,{} do %>
+                  <%= t 'navigation.payable_categories' %>
+                <% end %>
+              </li>
+							<li>       
+                <%= link_to site_payables_path ,{} do %>
+                  <%= t 'navigation.payables' %>
+                <% end %>   
+              </li>
+						</ul>
+					</li>
+					<li>
+            <%= link_to site_users_path, data: {"no-turbolinks": false } do %>
+              <i class="fa fa-user fa-lg"></i><%= t 'navigation.users' %>
+            <% end %>
+					</li>
+					<li>
+            <%= link_to destroy_user_session_path ,  method: :delete do %>
+              <i class="fa fa-sign-out fa-lg"></i> <%= t 'navigation.logout' %>
+            <% end %>
+					</li>
+				</ul>
+			</nav>

@@ -28,3 +28,9 @@
 //= require turbolinks
 //= require_self
 //= require_tree .
+
+$(document).ready(function () {
+  $('#sidebar-header').on('click', function () {
+    $('#sidebar').toggleClass('active');
+  });
+});

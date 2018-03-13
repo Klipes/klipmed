@@ -1,54 +1,3 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
- * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any styles
- * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
- * file per style scope.
- * 
- *= require bootstrap
- *= require font-awesome
- *= require bootstrap-datetimepicker
- *= require select2
- *= require select2-bootstrap4
- *= require fullcalendar
- *= require daterangepicker-bs3
- *= require_tree .
- *= require_self
- */
-
-.bodyBackoffice{
-  padding-top: 4.5rem;
-}
-
-.buttonBox {
-  position: absolute;
-  bottom:0;
-  left:0;
-}
-
-.buttonCenter {
-  position: absolute;
-  bottom:0px;
-  left:0;
-}
-
-.input-right {
-  text-align: right;
-  padding-right: 5px;
-}
-
-.invoiceOpen{
-  color: #A52A2A;
-}
-
-.invoicePaid{
-  color: #7CFC00
-}
 .wrapper {
   display: flex;
   align-items: stretch;
@@ -78,16 +27,16 @@ a[data-toggle="collapse"] {
 }
 
 a[aria-expanded="false"]::before, a[aria-expanded="true"]::before {
-  content: '\2795';
+  content: '\e259';
   display: block;
   position: absolute;
   right: 20px;
   font-family: 'Glyphicons Halflings';
-  font-size: 1em;
+  font-size: 0.6em;
 }
 
 a[aria-expanded="true"]::before {
-  content: '\2796';
+  content: '\e260';
 }
 
 @media (max-width: 768px) {
@@ -126,15 +75,14 @@ a, a:hover, a:focus {
 
 #sidebar {
     /* don't forget to add all the previously mentioned styles here too */
-    background: #3b3d43;
+    background: #7386D5;
     color: #fff;
     transition: all 0.3s;
-    text-align: center;
 }
 
 #sidebar .sidebar-header {
     padding: 20px;
-    background:  #3b3d43;
+    background: #6d7fcc;
 }
 
 /* Toggling the sidebar header content, hide the big heading [h3] and showing the small heading [strong] and vice versa*/
@@ -144,7 +92,7 @@ a, a:hover, a:focus {
 
 #sidebar ul.components {
     padding: 20px 0;
-    border-bottom: 1px solid #3b3d43;
+    border-bottom: 1px solid #47748b;
 }
 
 #sidebar ul p {
@@ -163,18 +111,18 @@ a, a:hover, a:focus {
 }
 
 #sidebar ul li a:hover {
-    color: #ffffff;
-    background: #464646;
+    color: #7386D5;
+    background: #fff;
 }
 
 #sidebar ul li.active > a, a[aria-expanded="true"] {
     color: #fff;
-    background: #444141;
+    background: #6d7fcc;
 }
 ul ul a {
     font-size: 0.9em !important;
     padding-left: 30px !important;
-    background: #3b3d43;
+    background: #6d7fcc;
 }
 
 #sidebar.active ul li a {
@@ -222,61 +170,57 @@ ul ul a {
      negative left margin
   */
   #sidebar.active {
-    min-width: 80px;
-    max-width: 80px;
-    text-align: center;
-    margin-left: -80px !important;
+      min-width: 80px;
+      max-width: 80px;
+      text-align: center;
+      margin-left: -80px !important;
   }
+
 
   /* Reappearing the sidebar on toggle button click */
   #sidebar {
-    margin-left: 0; 
+      margin-left: 0; 
   }
+
 
   /* Toggling the sidebar header content, 
      hide the big heading [h3] and showing the small heading [strong] and vice versa
   */
   #sidebar .sidebar-header strong {
-    display: none;
+      display: none;
   }
   #sidebar.active .sidebar-header h3 {
-    display: none;
+      display: none;
   }
   #sidebar.active .sidebar-header strong {
-    display: block;
+      display: block;
   }
 
   /* Downsize the navigation links font size */
   #sidebar.active ul li a {
-    padding: 20px 10px;
-    font-size: 0.85em;
+      padding: 20px 10px;
+      font-size: 0.85em;
   }
 
   #sidebar.active ul li a i {
-    margin-right:  0;
-    display: block;
-    font-size: 1.8em;
-    margin-bottom: 5px;
+      margin-right:  0;
+      display: block;
+      font-size: 1.8em;
+      margin-bottom: 5px;
   }
 
   /* Adjust the dropdown links padding*/
   #sidebar.active ul ul a {
-    padding: 10px !important;
+      padding: 10px !important;
   }
 
   /* Changing the arrow position to bottom center position, 
     translateX(50%) works with right: 50% 
     to accurately  center the arrow */
   #sidebar.active a[aria-expanded="false"]::before, #sidebar.active a[aria-expanded="true"]::before {
-    top: auto;
-    bottom: 5px;
-    right: 50%;
-    transform: translateX(50%);
+      top: auto;
+      bottom: 5px;
+      right: 50%;
+      transform: translateX(50%);
   }
-}
-
-#content {
-  padding: 20px;
-  min-height: 100vh;
-  transition: all 0.3s;
 }
