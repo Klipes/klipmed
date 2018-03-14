@@ -182,13 +182,13 @@ namespace :utils do
       (1..151).each do |i|
         user_configuration = UserConfiguration.new(
           user_id: i,
-          monday_schedule:    [true, false].sample,
-          tuesday_schedule:   [true, false].sample,
-          wednesday_schedule: [true, false].sample,
-          thursday_schedule:  [true, false].sample,
-          friday_schedule:    [true, false].sample,
-          saturday_schedule:  [true, false].sample,
-          sunday_schedule:    [true, false].sample,
+          monday_schedule:    true,
+          tuesday_schedule:   true,
+          wednesday_schedule: true,
+          thursday_schedule:  true,
+          friday_schedule:    true,
+          saturday_schedule:  false,
+          sunday_schedule:    false,
           start_hour:         Time.parse('2007-01-31 08:00:00'),
           end_hour:           Time.parse('2007-01-31 18:00:00')       
           ) 

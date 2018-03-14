@@ -285,6 +285,7 @@ ActiveRecord::Schema.define(version: 20180225175900) do
     t.integer  "company_id"
     t.integer  "role",                   default: 0,  null: false
     t.integer  "user_type",              default: 0,  null: false
+    t.datetime "deleted_at"
   end
 
   add_index "users", ["company_id"], name: "index_users_on_company_id"

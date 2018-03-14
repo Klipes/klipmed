@@ -4,7 +4,7 @@ class Site::CovenantsController < ApplicationController
   before_action :set_covenant, only: [:edit, :update, :destroy]
 
   def index
-    @covenants = Covenant.company(current_user.company_id).order(:description).page params[:page]
+    @covenants = Covenant.not_deleted.company(current_user.company_id).order(:description).page params[:page]
   end
 
   def new

@@ -4,6 +4,6 @@ class ReceivableCategory < ActiveRecord::Base
 
   validates :description, presence: true , length: {minimum: 4, maximum: 50}
 
-  default_scope { where("receivable_categories.deleted_at IS NULL") }
+  scope :not_deleted, -> { where("receivable_categories.deleted_at IS NULL") }
   scope :company, ->(company) {where("company_id = ?", company)} 
 end

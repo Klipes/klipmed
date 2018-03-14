@@ -6,11 +6,11 @@ class Site::SuppliersController < ApplicationController
   def index
     respond_to do |format|
       format.html do
-        @suppliers = Supplier.company(current_user.company_id).order(:trade_name).page params[:page]
+        @suppliers = Supplier.not_deleted.company(current_user.company_id).order(:trade_name).page params[:page]
       end
 
       format.js do
-        @suppliers = Supplier.company(current_user.company_id).fullname_or_phone(params[:search_text]).order(:trade_name).page params[:page]                
+        @suppliers = Supplier.not_deleted.company(current_user.company_id).fullname_or_phone(params[:search_text]).order(:trade_name).page params[:page]                
       end
     end
     authorize @suppliers

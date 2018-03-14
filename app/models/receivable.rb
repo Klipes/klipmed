@@ -21,7 +21,7 @@ class Receivable < ActiveRecord::Base
     end
   end
 
-  default_scope { where("receivables.deleted_at IS NULL") }
+  scope :not_deleted, -> { where("receivables.deleted_at IS NULL") }
   scope :company, ->(company) {where("receivables.company_id = ?", company)}
   scope :customers, ->(text) { 
     if !text.empty?

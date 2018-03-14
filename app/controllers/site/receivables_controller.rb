@@ -9,7 +9,7 @@ class Site::ReceivablesController < ApplicationController
   def index
     respond_to do |format|
       format.html do
-        @receivables = Receivable.company(current_user.company_id)
+        @receivables = Receivable.not_deleted.company(current_user.company_id)
         .includes(:customer)
         .includes(:receivable_category)
         .order(:due_date)
@@ -17,7 +17,7 @@ class Site::ReceivablesController < ApplicationController
       end
 
       format.js do 
-        @receivables = Receivable.company(current_user.company_id)
+        @receivables = Receivable.not_deleted.company(current_user.company_id)
         .includes(:receivable_category)
         .customers(params[:search_text])
         .status(params[:status])
@@ -69,14 +69,14 @@ class Site::ReceivablesController < ApplicationController
   end  
 
   def set_customers
-    @customers = Customer.where("company_id = ?", current_user.company_id)
+    @customers = Customer.not_deleted.company(current_user.company_id)
   end
 
   def set_categories
-    @categories = ReceivableCategory.where("company_id = ?", current_user.company_id)
+    @categories = ReceivableCategory.not_deleted.company(current_user.company_id)
   end
 
   def set_payment_methods
-    @payment_methods = PaymentMethod.where("company_id = ?", current_user.company_id)
+    @payment_methods = PaymentMethod.not_delete.company(current_user.company_id)
   end
 end

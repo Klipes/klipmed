@@ -9,6 +9,7 @@ class AddDeletedAtToTables < ActiveRecord::Migration
     add_column :covenants,                 :deleted_at, :datetime  
     add_column :payment_methods,           :deleted_at, :datetime     
     add_column :professional_reservations, :deleted_at, :datetime     
-    add_column :schedules,                 :deleted_at, :datetime     
+    add_column :schedules,                 :deleted_at, :datetime    
+    add_column :users,                     :deleted_at, :datetime 
   end
 end

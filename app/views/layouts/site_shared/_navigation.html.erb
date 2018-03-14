@@ -14,7 +14,7 @@
 						</a>
 					</li>
 					<li>
-            <%= link_to site_schedules_path do %>
+            <%= link_to site_schedules_path, data: {"no-turbolinks": false } do %>
               <i class="fa fa-calendar-plus-o fa-lg"></i><%= t 'navigation.schedule' %>
             <% end %>
 					</li>

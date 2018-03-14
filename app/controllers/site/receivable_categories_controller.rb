@@ -4,7 +4,7 @@ class Site::ReceivableCategoriesController < ApplicationController
   before_action :set_receivable_category, only: [:edit, :update, :destroy]
 
   def index
-    @receivable_categories = ReceivableCategory.company(current_user.company_id).order(:description).page params[:page]
+    @receivable_categories = ReceivableCategory.not_deleted.company(current_user.company_id).order(:description).page params[:page]
   end
 
   def new

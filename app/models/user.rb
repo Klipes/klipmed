@@ -19,6 +19,10 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :user_configuration
   accepts_nested_attributes_for :user_covenants, reject_if: :all_blank, allow_destroy: true
 
+  scope :not_deleted, -> { where("users.deleted_at IS NULL") }
+  scope :company, ->(company) { where("company_id = ?", company) } 
+  scope :user_type, ->(user_type) {where("user_type = ?", user_type)}
+
   def workDays
     _result = Array.new
     _workDays = Array.new

@@ -9,7 +9,7 @@ class Customer < ActiveRecord::Base
   
   accepts_nested_attributes_for :customer_address
 
-  default_scope { where("customers.deleted_at IS NULL") }
+  scope :not_deleted, -> { where("customers.deleted_at IS NULL") }
   scope :fullname_or_phone, ->(text) { where("fullname LIKE ? OR phone LIKE ?", "%#{text}%", "%#{text}%") }
   scope :company, ->(company) {where("company_id = ?", company)}
 end

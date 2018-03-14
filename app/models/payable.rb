@@ -21,7 +21,7 @@ class Payable < ActiveRecord::Base
     end
   end
 
-  default_scope { where("payables.deleted_at IS NULL") }
+  scope :not_deleted, -> { where("payables.deleted_at IS NULL") }
   scope :company, ->(company) {where("payables.company_id = ?", company)}
   scope :suppliers, ->(text) { 
     if !text.empty?

@@ -12,13 +12,15 @@ class Site::SchedulesController < ApplicationController
     respond_to do |format|
       format.html
       format.json do
-        @schedules =  Schedule.select(:id, :title, :start, :end, :user_id, :customer_id, :schedule_type, '0 AS editable' )
-                              .includes(:customer).where("company_id = ? and user_id = ?", _company_id, params['user_id']) 
-                              .where(start: params[:start]..params[:end]) 
+        @schedules = 
+          Schedule.select(:id, :title, :start, :end, :user_id, :customer_id, :schedule_type, '0 AS editable' )
+            .includes(:customer).company(_company_id).user(params['user_id']) 
+            .where(start: params[:start]..params[:end]) 
 
-        @reservations = ProfessionalReservation.select(:id, :title, :start, :end, :user_id, '0 AS customer_id', :schedule_type, '1 AS editable')
-                                               .where("company_id = ? and user_id = ?", _company_id, params['user_id']) 
-                                              .where(start: params[:start]..params[:end])    
+        @reservations = 
+          ProfessionalReservation.select(:id, :title, :start, :end, :user_id, '0 AS customer_id', :schedule_type, '1 AS editable')
+          .company(_company_id).user(params['user_id']) 
+          .where(start: params[:start]..params[:end])    
         
         @schedules = @schedules + @reservations
       end
@@ -98,11 +100,11 @@ class Site::SchedulesController < ApplicationController
 
   private
     def load_customers
-      @customers = Customer.where("company_id = ?", current_user.company_id)
+      @customers = Customer.not_deleted.company(current_user.company_id)
     end  
 
     def load_users 
-      @users = User.where("company_id = ? AND user_type = ?", current_user.company_id, User.user_types[:professional])
+      @users = User.not_deleted.company(current_user.company_id).user_type(User.user_types[:professional])
     end
 
     def set_schedule
@@ -110,6 +112,7 @@ class Site::SchedulesController < ApplicationController
     end
     
     def schedule_params
-      params.require(:schedule).permit(:id, :company_id, :user_id, :customer_id, :covenant_id, :schedule_type, :start, :end, :released)
+      params.require(:schedule).permit(:id, :company_id, :user_id, :customer_id, :covenant_id, :schedule_type, 
+        :start, :end, :released)
     end    
 end
