@@ -167,7 +167,6 @@ namespace :utils do
     UserConfiguration.transaction do
       (1..151).each do |i|
         user_configuration = UserConfiguration.new(
-          user_id: i,
           monday_schedule:    true,
           tuesday_schedule:   true,
           wednesday_schedule: true,
@@ -175,15 +174,25 @@ namespace :utils do
           friday_schedule:    true,
           saturday_schedule:  false,
           sunday_schedule:    false,
+          start_hour:         Time.parse('2007-01-31 08:00:00'),
+          end_hour:           Time.parse('2007-01-31 18:00:00'),
+          user_id: i       
+          ) 
+        user_configuration.save!   
+      end  
+    end; 
+
+    UserPolicy.transaction do
+      (1..151).each do |i|
+        user_policy = UserPolicy.new(
           customer:           [true, false].sample,
           supplier:           [true, false].sample,
           schedule:           [true, false].sample,
           receivable:         [true, false].sample,
-          payable:            [true, false].sample,
-          start_hour:         Time.parse('2007-01-31 08:00:00'),
-          end_hour:           Time.parse('2007-01-31 18:00:00')       
+          payable:            [true, false].sample,   
+          user_id: i
           ) 
-        user_configuration.save!   
+        user_policy.save!   
       end  
     end; 
 
@@ -314,11 +323,13 @@ namespace :utils do
     Receivable.transaction do
       (1..30).each do |i|
         _customers = Customer.where('company_id = ?', i).all
+        _users = User.where('company_id = ?', i).all
         _receivable_category = ReceivableCategory.where('company_id = ?', i).all
     
         (1..100).each do |j|
           receivable = Receivable.new(
             company_id:             i,
+            user_id:                _users.sample.id,
             customer_id:            _customers.sample.id,
             receivable_category_id: _receivable_category.sample.id,
             due_date:               generate_random_date,
@@ -338,10 +349,13 @@ namespace :utils do
     Payable.transaction do
       (1..30).each do |i|    
         _suppliers = Supplier.where('company_id = ?', i).all
+        _users = User.where('company_id = ?', i).all
         _payable_category = PayableCategory.where('company_id = ?', i).all
+        
         (1..100).each do |j|      
           payable = Payable.create!(
             company_id:          i,
+            user_id:             _users.sample.id,
             supplier_id:         _suppliers.sample.id,
             payable_category_id: _payable_category.sample.id,
             due_date:            generate_random_date,

@@ -7,6 +7,6 @@ class CustomerPolicy < ApplicationPolicy
   end
 
   def index?
-    user.user_configuration.customer?
+    user.user_policy.customer?
   end
 end

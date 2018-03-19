@@ -11,6 +11,7 @@ class Site::SchedulesController < ApplicationController
 
     respond_to do |format|
       format.html
+
       format.json do
         @schedules = 
           Schedule.select(:id, :title, :start, :end, :user_id, :customer_id, :schedule_type, '0 AS editable' )
@@ -23,9 +24,9 @@ class Site::SchedulesController < ApplicationController
           .where(start: params[:start]..params[:end])    
         
         @schedules = @schedules + @reservations
+        authorize @schedules
       end
     end
-    authorize @schedules
   end
   
   def new

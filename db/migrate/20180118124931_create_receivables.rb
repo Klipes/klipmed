@@ -2,6 +2,7 @@ class CreateReceivables < ActiveRecord::Migration
   def change
     create_table :receivables do |t|
       t.references :company, index: true, foreign_key: true
+      t.references :user, index: true, foreign_key: true
       t.references :customer, index: true, foreign_key: true
       t.references :receivable_category, index: true, foreign_key: true
       t.date :due_date

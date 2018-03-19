@@ -6,6 +6,6 @@ class PayablePolicy < ApplicationPolicy
   end
 
   def index?
-    user.user_configuration.payable?
+    user.user_policy.payable?
   end
 end

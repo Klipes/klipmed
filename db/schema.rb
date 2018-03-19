@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180225175900) do
+ActiveRecord::Schema.define(version: 20180319131722) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -105,6 +105,7 @@ ActiveRecord::Schema.define(version: 20180225175900) do
 
   create_table "payables", force: :cascade do |t|
     t.integer  "company_id"
+    t.integer  "user_id"
     t.integer  "supplier_id"
     t.integer  "payable_category_id"
     t.date     "due_date"
@@ -120,6 +121,7 @@ ActiveRecord::Schema.define(version: 20180225175900) do
   add_index "payables", ["payable_category_id"], name: "index_payables_on_payable_category_id"
   add_index "payables", ["payment_method_id"], name: "index_payables_on_payment_method_id"
   add_index "payables", ["supplier_id"], name: "index_payables_on_supplier_id"
+  add_index "payables", ["user_id"], name: "index_payables_on_user_id"
 
   create_table "payment_methods", force: :cascade do |t|
     t.integer  "company_id"
@@ -157,6 +159,7 @@ ActiveRecord::Schema.define(version: 20180225175900) do
 
   create_table "receivables", force: :cascade do |t|
     t.integer  "company_id"
+    t.integer  "user_id"
     t.integer  "customer_id"
     t.integer  "receivable_category_id"
     t.date     "due_date"
@@ -172,6 +175,7 @@ ActiveRecord::Schema.define(version: 20180225175900) do
   add_index "receivables", ["customer_id"], name: "index_receivables_on_customer_id"
   add_index "receivables", ["payment_method_id"], name: "index_receivables_on_payment_method_id"
   add_index "receivables", ["receivable_category_id"], name: "index_receivables_on_receivable_category_id"
+  add_index "receivables", ["user_id"], name: "index_receivables_on_user_id"
 
   create_table "schedules", force: :cascade do |t|
     t.integer  "company_id"
@@ -272,6 +276,21 @@ ActiveRecord::Schema.define(version: 20180225175900) do
 
   add_index "user_covenants", ["covenant_id"], name: "index_user_covenants_on_covenant_id"
   add_index "user_covenants", ["user_id"], name: "index_user_covenants_on_user_id"
+
+  create_table "user_policies", force: :cascade do |t|
+    t.integer  "user_id"
+    t.boolean  "customer",   default: true, null: false
+    t.boolean  "supplier",   default: true, null: false
+    t.boolean  "schedule",   default: true, null: false
+    t.boolean  "receivable", default: true, null: false
+    t.boolean  "payable",    default: true, null: false
+    t.time     "start_hour"
+    t.time     "end_hour"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  add_index "user_policies", ["user_id"], name: "index_user_policies_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

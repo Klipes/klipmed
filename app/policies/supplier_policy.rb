@@ -7,6 +7,6 @@ class SupplierPolicy < ApplicationPolicy
   end
 
   def index?
-    user.user_configuration.supplier?
+    user.user_policy.supplier?
   end
 end

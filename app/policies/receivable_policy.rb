@@ -6,6 +6,6 @@ class ReceivablePolicy < ApplicationPolicy
   end
 
   def index?
-    user.user_configuration.receivable?
+    user.user_policy.receivable?
   end
 end

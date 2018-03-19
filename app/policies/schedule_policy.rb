@@ -6,6 +6,6 @@ class SchedulePolicy < ApplicationPolicy
   end
 
   def index?
-    user.user_configuration.schedule?
+    user.user_policy.schedule?
   end
 end
