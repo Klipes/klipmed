@@ -29,7 +29,7 @@
 //= require_self
 //= require_tree .
 
-$(document).ready(function () {
+$(document).on('turbolinks:load', function() {
   $('#sidebar-header').on('click', function () {
     $('#sidebar').toggleClass('active');
   });
