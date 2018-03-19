@@ -57,9 +57,22 @@
             <!-- tabela relacionada de endereços!-->
             <%= render :partial => 'shared/address', :locals => { :f => f, :_model => @user, 
                 :_address => :user_address, :_state => @user.user_address.state, 
-                :_buttonLabel =>"user"} %>  
-                    
-
+                :_buttonLabel =>"user"} %> 
+            <hr>
+            <h3>Permissões</h3> </br>                    
+            <!-- Permissões!-->
+            <%= f.fields_for :user_policy do |policy| %>
+              <div class="row">
+                <div class="col-md-12">
+                  <label class="checkbox"><%= policy.check_box :customer, :class =>"checkbox" %>Clientes</label>
+                  <label class="checkbox"><%= policy.check_box :supplier, :class =>"checkbox" %>Fornecedores</label>
+                  <label class="checkbox"><%= policy.check_box :receivable, :class =>"checkbox" %>Contas a Receber</label>
+                  <label class="checkbox"><%= policy.check_box :payable, :class =>"checkbox" %>Contas a Pagar</label>
+                  <label class="checkbox"><%= policy.check_box :schedule, :class =>"checkbox" %>Agenda</label>
+                </div>
+              </div>
+            <% end %>
+            
             <% if User.user_types[@user.user_type] == User.user_types[:professional] %>
               <!-- tabela NxN de usuários versus convênios !-->
               <hr>
@@ -83,6 +96,7 @@
               <hr>
 
               <!-- Configurações -->
+             <h3>Configurações</h3> </br>
               <%= f.fields_for :user_configuration do |configuration| %>
                 <div class="row">
                   <div class="col-md-12">

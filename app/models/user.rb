@@ -18,6 +18,7 @@ class User < ActiveRecord::Base
 
   accepts_nested_attributes_for :user_address
   accepts_nested_attributes_for :user_configuration
+  accepts_nested_attributes_for :user_policy
   accepts_nested_attributes_for :user_covenants, reject_if: :all_blank, allow_destroy: true
 
   scope :not_deleted, -> { where("users.deleted_at IS NULL") }
