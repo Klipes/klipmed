@@ -22,7 +22,8 @@ class Payable < ActiveRecord::Base
   end
 
   scope :not_deleted, -> { where("payables.deleted_at IS NULL") }
-  scope :company, ->(company) {where("payables.company_id = ?", company)}
+  scope :company, -> (company) {where("payables.company_id = ?", company)}
+  scope :user, -> (user) {where("payables.user_id = ?", user)}
   scope :suppliers, ->(text) { 
     if !text.empty?
       joins(:supplier).where("suppliers.trade_name LIKE ?", "%#{text}%")

@@ -7,9 +7,12 @@ class Site::PayablesController < ApplicationController
   before_action :set_payment_methods, only: [:new, :edit]
 
   def index
+    _user = current_user
+
     respond_to do |format|
       format.html do
-        @payables = Payable.not_deleted.company(current_user.company_id)
+        @payables = Payable.not_deleted.company(_user.company_id)
+          .user(_user.id)
           .includes(:supplier)
           .includes(:payable_category)
           .order(:due_date)
@@ -17,7 +20,8 @@ class Site::PayablesController < ApplicationController
       end
 
       format.js do
-        @payables = Payable.not_deleted.company(current_user.company_id)
+        @payables = Payable.not_deleted.company(_user.company_id)
+        .user(_user.id)
         .includes(:payable_category)
         .suppliers(params[:search_text])
         .status(params[:status])
@@ -33,8 +37,11 @@ class Site::PayablesController < ApplicationController
   end
 
   def create
+    _user = current_user
+
     @payable = Payable.new(payable_params)
     @payable.company_id = current_user.company_id
+    @payable.user_id = _user.id
     
     if @payable.save
        redirect_to site_payables_path, notice: "Título a Pagar salvo com sucesso!"

@@ -23,6 +23,7 @@ class Receivable < ActiveRecord::Base
 
   scope :not_deleted, -> { where("receivables.deleted_at IS NULL") }
   scope :company, ->(company) {where("receivables.company_id = ?", company)}
+  scope :user, ->(user) {where("receivables.user_id = ?", user)}
   scope :customers, ->(text) { 
     if !text.empty?
       joins(:customer).where("customers.fullname LIKE ?", "%#{text}%")
