@@ -25,6 +25,7 @@ class Site::SchedulesController < ApplicationController
         @schedules = @schedules + @reservations
       end
     end
+    authorize @schedules
   end
   
   def new

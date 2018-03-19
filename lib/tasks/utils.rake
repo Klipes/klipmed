@@ -175,6 +175,11 @@ namespace :utils do
           friday_schedule:    true,
           saturday_schedule:  false,
           sunday_schedule:    false,
+          customer:           [true, false].sample,
+          supplier:           [true, false].sample,
+          schedule:           [true, false].sample,
+          receivable:         [true, false].sample,
+          payable:            [true, false].sample,
           start_hour:         Time.parse('2007-01-31 08:00:00'),
           end_hour:           Time.parse('2007-01-31 18:00:00')       
           ) 

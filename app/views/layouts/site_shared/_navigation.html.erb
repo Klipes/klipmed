@@ -13,11 +13,16 @@
 							Dashboard
 						</a>
 					</li>
-					<li>
-            <%= link_to site_schedules_path, data: {"no-turbolinks": false } do %>
-              <i class="fa fa-calendar-plus-o fa-lg"></i><%= t 'navigation.schedule' %>
-            <% end %>
-					</li>
+
+					<!-- Agenda !-->
+          <% if policy(Schedule).index? %>			
+						<li>
+							<%= link_to site_schedules_path, data: {"no-turbolinks": false } do %>
+								<i class="fa fa-calendar-plus-o fa-lg"></i><%= t 'navigation.schedule' %>
+							<% end %>
+						</li>
+					<% end %>
+
           <!-- Cadastros !-->
 					<li>
 						<a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">
@@ -25,20 +30,20 @@
 							Cadastros
 						</a>
 						<ul class="collapse list-unstyled" id="pageSubmenu">
-							<li>        
-                <% if policy(Customer).index? %>
-                  <%= link_to site_customers_path,{} do %>
-                    <%= t 'navigation.customers' %>
-                  <% end %>
-                <% end %>
-              </li>
-							<li>       
-                <% if policy(Customer).index? %>  
-                  <%= link_to site_suppliers_path ,{} do %>
-                    <%= t 'navigation.suppliers' %>
-                  <% end %>
-                <% end %>      
-              </li>
+              <% if policy(Customer).index? %>							
+								<li>        
+									<%= link_to site_customers_path,{} do %>
+										<%= t 'navigation.customers' %>
+									<% end %>
+								</li>
+              <% end %>
+              <% if policy(Supplier).index? %>  
+								<li>       
+									<%= link_to site_suppliers_path ,{} do %>
+										<%= t 'navigation.suppliers' %>
+									<% end %>
+								</li>
+              <% end %>      
 							<li>
                 <%= link_to site_covenants_path,{} do %>
                   <%= t 'navigation.covenants' %>
@@ -53,44 +58,48 @@
 					</li>
 
           <!-- Contas a Receber!-->
-					<li>
-						<a href="#pageSubmenu1" data-toggle="collapse" aria-expanded="false">
-							<i class="fa fa-money"></i>
-							Receber
-						</a>
-						<ul class="collapse list-unstyled" id="pageSubmenu1">
-							<li>        
-                <%= link_to site_receivable_categories_path ,{} do %>
-                  <%= t 'navigation.receivable_categories' %>
-                <% end %>
-              </li>
-							<li>       
-                <%= link_to site_receivables_path ,{} do %>
-                  <%= t 'navigation.receivables' %>
-                <% end %>     
-              </li>
-						</ul>
-					</li>
-
+					<% if policy(Receivable).index? %>
+						<li>
+							<a href="#pageSubmenu1" data-toggle="collapse" aria-expanded="false">
+								<i class="fa fa-money"></i>
+								Receber
+							</a>
+							<ul class="collapse list-unstyled" id="pageSubmenu1">
+								<li>        
+									<%= link_to site_receivable_categories_path ,{} do %>
+										<%= t 'navigation.receivable_categories' %>
+									<% end %>
+								</li>
+								<li>       
+									<%= link_to site_receivables_path ,{} do %>
+										<%= t 'navigation.receivables' %>
+									<% end %>     
+								</li>
+							</ul>
+						</li>
+					<% end %>
           <!-- Contas a Pagar!-->
-					<li>
-						<a href="#pageSubmenu2" data-toggle="collapse" aria-expanded="false">
-							<i class="fa fa-money"></i>
-              Pagar
-						</a>
-						<ul class="collapse list-unstyled" id="pageSubmenu2">
-							<li>        
-                <%= link_to site_payable_categories_path ,{} do %>
-                  <%= t 'navigation.payable_categories' %>
-                <% end %>
-              </li>
-							<li>       
-                <%= link_to site_payables_path ,{} do %>
-                  <%= t 'navigation.payables' %>
-                <% end %>   
-              </li>
-						</ul>
-					</li>
+					<% if policy(Payable).index? %>
+						<li>
+							<a href="#pageSubmenu2" data-toggle="collapse" aria-expanded="false">
+								<i class="fa fa-money"></i>
+								Pagar
+							</a>
+							<ul class="collapse list-unstyled" id="pageSubmenu2">
+								<li>        
+									<%= link_to site_payable_categories_path ,{} do %>
+										<%= t 'navigation.payable_categories' %>
+									<% end %>
+								</li>
+								<li>       
+									<%= link_to site_payables_path ,{} do %>
+										<%= t 'navigation.payables' %>
+									<% end %>   
+								</li>
+							</ul>
+						</li>
+					<% end %>
+
 					<li>
             <%= link_to site_users_path, data: {"no-turbolinks": false } do %>
               <i class="fa fa-user fa-lg"></i><%= t 'navigation.users' %>

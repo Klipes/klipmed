@@ -25,6 +25,7 @@ class Site::PayablesController < ApplicationController
         .page params[:page]
       end
     end
+    authorize @payables
   end
 
   def new

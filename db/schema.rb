@@ -250,6 +250,11 @@ ActiveRecord::Schema.define(version: 20180225175900) do
     t.boolean  "friday_schedule",    default: true, null: false
     t.boolean  "saturday_schedule",  default: true, null: false
     t.boolean  "sunday_schedule",    default: true, null: false
+    t.boolean  "customer",           default: true, null: false
+    t.boolean  "supplier",           default: true, null: false
+    t.boolean  "schedule",           default: true, null: false
+    t.boolean  "receivable",         default: true, null: false
+    t.boolean  "payable",            default: true, null: false
     t.time     "start_hour"
     t.time     "end_hour"
     t.datetime "created_at",                        null: false

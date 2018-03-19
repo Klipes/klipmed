@@ -1,5 +1,4 @@
-class CustomerPolicy < ApplicationPolicy
-
+class PayablePolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
       scope
@@ -7,6 +6,6 @@ class CustomerPolicy < ApplicationPolicy
   end
 
   def index?
-    user.user_configuration.customer?
+    user.user_configuration.payable?
   end
 end

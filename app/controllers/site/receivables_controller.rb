@@ -25,6 +25,7 @@ class Site::ReceivablesController < ApplicationController
         .page params[:page]
       end
     end
+    authorize @receivables
   end
 
   def new
