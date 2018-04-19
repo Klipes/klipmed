@@ -63,13 +63,13 @@
             <hr>
             <h3>Configuração</h3> </br>                    
             <!-- Permissões!-->
-            <%= f.fields_for :company_configuration do |configuration| %>
+            <%= f.fields_for :company_policy do |policy| %>
               <div class="row">
                 <div class="col-md-12">
-                  <label class="checkbox"><%= configuration.check_box :registrations, :class =>"checkbox" %>Cadastros</label>
-                  <label class="checkbox"><%= configuration.check_box :receivable, :class =>"checkbox" %>Contas a Receber</label>
-                  <label class="checkbox"><%= configuration.check_box :payable, :class =>"checkbox" %>Contas a Pagar</label>
-                  <label class="checkbox"><%= configuration.check_box :schedule, :class =>"checkbox" %>Agenda</label>
+                  <label class="checkbox"><%= policy.check_box :registrations, :class =>"checkbox" %>Cadastros</label>
+                  <label class="checkbox"><%= policy.check_box :receivable, :class =>"checkbox" %>Contas a Receber</label>
+                  <label class="checkbox"><%= policy.check_box :payable, :class =>"checkbox" %>Contas a Pagar</label>
+                  <label class="checkbox"><%= policy.check_box :schedule, :class =>"checkbox" %>Agenda</label>
                 </div>
               </div>
             <% end %>

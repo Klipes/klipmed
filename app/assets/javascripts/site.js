@@ -1,6 +1,7 @@
 //= require jquery3
 //= require jquery_ujs
 //= require bootstrap
+//= require select2
 //= require moment
 //= require inputmask
 //= require jquery.inputmask

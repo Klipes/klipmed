@@ -41,6 +41,15 @@
         zip: "CEP"
         company_type: "Tipo"
         identifier: "CPF/CNPJ"
+      company_address:
+        company_id: "Empresa"
+        address1: "Endereço"
+        address2: "Complemento"
+        number: "Número"
+        neighborhood: "Bairro"
+        city: "Cidade"
+        state: "Estado"
+        zip: "CEP"      
       customer:
         fullname: "Nome"
         email: "E-mail"

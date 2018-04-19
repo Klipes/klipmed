@@ -75,16 +75,16 @@ namespace :utils do
       end
     end
 
-    CompanyConfiguration.transaction do
+    CompanyPolicy.transaction do
       (1..30).each do |i|
-        company_configuration = CompanyConfiguration.new(
+        company_policy = CompanyPolicy.new(
           registrations: true,
           payable:       true,
           receivable:    true,
           schedule:      true,          
           company_id: i
         )
-        company_configuration.save!
+        company_policy.save!
       end
     end
   end 
@@ -198,11 +198,15 @@ namespace :utils do
     UserPolicy.transaction do
       (1..151).each do |i|
         user_policy = UserPolicy.new(
-          customer:           [true, false].sample,
-          supplier:           [true, false].sample,
-          schedule:           [true, false].sample,
-          receivable:         [true, false].sample,
-          payable:            [true, false].sample,   
+          customer:            [true, false].sample,
+          supplier:            [true, false].sample,
+          covenant:            [true, false].sample,
+          payment_method:      [true, false].sample,
+          schedule:            [true, false].sample,
+          receivable_category: [true, false].sample,
+          receivable:          [true, false].sample,
+          payable_category:    [true, false].sample,
+          payable:             [true, false].sample,   
           user_id: i
           ) 
         user_policy.save!   

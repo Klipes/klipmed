@@ -5,6 +5,7 @@ class Site::CovenantsController < ApplicationController
 
   def index
     @covenants = Covenant.not_deleted.company(current_user.company_id).order(:description).page params[:page]
+    authorize @covenants
   end
 
   def new

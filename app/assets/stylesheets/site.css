@@ -9,7 +9,15 @@
  *= require_tree ./site
  */
 
- .wrapper {
+.invoiceOpen{
+  color: #A52A2A;
+}
+
+.invoicePaid{
+  color: #7CFC00
+}
+
+.wrapper {
   display: flex;
   align-items: stretch;
 }          

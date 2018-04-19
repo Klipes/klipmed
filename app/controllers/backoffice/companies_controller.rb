@@ -44,6 +44,6 @@ class Backoffice::CompaniesController < ApplicationController
   def company_params
     params.require(:company).permit(:id, :company_name, :trade_name, :email, :phone, :company_type, :identifier,
       company_address_attributes:[:id, :company_id, :address1, :address2, :number, :neighborhood, :city, :state, :zip],
-      company_configuration_attributes:[:id, :company_id, :registrations, :receivable, :payable, :schedule])
+      company_policy_attributes:[:id, :company_id, :registrations, :receivable, :payable, :schedule])
   end
 end

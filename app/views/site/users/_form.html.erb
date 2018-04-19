@@ -64,11 +64,23 @@
             <%= f.fields_for :user_policy do |policy| %>
               <div class="row">
                 <div class="col-md-12">
-                  <label class="checkbox"><%= policy.check_box :customer, :class =>"checkbox" %>Clientes</label>
-                  <label class="checkbox"><%= policy.check_box :supplier, :class =>"checkbox" %>Fornecedores</label>
-                  <label class="checkbox"><%= policy.check_box :receivable, :class =>"checkbox" %>Contas a Receber</label>
-                  <label class="checkbox"><%= policy.check_box :payable, :class =>"checkbox" %>Contas a Pagar</label>
-                  <label class="checkbox"><%= policy.check_box :schedule, :class =>"checkbox" %>Agenda</label>
+                  <% if @company.company_policy.registrations %>
+                    <label class="checkbox"><%= policy.check_box :customer, :class =>"checkbox" %>Clientes</label>
+                    <label class="checkbox"><%= policy.check_box :supplier, :class =>"checkbox" %>Fornecedores</label>
+                    <label class="checkbox"><%= policy.check_box :covenant, :class =>"checkbox" %>Convênios</label>
+                    <label class="checkbox"><%= policy.check_box :payment_method, :class =>"checkbox" %>Formas de Pagamento</label>
+                  <% end %>
+                  <% if @company.company_policy.receivable %>
+                    <label class="checkbox"><%= policy.check_box :receivable_category, :class =>"checkbox" %>Categorias Contas a Receber</label>                  
+                    <label class="checkbox"><%= policy.check_box :receivable, :class =>"checkbox" %>Contas a Receber</label>
+                  <% end %>
+                  <% if @company.company_policy.payable %>
+                    <label class="checkbox"><%= policy.check_box :payable_category, :class =>"checkbox" %>Categorias Contas a Pagar</label>                  
+                    <label class="checkbox"><%= policy.check_box :payable, :class =>"checkbox" %>Contas a Pagar</label>
+                  <% end %>
+                  <% if @company.company_policy.schedule %>
+                    <label class="checkbox"><%= policy.check_box :schedule, :class =>"checkbox" %>Agenda</label>
+                  <% end %>
                 </div>
               </div>
             <% end %>

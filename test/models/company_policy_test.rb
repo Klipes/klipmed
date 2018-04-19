@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class CompanyConfigurationTest < ActiveSupport::TestCase
+class CompanyPolicyTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

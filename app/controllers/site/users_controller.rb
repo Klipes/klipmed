@@ -3,6 +3,7 @@ class Site::UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_user, only: [:edit, :update, :destroy, :configuration]
   before_action :load_covenants, only: [:new, :edit]
+  before_action :load_company, only: [:new, :edit]
 
   def index
     if current_user.full_access?
@@ -74,10 +75,15 @@ class Site::UsersController < ApplicationController
       user_covenants_attributes:[:id, :covenant_id, :_destroy],
       user_configuration_attributes: [:id, :user_id, :monday_schedule, :tuesday_schedule, :wednesday_schedule, 
             :thursday_schedule, :friday_schedule, :saturday_schedule, :sunday_schedule, :start_hour, :end_hour],
-      user_policy_attributes: [:id, :user_id, :customer, :supplier, :schedule, :receivable, :payable])  
+      user_policy_attributes: [:id, :user_id, :customer, :supplier, :covenant, :payment_method, :schedule, 
+        :receivable, :receivable_category, :payable, :payable_category])  
   end
 
   def load_covenants
     @covenants = Covenant.where("company_id = ?", current_user.company_id)  
+  end
+
+  def load_company
+    @company = Company.find(current_user.company_id)
   end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180419122917) do
+ActiveRecord::Schema.define(version: 20180419131537) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -55,17 +55,17 @@ ActiveRecord::Schema.define(version: 20180419122917) do
 
   add_index "company_addresses", ["company_id"], name: "index_company_addresses_on_company_id"
 
-  create_table "company_configurations", force: :cascade do |t|
+  create_table "company_policies", force: :cascade do |t|
     t.integer  "company_id"
-    t.boolean  "registrations", default: true
-    t.boolean  "payable",       default: true
-    t.boolean  "receivable",    default: true
-    t.boolean  "schedule",      default: true
+    t.boolean  "registrations", default: true, null: false
+    t.boolean  "payable",       default: true, null: false
+    t.boolean  "receivable",    default: true, null: false
+    t.boolean  "schedule",      default: true, null: false
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
   end
 
-  add_index "company_configurations", ["company_id"], name: "index_company_configurations_on_company_id"
+  add_index "company_policies", ["company_id"], name: "index_company_policies_on_company_id"
 
   create_table "covenants", force: :cascade do |t|
     t.integer  "company_id"
@@ -266,11 +266,6 @@ ActiveRecord::Schema.define(version: 20180419122917) do
     t.boolean  "friday_schedule",    default: true, null: false
     t.boolean  "saturday_schedule",  default: true, null: false
     t.boolean  "sunday_schedule",    default: true, null: false
-    t.boolean  "customer",           default: true, null: false
-    t.boolean  "supplier",           default: true, null: false
-    t.boolean  "schedule",           default: true, null: false
-    t.boolean  "receivable",         default: true, null: false
-    t.boolean  "payable",            default: true, null: false
     t.time     "start_hour"
     t.time     "end_hour"
     t.datetime "created_at",                        null: false
@@ -291,15 +286,17 @@ ActiveRecord::Schema.define(version: 20180419122917) do
 
   create_table "user_policies", force: :cascade do |t|
     t.integer  "user_id"
-    t.boolean  "customer",   default: true, null: false
-    t.boolean  "supplier",   default: true, null: false
-    t.boolean  "schedule",   default: true, null: false
-    t.boolean  "receivable", default: true, null: false
-    t.boolean  "payable",    default: true, null: false
-    t.time     "start_hour"
-    t.time     "end_hour"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.boolean  "customer",            default: true, null: false
+    t.boolean  "supplier",            default: true, null: false
+    t.boolean  "covenant",            default: true, null: false
+    t.boolean  "payment_method",      default: true, null: false
+    t.boolean  "schedule",            default: true, null: false
+    t.boolean  "receivable_category", default: true, null: false
+    t.boolean  "receivable",          default: true, null: false
+    t.boolean  "payable_category",    default: true, null: false
+    t.boolean  "payable",             default: true, null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
   end
 
   add_index "user_policies", ["user_id"], name: "index_user_policies_on_user_id"

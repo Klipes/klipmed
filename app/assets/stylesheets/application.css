@@ -50,13 +50,6 @@
   padding-right: 5px;
 }
 
-.invoiceOpen{
-  color: #A52A2A;
-}
-
-.invoicePaid{
-  color: #7CFC00
-}
 .wrapper {
   display: flex;
   align-items: stretch;

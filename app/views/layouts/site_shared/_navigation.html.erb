@@ -24,78 +24,96 @@
 					<% end %>
 
           <!-- Cadastros !-->
-					<li>
-						<a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">
-							<i class="fa fa-folder-o"></i>
-							Cadastros
-						</a>
-						<ul class="collapse list-unstyled" id="pageSubmenu">
-              <% if policy(Customer).index? %>							
-								<li>        
-									<%= link_to site_customers_path,{} do %>
-										<%= t 'navigation.customers' %>
-									<% end %>
-								</li>
-              <% end %>
-              <% if policy(Supplier).index? %>  
-								<li>       
-									<%= link_to site_suppliers_path ,{} do %>
-										<%= t 'navigation.suppliers' %>
-									<% end %>
-								</li>
-              <% end %>      
-							<li>
-                <%= link_to site_covenants_path,{} do %>
-                  <%= t 'navigation.covenants' %>
-                <% end %>
-              </li>
-							<li>
-                <%= link_to site_payment_methods_path,{} do %>
-                  <%= t 'navigation.payment_methods' %>
-                <% end %>             
-              </li>
-						</ul>
-					</li>
+					<% if (policy( Customer).index? || policy(Supplier).index? || policy(Covenant).index? || policy(PaymentMethod).index? )%>
+						<li>
+							<a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">
+								<i class="fa fa-folder-o"></i>
+								Cadastros
+							</a>
+							<ul class="collapse list-unstyled" id="pageSubmenu">
+								<% if policy(Customer).index? %>							
+									<li>        
+										<%= link_to site_customers_path,{} do %>
+											<%= t 'navigation.customers' %>
+										<% end %>
+									</li>
+								<% end %>
+
+								<% if policy(Supplier).index? %>  
+									<li>       
+										<%= link_to site_suppliers_path ,{} do %>
+											<%= t 'navigation.suppliers' %>
+										<% end %>
+									</li>
+								<% end %>      
+
+								<% if policy(Covenant).index? %> 
+									<li>
+										<%= link_to site_covenants_path,{} do %>
+											<%= t 'navigation.covenants' %>
+										<% end %>
+									</li>
+								<% end %>
+
+								<% if policy(PaymentMethod).index? %>
+									<li>
+										<%= link_to site_payment_methods_path,{} do %>
+											<%= t 'navigation.payment_methods' %>
+										<% end %>     
+									</li>
+								<% end %>        
+							</ul>
+						</li>
+					<% end %>
 
           <!-- Contas a Receber!-->
-					<% if policy(Receivable).index? %>
+					<% if ( policy(Receivable).index? || policy(ReceivableCategory) ) %>
 						<li>
 							<a href="#pageSubmenu1" data-toggle="collapse" aria-expanded="false">
 								<i class="fa fa-money"></i>
 								Receber
 							</a>
 							<ul class="collapse list-unstyled" id="pageSubmenu1">
-								<li>        
-									<%= link_to site_receivable_categories_path ,{} do %>
-										<%= t 'navigation.receivable_categories' %>
-									<% end %>
-								</li>
-								<li>       
-									<%= link_to site_receivables_path ,{} do %>
-										<%= t 'navigation.receivables' %>
-									<% end %>     
-								</li>
+								<% if policy(ReceivableCategory).index?	%>						
+									<li>        
+										<%= link_to site_receivable_categories_path ,{} do %>
+											<%= t 'navigation.receivable_categories' %>
+										<% end %>
+									</li>
+								<% end %>
+								<% if policy(Receivable).index?	%>										
+									<li>       
+										<%= link_to site_receivables_path ,{} do %>
+											<%= t 'navigation.receivables' %>
+										<% end %>     
+									</li>
+								<% end %>
 							</ul>
 						</li>
 					<% end %>
+
           <!-- Contas a Pagar!-->
-					<% if policy(Payable).index? %>
+					<% if ( policy(Payable).index? || policy(PayableCategory).index? ) %>
 						<li>
 							<a href="#pageSubmenu2" data-toggle="collapse" aria-expanded="false">
 								<i class="fa fa-money"></i>
 								Pagar
 							</a>
 							<ul class="collapse list-unstyled" id="pageSubmenu2">
-								<li>        
-									<%= link_to site_payable_categories_path ,{} do %>
-										<%= t 'navigation.payable_categories' %>
-									<% end %>
-								</li>
-								<li>       
-									<%= link_to site_payables_path ,{} do %>
-										<%= t 'navigation.payables' %>
-									<% end %>   
-								</li>
+								<% if policy(PayableCategory).index? %>
+									<li>        
+										<%= link_to site_payable_categories_path ,{} do %>
+											<%= t 'navigation.payable_categories' %>
+										<% end %>
+									</li>
+								<% end %>
+								<% if policy(Payable).index? %>
+									<li>       
+										<%= link_to site_payables_path ,{} do %>
+											<%= t 'navigation.payables' %>
+										<% end %>   
+									</li>
+								<% end %>
 							</ul>
 						</li>
 					<% end %>

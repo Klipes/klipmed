@@ -10,21 +10,22 @@ class Site::SchedulesController < ApplicationController
     _company_id = current_user.company_id
 
     respond_to do |format|
-      format.html
+      format.html do
+      end
 
       format.json do
         @schedules = 
           Schedule.select(:id, :title, :start, :end, :user_id, :customer_id, :schedule_type, '0 AS editable' )
             .includes(:customer).company(_company_id).user(params['user_id']) 
             .where(start: params[:start]..params[:end]) 
-
+        authorize @schedules
+        
         @reservations = 
           ProfessionalReservation.select(:id, :title, :start, :end, :user_id, '0 AS customer_id', :schedule_type, '1 AS editable')
           .company(_company_id).user(params['user_id']) 
           .where(start: params[:start]..params[:end])    
         
         @schedules = @schedules + @reservations
-        authorize @schedules
       end
     end
   end

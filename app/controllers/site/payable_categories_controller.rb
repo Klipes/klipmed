@@ -5,6 +5,7 @@ class Site::PayableCategoriesController < ApplicationController
 
   def index
     @payable_categories = PayableCategory.not_deleted.company(current_user.company_id).order(:description).page params[:page]
+    authorize @payable_categories
   end
 
   def new
