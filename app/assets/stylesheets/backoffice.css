@@ -1,0 +1,15 @@
+/*
+ *= require bootstrap
+ *= require font-awesome
+ *= require_tree ./backoffice
+ */
+
+ .bodyBackoffice {
+  padding-top: 4.5rem;
+}
+
+.buttonBox {
+  position: absolute;
+  bottom:0;
+  left:0;
+}

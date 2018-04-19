@@ -60,6 +60,20 @@
                 :_address => :company_address, :_state => @company.company_address.state, 
                 :_buttonLabel =>"company"} %>    
 
+            <hr>
+            <h3>Configuração</h3> </br>                    
+            <!-- Permissões!-->
+            <%= f.fields_for :company_configuration do |configuration| %>
+              <div class="row">
+                <div class="col-md-12">
+                  <label class="checkbox"><%= configuration.check_box :registrations, :class =>"checkbox" %>Cadastros</label>
+                  <label class="checkbox"><%= configuration.check_box :receivable, :class =>"checkbox" %>Contas a Receber</label>
+                  <label class="checkbox"><%= configuration.check_box :payable, :class =>"checkbox" %>Contas a Pagar</label>
+                  <label class="checkbox"><%= configuration.check_box :schedule, :class =>"checkbox" %>Agenda</label>
+                </div>
+              </div>
+            <% end %>
+
             <!-- Botões de Confirmar e Cancelar-->           
             <%= render :partial => 'shared/submit', :locals => { :f => f, :path => backoffice_companies_path} %>        
           </div>

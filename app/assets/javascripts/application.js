@@ -27,7 +27,6 @@
 //= require inputmask.regex.extensions
 //= require turbolinks
 //= require_self
-//= require_tree .
 
 $(document).on('turbolinks:load', function() {
   $('#sidebar-header').on('click', function () {

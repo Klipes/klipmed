@@ -74,6 +74,19 @@ namespace :utils do
         company_address.save!
       end
     end
+
+    CompanyConfiguration.transaction do
+      (1..30).each do |i|
+        company_configuration = CompanyConfiguration.new(
+          registrations: true,
+          payable:       true,
+          receivable:    true,
+          schedule:      true,          
+          company_id: i
+        )
+        company_configuration.save!
+      end
+    end
   end 
 
   desc 'Generate Covenant Data'

@@ -4,6 +4,7 @@ class Company < ActiveRecord::Base
   validates :phone, presence: true
 
   has_one :company_address
+  has_one :company_configuration
   has_many :users
   has_many :customers
   has_many :suppliers
@@ -17,6 +18,7 @@ class Company < ActiveRecord::Base
   has_many :payment_methods
 
   accepts_nested_attributes_for :company_address
-
+  accepts_nested_attributes_for :company_configuration
+  
   enum company_type: {:entity => 0, :legal_entity => 1}
 end

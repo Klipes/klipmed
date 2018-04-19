@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180319131722) do
+ActiveRecord::Schema.define(version: 20180419122917) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -54,6 +54,18 @@ ActiveRecord::Schema.define(version: 20180319131722) do
   end
 
   add_index "company_addresses", ["company_id"], name: "index_company_addresses_on_company_id"
+
+  create_table "company_configurations", force: :cascade do |t|
+    t.integer  "company_id"
+    t.boolean  "registrations", default: true
+    t.boolean  "payable",       default: true
+    t.boolean  "receivable",    default: true
+    t.boolean  "schedule",      default: true
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+  end
+
+  add_index "company_configurations", ["company_id"], name: "index_company_configurations_on_company_id"
 
   create_table "covenants", force: :cascade do |t|
     t.integer  "company_id"

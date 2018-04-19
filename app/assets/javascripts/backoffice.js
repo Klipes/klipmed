@@ -1,0 +1,13 @@
+//= require jquery3
+//= require jquery_ujs
+//= require bootstrap
+//= require inputmask
+//= require jquery.inputmask
+//= require inputmask.extensions
+//= require inputmask.date.extensions
+//= require inputmask.phone.extensions
+//= require inputmask.numeric.extensions
+//= require inputmask.regex.extensions
+//= require notifyjs
+//= require turbolinks
+//= require_tree ./backoffice
